@@ -1,0 +1,176 @@
+ward,ward_name,field,value,source_file,note
+1,Etobicoke North,registered_voters,70797,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+1,Etobicoke North,ballots_cast,16974,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+1,Etobicoke North,turnout_pct,23.98,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+1,Etobicoke North,turnout_2018_pct,35.26,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+1,Etobicoke North,winner_votes,6815,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+1,Etobicoke North,population_2021,115120,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+1,Etobicoke North,median_household_income_2020,81000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+2,Etobicoke Centre,registered_voters,89491,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+2,Etobicoke Centre,ballots_cast,26800,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+2,Etobicoke Centre,turnout_pct,29.95,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+2,Etobicoke Centre,turnout_2018_pct,43.0,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+2,Etobicoke Centre,winner_votes,18559,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+2,Etobicoke Centre,population_2021,117200,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+2,Etobicoke Centre,median_household_income_2020,100000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+3,Etobicoke-Lakeshore,registered_voters,102797,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+3,Etobicoke-Lakeshore,ballots_cast,33569,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+3,Etobicoke-Lakeshore,turnout_pct,32.66,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+3,Etobicoke-Lakeshore,turnout_2018_pct,42.16,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+3,Etobicoke-Lakeshore,winner_votes,15271,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+3,Etobicoke-Lakeshore,population_2021,139920,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+3,Etobicoke-Lakeshore,median_household_income_2020,90000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+4,Parkdale-High Park,registered_voters,83800,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+4,Parkdale-High Park,ballots_cast,32231,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+4,Parkdale-High Park,turnout_pct,38.46,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+4,Parkdale-High Park,turnout_2018_pct,46.57,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+4,Parkdale-High Park,winner_votes,11149,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+4,Parkdale-High Park,population_2021,104715,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+4,Parkdale-High Park,median_household_income_2020,85000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+5,York South-Weston,registered_voters,76907,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+5,York South-Weston,ballots_cast,21824,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+5,York South-Weston,turnout_pct,28.38,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+5,York South-Weston,turnout_2018_pct,35.63,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+5,York South-Weston,winner_votes,10077,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+5,York South-Weston,population_2021,115675,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+5,York South-Weston,median_household_income_2020,72000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+6,York Centre,registered_voters,68296,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+6,York Centre,ballots_cast,17130,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+6,York Centre,turnout_pct,25.08,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+6,York Centre,turnout_2018_pct,37.11,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+6,York Centre,winner_votes,12187,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+6,York Centre,population_2021,107355,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+6,York Centre,median_household_income_2020,82000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+7,Humber River-Black Creek,registered_voters,66162,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+7,Humber River-Black Creek,ballots_cast,14626,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+7,Humber River-Black Creek,turnout_pct,22.11,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+7,Humber River-Black Creek,turnout_2018_pct,34.6,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+7,Humber River-Black Creek,winner_votes,8707,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+7,Humber River-Black Creek,population_2021,111200,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+7,Humber River-Black Creek,median_household_income_2020,73000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+8,Eglinton-Lawrence,registered_voters,79418,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+8,Eglinton-Lawrence,ballots_cast,25098,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+8,Eglinton-Lawrence,turnout_pct,31.6,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+8,Eglinton-Lawrence,turnout_2018_pct,43.99,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+8,Eglinton-Lawrence,winner_votes,17109,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+8,Eglinton-Lawrence,population_2021,114820,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+8,Eglinton-Lawrence,median_household_income_2020,97000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+9,Davenport,registered_voters,81355,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+9,Davenport,ballots_cast,24900,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+9,Davenport,turnout_pct,30.61,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+9,Davenport,turnout_2018_pct,40.15,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+9,Davenport,winner_votes,17009,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+9,Davenport,population_2021,104730,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+9,Davenport,median_household_income_2020,85000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+10,Spadina-Fort York,registered_voters,95433,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+10,Spadina-Fort York,ballots_cast,23306,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+10,Spadina-Fort York,turnout_pct,24.42,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+10,Spadina-Fort York,turnout_2018_pct,34.86,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+10,Spadina-Fort York,winner_votes,8033,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+10,Spadina-Fort York,population_2021,135400,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+10,Spadina-Fort York,median_household_income_2020,89000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+11,University-Rosedale,registered_voters,80347,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+11,University-Rosedale,ballots_cast,25703,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+11,University-Rosedale,turnout_pct,31.99,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+11,University-Rosedale,turnout_2018_pct,41.82,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+11,University-Rosedale,winner_votes,8614,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+11,University-Rosedale,population_2021,102385,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+11,University-Rosedale,median_household_income_2020,84000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+12,Toronto-St. Paul's,registered_voters,83877,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+12,Toronto-St. Paul's,ballots_cast,28209,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+12,Toronto-St. Paul's,turnout_pct,33.63,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+12,Toronto-St. Paul's,turnout_2018_pct,48.49,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+12,Toronto-St. Paul's,winner_votes,22670,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+12,Toronto-St. Paul's,population_2021,114095,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+12,Toronto-St. Paul's,median_household_income_2020,86000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+13,Toronto Centre,registered_voters,80096,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+13,Toronto Centre,ballots_cast,23104,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+13,Toronto Centre,turnout_pct,28.85,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+13,Toronto Centre,turnout_2018_pct,43.16,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+13,Toronto Centre,winner_votes,10457,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+13,Toronto Centre,population_2021,116930,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+13,Toronto Centre,median_household_income_2020,65000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+14,Toronto-Danforth,registered_voters,79533,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+14,Toronto-Danforth,ballots_cast,28421,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+14,Toronto-Danforth,turnout_pct,35.73,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+14,Toronto-Danforth,turnout_2018_pct,49.23,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+14,Toronto-Danforth,winner_votes,20305,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+14,Toronto-Danforth,population_2021,104555,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+14,Toronto-Danforth,median_household_income_2020,93000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+15,Don Valley West,registered_voters,69118,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+15,Don Valley West,ballots_cast,22534,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+15,Don Valley West,turnout_pct,32.6,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+15,Don Valley West,turnout_2018_pct,48.53,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+15,Don Valley West,winner_votes,16142,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+15,Don Valley West,population_2021,101025,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+15,Don Valley West,median_household_income_2020,102000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+16,Don Valley East,registered_voters,61583,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+16,Don Valley East,ballots_cast,18808,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+16,Don Valley East,turnout_pct,30.54,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+16,Don Valley East,turnout_2018_pct,39.94,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+16,Don Valley East,winner_votes,8147,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+16,Don Valley East,population_2021,94335,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+16,Don Valley East,median_household_income_2020,78500,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+17,Don Valley North,registered_voters,70517,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+17,Don Valley North,ballots_cast,18718,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+17,Don Valley North,turnout_pct,26.54,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+17,Don Valley North,turnout_2018_pct,39.1,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+17,Don Valley North,winner_votes,12897,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+17,Don Valley North,population_2021,112590,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+17,Don Valley North,median_household_income_2020,84000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+18,Willowdale,registered_voters,69996,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+18,Willowdale,ballots_cast,20444,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+18,Willowdale,turnout_pct,29.21,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+18,Willowdale,turnout_2018_pct,38.21,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+18,Willowdale,winner_votes,8337,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+18,Willowdale,population_2021,117130,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+18,Willowdale,median_household_income_2020,81000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+19,Beaches-East York,registered_voters,77782,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+19,Beaches-East York,ballots_cast,28335,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+19,Beaches-East York,turnout_pct,36.43,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+19,Beaches-East York,turnout_2018_pct,48.45,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+19,Beaches-East York,winner_votes,15169,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+19,Beaches-East York,population_2021,108500,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+19,Beaches-East York,median_household_income_2020,89000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+20,Scarborough Southwest,registered_voters,74104,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+20,Scarborough Southwest,ballots_cast,23990,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+20,Scarborough Southwest,turnout_pct,32.37,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+20,Scarborough Southwest,turnout_2018_pct,40.84,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+20,Scarborough Southwest,winner_votes,8216,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+20,Scarborough Southwest,population_2021,110095,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+20,Scarborough Southwest,median_household_income_2020,79000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+21,Scarborough Centre,registered_voters,71240,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+21,Scarborough Centre,ballots_cast,18872,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+21,Scarborough Centre,turnout_pct,26.49,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+21,Scarborough Centre,turnout_2018_pct,35.3,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+21,Scarborough Centre,winner_votes,9977,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+21,Scarborough Centre,population_2021,111560,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+21,Scarborough Centre,median_household_income_2020,78000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+22,Scarborough-Agincourt,registered_voters,67123,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+22,Scarborough-Agincourt,ballots_cast,17481,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+22,Scarborough-Agincourt,turnout_pct,26.04,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+22,Scarborough-Agincourt,turnout_2018_pct,40.44,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+22,Scarborough-Agincourt,winner_votes,8228,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+22,Scarborough-Agincourt,population_2021,103690,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+22,Scarborough-Agincourt,median_household_income_2020,77000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+23,Scarborough North,registered_voters,61338,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+23,Scarborough North,ballots_cast,15397,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+23,Scarborough North,turnout_pct,25.1,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+23,Scarborough North,turnout_2018_pct,34.06,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+23,Scarborough North,winner_votes,5315,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+23,Scarborough North,population_2021,94025,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+23,Scarborough North,median_household_income_2020,87000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+24,Scarborough-Guildwood,registered_voters,64080,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+24,Scarborough-Guildwood,ballots_cast,17025,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+24,Scarborough-Guildwood,turnout_pct,26.57,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+24,Scarborough-Guildwood,turnout_2018_pct,36.58,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+24,Scarborough-Guildwood,winner_votes,12483,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+24,Scarborough-Guildwood,population_2021,102755,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+24,Scarborough-Guildwood,median_household_income_2020,78000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+25,Scarborough-Rouge Park,registered_voters,73560,2022_voter_turnout_statistics_final.xlsx,Sum of col 13 (Total Eligible Electors) for subs 1-96 only
+25,Scarborough-Rouge Park,ballots_cast,20064,2022_voter_turnout_statistics_final.xlsx,Sum of col 14+17 (Number Voted + Declined) for all subs
+25,Scarborough-Rouge Park,turnout_pct,27.28,2022_voter_turnout_statistics_final.xlsx,ballots_cast / registered_voters * 100
+25,Scarborough-Rouge Park,turnout_2018_pct,39.7,2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX,Same formula as 2022
+25,Scarborough-Rouge Park,winner_votes,14168,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
+25,Scarborough-Rouge Park,population_2021,101485,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
+25,Scarborough-Rouge Park,median_household_income_2020,105000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'

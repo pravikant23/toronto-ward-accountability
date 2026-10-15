@@ -1,542 +1,425 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ward 11: University-Palmerston | Toronto Ward Accountability</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        
-        .ward-number {
-            font-size: 14px;
-            opacity: 0.9;
-            margin-bottom: 10px;
-        }
-        
-        .ward-name {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        
-        .councillor-info {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-        
-        .party-badge {
-            display: inline-block;
-            background: #F17D3F;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-right: 10px;
-        }
-        
-        .turnout {
-            font-size: 14px;
-            opacity: 0.9;
-            margin-top: 10px;
-        }
-        
-        .nav {
-            background: #f8f9fa;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e9ecef;
-        }
-        
-        .nav-button {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .nav-button:hover {
-            background: #764ba2;
-        }
-        
-        .nav-button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-        
-        .content {
-            padding: 40px;
-        }
-        
-        .section {
-            margin-bottom: 50px;
-        }
-        
-        .section-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #667eea;
-            color: #333;
-        }
-        
-        .charts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .chart-container {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-        }
-        
-        .chart-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        
-        canvas {
-            max-height: 300px;
-        }
-        
-        .verdict-box {
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            color: white;
-        }
-        
-        .verdict-box.improved {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        }
-        
-        .verdict-box.mixed {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        }
-        
-        .verdict-box.declined {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-        }
-        
-        .verdict-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        .verdict-reasoning {
-            font-size: 14px;
-            opacity: 0.95;
-            line-height: 1.5;
-        }
-        
-        .data-sources {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .data-sources h4 {
-            margin-bottom: 10px;
-            color: #333;
-        }
-        
-        .data-sources ul {
-            margin-left: 20px;
-        }
-        
-        .data-sources li {
-            margin-bottom: 5px;
-        }
-        
-        .footer {
-            background: #f8f9fa;
-            padding: 20px;
-            text-align: center;
-            font-size: 12px;
-            color: #666;
-            border-top: 1px solid #e9ecef;
-        }
-        
-        @media (max-width: 768px) {
-            .charts-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            .ward-name {
-                font-size: 24px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ward 11 — University-Rosedale | Toronto Ward Facts</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="ward-number">Ward 11</div>
-            <div class="ward-name">University-Palmerston</div>
-            <div class="councillor-info">Councillor Brodie Chen</div>
-            <span class="party-badge">NDP</span>
-            <div class="turnout">Voter Turnout (2022): 46.3%</div>
-        </div>
-        
-        <div class="nav">
-            <div>
-                <a href="ward-10.html" class="nav-button">← Previous Ward</a>
-            </div>
-            <a href="index.html" class="nav-button">← Back to All Wards</a>
-            <div>
-                <a href="ward-12.html" class="nav-button">Next Ward →</a>
-            </div>
-        </div>
-        
-        <div class="content">
-            <div class="verdict-box improved">
-                <div class="verdict-title">Neighbourhood Verdict: Improved</div>
-                <div class="verdict-reasoning">Excellent performance: high tree canopy, best-in-class cycling, lowest crime rate</div>
-            </div>
-            
-            <div class="section">
-                <div class="section-title">🌳 Neighbourhood Change Metrics (2022–2026)</div>
-                <div class="charts-grid">
-                    <div class="chart-container">
-                        <div class="chart-title">Tree Canopy Coverage (%)</div>
-                        <canvas id="treesChart"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-title">Transit Access (km to nearest TTC stop)</div>
-                        <canvas id="transitChart"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-title">Schools (count in ward)</div>
-                        <canvas id="schoolsChart"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-title">Cycling Infrastructure (km of bike lanes)</div>
-                        <canvas id="cyclingChart"></canvas>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section">
-                <div class="section-title">🚨 Public Safety Metrics (2022–2026)</div>
-                <p style="margin-bottom: 20px; color: #666; font-size: 14px;">Year-on-year crime statistics per 10,000 residents (except Overall Crime Rate which is per 10k residents citywide comparison)</p>
-                <div class="charts-grid">
-                    <div class="chart-container">
-                        <div class="chart-title">Auto Theft Incidents</div>
-                        <canvas id="autoTheftChart"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-title">Robbery Incidents</div>
-                        <canvas id="robberyChart"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-title">Break & Enter Incidents</div>
-                        <canvas id="breakEnterChart"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-title">Assault Incidents</div>
-                        <canvas id="assaultChart"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-title">Overall Crime Rate (per 10k residents)</div>
-                        <canvas id="crimeRateChart"></canvas>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="data-sources">
-                <h4>Data Sources</h4>
-                <ul>
-                    <li>Tree Canopy: Toronto Parks, Forestry & Recreation (2008, 2018 baseline; 2022-2026 projections)</li>
-                    <li>Transit: Toronto Transit Commission (TTC) coverage data</li>
-                    <li>Schools: Toronto Public and Catholic School Boards</li>
-                    <li>Cycling: Toronto Transportation Services</li>
-                    <li>Crime Statistics: Toronto Police Service (Annual Statistical Report, public neighbourhood crime data)</li>
-                    <li>Note: 2026 data represents year-to-date through October 2026</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p>Toronto Ward Accountability Platform | Data current as of October 2026</p>
-            <p>All data sourced from City of Toronto open data portals and official reports. Neighbourhood improvements assessed year-on-year.</p>
-        </div>
-    </div>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <a class="site-logo" href="index.html">Toronto Ward Facts</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+<main id="main">
+<div class="ward-hero">
+  <div class="ward-hero__text">
+    <p class="ward-label">Ward 11</p>
+    <h1>University-Rosedale</h1>
+    <p class="councillor-line">Current councillor: <strong>Dianne Saxe</strong></p>
     
-    <script>
-        // Chart configuration
-        const chartOptions = {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                    padding: 12,
-                    titleFont: { size: 14 },
-                    bodyFont: { size: 13 },
-                    borderColor: '#667eea',
-                    borderWidth: 1
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        color: 'rgba(0, 0, 0, 0.05)'
-                    }
-                },
-                x: {
-                    grid: {
-                        display: false
-                    }
-                }
-            }
-        };
-        
-        // Trees Chart
-        new Chart(document.getElementById('treesChart'), {
-            type: 'line',
-            data: {
-                labels: ['2022', '2023', '2024', '2025', '2026'],
-                datasets: [{
-                    label: 'Canopy %',
-                    data: [30.1, 30.4, 30.8, 31.3, 31.8],
-                    borderColor: '#10b981',
-                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 4,
-                    pointBackgroundColor: '#10b981',
-                    pointBorderColor: 'white',
-                    pointBorderWidth: 2
-                }]
-            },
-            options: chartOptions
-        });
-        
-        // Transit Chart
-        new Chart(document.getElementById('transitChart'), {
-            type: 'line',
-            data: {
-                labels: ['2022', '2023', '2024', '2025', '2026'],
-                datasets: [{
-                    label: 'km to nearest stop',
-                    data: [1.6, 1.55, 1.5, 1.45, 1.4],
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 4,
-                    pointBackgroundColor: '#3b82f6',
-                    pointBorderColor: 'white',
-                    pointBorderWidth: 2
-                }]
-            },
-            options: chartOptions
-        });
-        
-        // Schools Chart
-        new Chart(document.getElementById('schoolsChart'), {
-            type: 'bar',
-            data: {
-                labels: ['2022', '2023', '2024', '2025', '2026'],
-                datasets: [{
-                    label: 'Schools',
-                    data: [11, 11, 11, 12, 12],
-                    backgroundColor: '#f59e0b',
-                    borderColor: '#d97706',
-                    borderWidth: 1,
-                    borderRadius: 4
-                }]
-            },
-            options: chartOptions
-        });
-        
-        // Cycling Chart
-        new Chart(document.getElementById('cyclingChart'), {
-            type: 'line',
-            data: {
-                labels: ['2022', '2023', '2024', '2025', '2026'],
-                datasets: [{
-                    label: 'km of lanes',
-                    data: [21.5, 23.1, 25.0, 27.1, 29.5],
-                    borderColor: '#ef4444',
-                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 4,
-                    pointBackgroundColor: '#ef4444',
-                    pointBorderColor: 'white',
-                    pointBorderWidth: 2
-                }]
-            },
-            options: chartOptions
-        });
-        
-        // Auto Theft Chart
-        new Chart(document.getElementById('autoTheftChart'), {
-            type: 'line',
-            data: {
-                labels: ['2022', '2023', '2024', '2025', '2026'],
-                datasets: [{
-                    label: 'Incidents',
-                    data: [26, 24, 22, 19, 17],
-                    borderColor: '#ef4444',
-                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 4,
-                    pointBackgroundColor: '#ef4444',
-                    pointBorderColor: 'white',
-                    pointBorderWidth: 2
-                }]
-            },
-            options: chartOptions
-        });
-        
-        // Robbery Chart
-        new Chart(document.getElementById('robberyChart'), {
-            type: 'line',
-            data: {
-                labels: ['2022', '2023', '2024', '2025', '2026'],
-                datasets: [{
-                    label: 'Incidents',
-                    data: [17, 16, 15, 14, 13],
-                    borderColor: '#dc2626',
-                    backgroundColor: 'rgba(220, 38, 38, 0.1)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 4,
-                    pointBackgroundColor: '#dc2626',
-                    pointBorderColor: 'white',
-                    pointBorderWidth: 2
-                }]
-            },
-            options: chartOptions
-        });
-        
-        // Break & Enter Chart
-        new Chart(document.getElementById('breakEnterChart'), {
-            type: 'line',
-            data: {
-                labels: ['2022', '2023', '2024', '2025', '2026'],
-                datasets: [{
-                    label: 'Incidents',
-                    data: [45, 42, 39, 36, 33],
-                    borderColor: '#b91c1c',
-                    backgroundColor: 'rgba(185, 28, 28, 0.1)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 4,
-                    pointBackgroundColor: '#b91c1c',
-                    pointBorderColor: 'white',
-                    pointBorderWidth: 2
-                }]
-            },
-            options: chartOptions
-        });
-        
-        // Assault Chart
-        new Chart(document.getElementById('assaultChart'), {
-            type: 'line',
-            data: {
-                labels: ['2022', '2023', '2024', '2025', '2026'],
-                datasets: [{
-                    label: 'Incidents',
-                    data: [68, 64, 61, 57, 54],
-                    borderColor: '#991b1b',
-                    backgroundColor: 'rgba(153, 27, 27, 0.1)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 4,
-                    pointBackgroundColor: '#991b1b',
-                    pointBorderColor: 'white',
-                    pointBorderWidth: 2
-                }]
-            },
-            options: chartOptions
-        });
-        
-        // Crime Rate Chart
-        new Chart(document.getElementById('crimeRateChart'), {
-            type: 'line',
-            data: {
-                labels: ['2022', '2023', '2024', '2025', '2026'],
-                datasets: [{
-                    label: 'Rate per 10k residents',
-                    data: [211, 200, 190, 180, 171],
-                    borderColor: '#667eea',
-                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 4,
-                    pointBackgroundColor: '#667eea',
-                    pointBorderColor: 'white',
-                    pointBorderWidth: 2
-                }]
-            },
-            options: chartOptions
-        });
-    </script>
+  </div>
+  <div class="ward-hero__map" aria-hidden="true"><svg viewBox="0 0 480 348.0" xmlns="http://www.w3.org/2000/svg" class="city-map" role="img" aria-label="Map of Toronto's 25 wards, ward 11 highlighted">
+  <desc>Outline map showing all 25 Toronto municipal wards.</desc>
+  <a href="ward-1.html"><path d="M55,118L56,118L57,118L56,118L56,119L55,119L55,120L54,120L54,121L54,122L53,123L52,123L51,123L51,124L50,125L50,126L50,127L50,128L51,128L51,129L51,130L52,130L52,131L53,131L54,131L54,132L55,132L55,133L56,133L57,133L58,134L59,134L59,133L60,133L61,133L61,134L61,135L61,136L60,136L60,137L61,137L61,138L62,138L63,138L64,138L65,138L66,139L67,139L68,139L69,140L70,140L70,141L71,141L71,142L70,142L71,143L72,143L73,143L74,143L75,144L74,144L74,145L75,145L76,145L76,144L75,144L75,143L76,143L76,142L77,142L78,142L79,142L80,141L81,141L82,141L82,142L82,143L81,143L82,143L83,143L82,144L83,144L84,144L85,145L85,146L85,147L84,147L84,148L83,148L83,149L82,149L82,150L81,151L82,152L83,152L82,152L82,153L81,153L81,154L81,155L82,155L83,155L83,156L84,156L84,157L85,157L86,157L86,156L87,156L87,157L87,158L87,159L88,159L89,159L90,160L91,159L91,158L92,158L92,157L91,157L92,156L92,157L92,158L92,159L92,160L92,161L92,162L93,162L93,163L92,163L92,164L91,164L90,164L90,165L90,166L90,167L90,168L90,169L90,170L89,170L89,171L88,171L88,172L88,173L87,174L87,175L88,175L88,176L89,176L90,176L90,177L90,178L91,178L92,178L93,179L93,180L93,181L93,182L92,182L92,183L91,184L92,185L92,186L93,186L93,187L94,187L95,187L95,188L95,189L95,190L95,191L96,191L97,191L98,191L99,191L100,192L101,193L101,194L102,194L103,194L103,195L104,195L102,196L101,196L99,196L98,197L96,197L93,198L91,199L89,199L88,200L87,200L86,200L85,201L84,201L83,201L82,202L81,202L80,202L78,203L77,203L75,204L74,204L71,205L70,205L70,206L69,206L67,207L66,207L65,207L64,207L63,208L63,209L63,210L64,212L64,213L65,214L66,217L66,218L67,221L68,223L68,225L69,226L70,229L69,229L69,230L68,230L66,230L65,230L64,230L63,230L62,230L60,231L59,231L58,231L57,231L56,232L53,232L52,232L52,233L51,233L51,234L50,234L49,234L49,235L48,235L47,235L47,236L46,236L45,236L45,237L44,237L44,236L43,235L42,232L42,231L41,230L41,229L38,221L36,218L36,217L36,216L35,215L35,214L34,214L34,213L34,212L34,211L33,211L32,207L32,206L31,206L31,205L31,204L29,201L29,200L28,198L27,196L27,195L26,194L25,192L25,191L24,190L24,189L23,188L23,186L22,184L20,180L20,179L19,178L18,176L17,174L15,169L15,168L14,166L14,165L13,162L12,161L12,160L12,159L11,157L11,156L11,155L10,155L10,154L9,154L9,153L8,152L7,150L6,146L5,144L3,141L3,140L2,138L2,137L2,136L1,136L1,135L0,134L1,133L2,133L2,132L3,132L4,132L5,132L6,132L7,132L8,132L8,131L9,131L13,130L18,128L20,128L23,127L26,126L28,125L29,125L32,124L33,124L34,123L36,123L39,122L40,122L42,121L45,120L54,117L54,118L55,118Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 1</title></path></a>
+  <a href="ward-2.html"><path d="M102,196L104,195L105,196L106,196L107,197L108,197L108,198L109,198L109,199L109,200L110,200L110,201L111,201L112,201L113,201L114,201L115,201L116,201L117,201L117,202L116,202L116,203L116,204L116,205L115,205L115,207L115,208L116,208L116,209L116,210L116,211L116,212L117,213L117,214L118,215L118,216L118,217L118,218L119,218L119,219L120,219L121,219L122,219L122,220L123,221L123,222L122,222L122,223L121,223L121,224L120,225L120,226L120,227L119,227L119,228L118,228L117,229L117,230L116,230L116,231L116,232L117,233L117,234L117,235L117,236L117,237L117,238L116,238L116,239L116,240L116,241L116,242L116,243L116,244L117,245L118,245L119,245L120,245L120,244L121,244L122,244L123,244L122,244L122,245L121,245L121,246L120,246L119,247L118,247L117,248L115,249L114,249L113,249L113,250L112,250L112,251L110,255L109,259L109,260L109,261L108,261L108,262L107,263L107,262L106,262L106,261L105,261L105,260L104,260L104,259L103,259L102,259L101,259L100,259L99,259L99,260L98,260L98,259L98,258L97,258L96,258L95,257L94,257L93,257L93,256L94,255L93,255L93,254L92,254L91,254L91,255L91,256L91,257L91,258L92,259L92,262L93,263L93,264L94,266L94,267L94,268L95,269L95,270L95,271L94,271L93,271L93,272L91,272L90,272L89,273L87,273L86,274L85,274L84,274L80,275L80,276L76,277L73,278L73,279L73,280L74,280L74,281L74,282L74,283L74,284L75,284L75,285L75,286L75,287L76,287L76,288L75,288L74,288L73,288L73,289L72,289L70,289L69,290L69,289L69,288L68,288L67,288L66,288L66,289L65,289L65,290L64,290L63,290L62,290L62,291L61,291L60,291L59,291L59,292L58,291L57,291L57,290L56,290L55,290L54,290L54,289L53,289L53,288L52,288L51,288L50,288L50,287L49,287L49,286L49,285L50,284L50,283L50,282L49,282L49,281L49,280L49,279L49,278L49,277L49,276L49,275L48,275L48,274L48,273L48,272L47,272L47,271L47,270L46,270L46,269L45,269L45,268L44,268L44,267L43,267L42,267L42,268L41,268L41,269L40,269L39,269L38,269L37,269L37,268L36,268L35,268L34,268L34,267L33,267L32,267L32,268L31,267L30,267L29,267L29,266L28,266L28,265L29,264L30,262L33,258L37,253L40,250L41,248L42,248L42,247L43,246L44,245L46,242L45,240L45,239L45,238L44,238L44,237L45,237L45,236L46,236L47,236L47,235L48,235L49,235L49,234L50,234L51,234L51,233L52,233L52,232L53,232L56,232L57,231L58,231L59,231L60,231L62,230L63,230L64,230L65,230L66,230L68,230L69,230L69,229L70,229L69,226L68,225L68,223L67,221L66,218L66,217L65,214L64,213L64,212L63,210L63,209L63,208L64,207L65,207L66,207L67,207L69,206L70,206L70,205L71,205L74,204L75,204L77,203L78,203L80,202L81,202L82,202L83,201L84,201L85,201L86,200L87,200L88,200L89,199L91,199L93,198L96,197L98,197L99,196L101,196L102,196Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 2</title></path></a>
+  <a href="ward-3.html"><path d="M130,258L131,258L132,258L133,258L134,258L135,258L136,259L136,260L136,261L135,262L135,263L134,264L134,265L134,266L135,266L135,267L136,268L136,269L136,270L137,271L137,272L138,272L138,271L139,271L140,271L140,270L141,270L141,271L141,272L141,273L141,274L141,275L142,275L142,276L143,276L144,276L145,276L146,276L147,276L148,276L149,277L149,278L149,279L150,279L150,280L150,281L151,281L151,282L152,282L153,282L153,283L154,284L154,285L153,285L153,286L152,286L152,287L152,286L151,286L151,287L151,288L150,288L150,289L150,290L150,289L150,290L150,291L149,291L150,291L150,292L149,292L149,291L149,292L149,293L149,292L149,293L150,293L149,293L149,294L150,294L151,294L150,294L150,295L151,295L152,295L152,294L152,293L151,294L152,293L152,294L153,294L153,293L154,293L153,292L154,292L155,292L155,293L155,294L156,295L155,296L155,295L154,295L153,295L153,296L152,296L152,297L151,297L151,298L151,299L151,300L150,300L150,299L149,299L149,298L148,298L149,298L149,297L148,297L148,296L148,297L147,297L147,296L146,296L146,297L147,297L147,298L148,298L147,298L147,297L146,297L146,298L147,298L147,299L148,299L149,299L149,300L149,301L148,301L148,300L147,300L147,301L148,301L148,302L149,302L149,301L150,301L151,301L151,302L150,302L150,301L150,302L149,302L149,303L149,304L148,304L148,305L149,305L149,306L148,306L147,306L147,307L147,308L147,309L146,309L146,308L146,307L145,307L144,307L143,307L143,308L143,307L142,307L142,306L143,306L143,305L143,306L144,306L145,306L146,306L146,305L146,304L145,304L146,304L146,303L147,303L147,302L146,302L146,301L145,301L144,301L145,301L145,300L144,300L143,301L142,301L142,302L141,302L141,303L141,304L141,305L140,306L141,306L140,306L141,306L140,306L140,307L140,308L140,307L140,308L140,309L140,310L140,311L140,312L139,312L139,313L139,314L139,315L138,315L138,316L137,316L137,317L137,318L136,318L136,319L135,319L135,320L134,320L134,321L133,321L132,321L131,321L131,322L130,322L130,323L130,324L129,324L129,325L130,325L130,326L129,326L129,327L129,326L129,327L128,327L128,328L127,328L127,329L127,330L126,330L126,331L125,331L124,331L123,331L123,332L122,332L122,331L121,331L121,332L120,332L119,332L118,332L118,333L119,333L118,333L119,333L119,334L118,333L118,334L118,335L118,336L119,336L120,336L119,336L119,337L118,337L118,338L118,339L119,339L119,340L118,340L117,340L116,340L115,340L114,340L113,339L112,339L112,338L112,339L113,339L114,339L114,340L115,339L116,339L117,339L117,338L117,336L116,336L114,336L113,336L113,335L113,336L113,337L114,337L114,338L113,338L112,338L113,338L113,337L112,336L111,336L110,336L109,336L108,336L107,336L107,337L106,337L105,337L104,337L103,337L102,337L102,338L101,338L101,339L100,339L99,339L100,339L100,338L99,338L99,339L98,339L97,339L96,339L97,340L96,340L96,339L95,339L94,339L93,339L93,340L92,340L92,341L91,341L91,342L90,342L90,343L90,344L89,344L89,345L89,346L88,346L88,347L88,348L87,347L87,346L87,343L83,340L84,340L85,338L84,337L83,337L83,336L82,336L82,335L82,334L82,333L83,333L83,332L83,331L83,330L82,330L81,330L80,330L79,330L79,329L78,329L78,328L78,327L79,327L79,326L78,326L78,325L77,325L77,324L76,324L76,323L76,322L76,321L76,320L75,320L74,319L74,318L73,318L73,317L72,317L71,316L70,315L69,315L68,315L68,314L68,313L67,313L66,313L66,312L66,311L66,310L67,310L67,309L68,309L69,308L69,307L68,307L67,307L66,307L66,306L65,306L65,305L65,304L65,303L66,302L67,301L66,300L66,299L66,298L66,297L67,297L68,296L67,296L67,295L67,294L67,293L68,293L69,293L69,292L69,291L69,290L70,289L72,289L73,289L73,288L74,288L75,288L76,288L76,287L75,287L75,286L75,285L75,284L74,284L74,283L74,282L74,281L74,280L73,280L73,279L73,278L76,277L80,276L80,275L84,274L85,274L86,274L87,273L89,273L90,272L91,272L93,272L93,271L94,271L95,271L95,270L95,269L94,268L94,267L94,266L93,264L93,263L92,262L92,259L91,258L91,257L91,256L91,255L91,254L92,254L93,254L93,255L94,255L93,256L93,257L94,257L95,257L96,258L97,258L98,258L98,259L98,260L99,260L99,259L100,259L101,259L102,259L103,259L104,259L104,260L105,260L105,261L106,261L106,262L107,262L107,263L108,262L108,261L109,261L109,260L109,259L110,255L112,251L112,250L113,250L113,249L114,249L115,249L117,248L118,247L119,247L120,246L121,246L121,245L122,245L122,244L123,244L123,245L124,245L124,246L125,246L125,247L126,247L126,248L127,248L127,249L128,249L128,250L128,251L127,252L126,252L126,253L126,254L125,254L125,255L125,256L125,257L126,257L127,258L128,258L129,258L130,258Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 3</title></path></a>
+  <a href="ward-4.html"><path d="M156,239L159,239L161,239L162,239L163,239L164,239L165,240L166,242L167,242L168,244L169,246L170,247L172,249L172,250L174,252L175,254L176,255L177,256L179,259L179,260L180,260L180,261L181,261L181,262L182,262L182,263L183,263L183,264L184,264L185,265L186,265L186,266L187,266L188,267L191,269L192,269L192,270L193,270L193,271L194,272L194,274L195,277L195,278L195,279L196,280L196,281L194,282L193,282L193,284L193,285L194,285L194,286L192,286L191,286L190,285L189,285L188,285L188,284L187,284L186,284L186,283L186,284L186,283L185,283L184,283L184,282L183,282L183,281L183,280L182,280L181,280L180,280L179,280L179,279L178,279L177,278L176,278L175,278L174,278L173,278L173,277L173,278L172,278L172,277L171,277L170,277L170,276L169,276L168,276L168,277L167,277L166,277L165,277L164,277L164,278L163,278L162,278L162,279L161,279L160,279L159,279L159,280L158,280L157,280L157,281L156,281L156,282L156,283L155,283L154,283L154,284L153,283L153,282L152,282L151,282L151,281L150,281L150,280L150,279L149,279L149,278L149,277L148,276L147,276L146,276L145,276L144,276L143,276L142,276L142,275L141,275L141,274L141,273L141,272L141,271L141,270L140,270L140,271L139,271L138,271L138,272L137,272L137,271L136,270L136,269L136,268L135,267L135,266L134,266L134,265L134,264L135,263L135,262L136,261L136,260L136,259L135,258L134,258L133,258L132,258L131,258L130,258L129,258L128,258L127,258L126,257L125,257L125,256L125,255L125,254L126,254L126,253L126,252L127,252L128,251L128,250L128,249L127,249L127,248L126,248L126,247L125,247L125,246L124,246L124,245L123,245L123,244L122,244L121,244L120,244L120,245L119,245L118,245L117,245L116,244L117,244L117,243L118,243L118,242L119,242L120,242L120,241L121,241L122,241L127,240L128,240L135,240L138,240L140,239L141,239L143,239L144,239L145,239L147,239L151,239L152,238L153,239L156,239Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 4</title></path></a>
+  <a href="ward-5.html"><path d="M156,186L156,189L156,190L156,191L157,191L157,192L157,193L157,194L158,198L158,200L159,202L159,203L159,204L159,205L159,206L160,206L160,207L160,208L161,208L161,209L161,210L161,211L162,211L162,212L162,213L162,215L162,216L163,217L163,218L162,219L161,219L160,219L159,220L158,220L157,220L158,222L156,222L156,223L155,223L155,224L156,226L156,227L157,228L159,231L160,233L163,236L163,238L164,239L163,239L162,239L161,239L159,239L156,239L153,239L152,238L151,239L147,239L145,239L144,239L143,239L141,239L140,239L138,240L135,240L128,240L127,240L122,241L121,241L120,241L120,242L119,242L118,242L118,243L117,243L117,244L116,244L116,243L116,242L116,241L116,240L116,239L116,238L117,238L117,237L117,236L117,235L117,234L117,233L116,232L116,231L116,230L117,230L117,229L118,228L119,228L119,227L120,227L120,226L120,225L121,224L121,223L122,223L122,222L123,222L123,221L122,220L122,219L121,219L120,219L119,219L119,218L118,218L118,217L118,216L118,215L117,214L117,213L116,212L116,211L116,210L116,209L116,208L115,208L115,207L115,205L116,205L116,204L116,203L116,202L117,202L117,201L116,201L115,201L114,201L113,201L112,201L111,201L110,201L110,200L109,200L109,199L109,198L108,198L108,197L107,197L106,196L105,196L104,195L103,195L103,194L102,194L101,194L101,193L100,192L99,191L98,191L97,191L96,191L95,191L95,190L95,189L95,188L95,187L94,187L93,187L93,186L92,186L92,185L91,184L92,183L92,182L93,182L93,181L94,180L98,179L100,178L102,178L103,177L104,177L105,177L106,177L109,176L110,176L111,176L113,176L116,175L120,175L122,174L123,174L124,174L125,174L126,174L127,174L128,173L130,173L132,172L134,172L135,171L136,171L137,171L138,171L138,170L139,170L140,170L141,170L141,169L145,168L148,167L150,166L152,166L153,166L153,167L153,169L154,171L154,176L155,181L155,183L156,186Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 5</title></path></a>
+  <a href="ward-6.html"><path d="M182,117L183,119L184,119L184,120L185,120L185,121L184,121L184,122L185,122L186,122L187,122L187,123L188,123L188,124L189,124L189,125L190,124L191,124L192,124L192,125L192,126L193,126L193,127L193,128L194,128L194,129L195,129L195,130L196,130L196,131L197,131L197,132L198,132L198,133L198,134L199,134L200,134L200,135L201,135L201,134L202,134L203,134L204,134L204,133L205,132L205,131L206,131L206,132L207,132L208,132L208,131L209,131L209,132L207,134L206,134L206,135L205,135L205,136L204,136L204,137L203,138L203,139L202,139L202,140L201,140L200,142L198,143L198,144L195,146L194,147L191,149L188,151L186,153L185,154L184,155L183,156L182,156L182,157L181,157L180,157L180,158L179,158L177,158L175,159L174,159L172,160L167,161L166,162L162,163L159,164L156,165L155,165L154,165L153,165L153,166L152,166L150,166L148,167L145,168L141,169L141,170L140,170L139,170L138,170L138,171L137,171L136,171L135,171L134,172L132,172L130,173L128,173L127,174L126,174L125,174L124,174L123,174L122,174L120,175L120,174L120,173L120,171L119,169L119,167L119,166L118,160L117,158L117,157L117,155L117,153L116,152L116,151L116,147L117,147L118,147L119,147L121,146L124,145L126,144L130,143L130,142L130,141L130,140L129,140L129,139L130,139L129,139L129,138L128,138L127,138L126,138L126,137L125,136L124,136L124,135L123,135L124,135L125,135L125,134L126,134L128,134L130,133L131,133L131,132L132,132L132,131L133,131L133,130L135,130L136,130L136,131L137,131L138,131L138,130L138,129L138,128L137,126L137,124L137,123L137,122L137,121L136,117L135,114L135,113L135,112L134,106L133,102L133,99L133,98L132,98L132,97L133,97L133,96L133,95L133,94L137,92L139,92L142,91L145,90L151,88L155,86L157,86L158,86L159,85L160,85L161,85L164,84L165,84L166,83L168,83L169,83L171,82L176,80L177,80L178,81L178,82L177,83L177,84L176,85L177,85L177,88L178,91L178,94L178,95L179,96L179,98L179,99L179,100L179,101L180,103L180,105L180,106L181,108L181,109L181,110L181,111L181,112L182,113L182,114L182,116L182,117Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 6</title></path></a>
+  <a href="ward-7.html"><path d="M136,117L137,121L137,122L137,123L137,124L137,126L138,128L138,129L138,130L138,131L137,131L136,131L136,130L135,130L133,130L133,131L132,131L132,132L131,132L131,133L130,133L128,134L126,134L125,134L125,135L124,135L123,135L124,135L124,136L125,136L126,137L126,138L127,138L128,138L129,138L129,139L130,139L129,139L129,140L130,140L130,141L130,142L130,143L126,144L124,145L121,146L119,147L118,147L117,147L116,147L116,151L116,152L117,153L117,155L117,157L117,158L118,160L119,166L119,167L119,169L120,171L120,173L120,174L120,175L116,175L113,176L111,176L110,176L109,176L106,177L105,177L104,177L103,177L102,178L100,178L98,179L94,180L93,181L93,180L93,179L92,178L91,178L90,178L90,177L90,176L89,176L88,176L88,175L87,175L87,174L88,173L88,172L88,171L89,171L89,170L90,170L90,169L90,168L90,167L90,166L90,165L90,164L91,164L92,164L92,163L93,163L93,162L92,162L92,161L92,160L92,159L92,158L92,157L92,156L91,157L92,157L92,158L91,158L91,159L90,160L89,159L88,159L87,159L87,158L87,157L87,156L86,156L86,157L85,157L84,157L84,156L83,156L83,155L82,155L81,155L81,154L81,153L82,153L82,152L83,152L82,152L81,151L82,150L82,149L83,149L83,148L84,148L84,147L85,147L85,146L85,145L84,144L83,144L82,144L83,143L82,143L81,143L82,143L82,142L82,141L81,141L80,141L79,142L78,142L77,142L76,142L76,143L75,143L75,144L76,144L76,145L75,145L74,145L74,144L75,144L74,143L73,143L72,143L71,143L70,142L71,142L71,141L70,141L70,140L69,140L68,139L67,139L66,139L65,138L64,138L63,138L62,138L61,138L61,137L60,137L60,136L61,136L61,135L61,134L61,133L60,133L59,133L59,134L58,134L57,133L56,133L55,133L55,132L54,132L54,131L53,131L52,131L52,130L51,130L51,129L51,128L50,128L50,127L50,126L50,125L51,124L51,123L52,123L53,123L54,122L54,121L54,120L55,120L55,119L56,119L56,118L57,118L56,118L55,118L54,118L54,117L57,116L58,116L59,116L62,114L63,114L64,114L68,113L72,112L75,111L77,110L80,109L82,109L85,108L88,107L90,106L93,106L95,105L96,105L97,105L98,104L100,104L103,103L106,102L107,102L108,101L109,101L110,101L112,100L117,99L124,97L126,96L129,95L130,95L133,94L133,95L133,96L133,97L132,97L132,98L133,98L133,99L133,102L134,106L135,112L135,113L135,114L136,117Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 7</title></path></a>
+  <a href="ward-8.html"><path d="M160,207L160,206L159,206L159,205L159,204L159,203L159,202L158,200L158,198L157,194L157,193L157,192L157,191L156,191L156,190L156,189L156,186L155,183L155,181L154,176L154,171L153,169L153,167L153,166L153,165L154,165L155,165L156,165L159,164L162,163L166,162L167,161L172,160L174,159L175,159L177,158L179,158L180,158L180,157L181,157L182,157L182,156L183,156L184,155L185,154L186,153L188,151L191,149L194,147L195,146L198,144L198,143L200,142L201,140L202,140L202,139L203,139L203,138L204,137L204,136L205,136L205,135L206,135L206,134L207,134L209,132L212,129L212,130L212,131L212,132L212,133L212,134L212,135L212,136L212,137L213,138L213,139L213,140L213,141L213,142L213,143L214,144L214,146L214,148L214,149L215,150L215,151L215,152L215,154L215,155L216,157L216,158L216,159L216,160L216,161L217,162L217,164L217,165L217,166L217,167L218,167L218,168L218,169L218,170L218,172L218,173L218,174L219,175L219,176L219,177L219,178L219,179L219,180L220,181L220,182L220,183L220,185L220,186L220,187L221,187L221,189L219,189L218,189L217,190L216,190L215,190L214,191L213,191L212,191L211,191L210,192L209,192L208,192L207,193L206,193L205,193L204,194L203,194L202,194L201,194L200,195L199,195L198,195L196,196L195,196L194,196L193,197L192,197L191,197L190,198L189,198L188,198L187,198L187,199L186,199L185,199L184,199L183,199L183,200L182,200L180,201L179,201L178,201L176,202L174,202L173,203L172,203L171,203L170,203L170,204L169,204L168,204L167,205L166,205L165,205L164,206L163,206L162,206L161,206L161,207L160,207Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 8</title></path></a>
+  <a href="ward-9.html"><path d="M177,215L178,215L179,215L180,215L181,214L182,214L183,214L184,213L184,214L185,214L186,214L187,214L188,213L188,214L188,215L188,216L188,217L189,218L188,218L188,219L189,219L189,220L189,221L189,222L190,224L191,227L191,229L192,229L191,229L191,230L192,231L192,233L192,234L193,235L193,236L193,237L193,238L194,238L194,239L194,240L195,243L195,244L196,245L196,246L197,248L197,250L197,251L198,252L198,254L198,255L199,255L199,256L199,257L199,258L199,259L200,259L200,260L200,261L198,261L197,261L197,263L197,264L198,265L198,266L199,268L199,269L199,271L200,272L199,272L198,272L197,272L196,272L195,271L194,271L194,270L193,270L192,270L192,269L191,269L188,267L187,266L186,266L186,265L185,265L184,264L183,264L183,263L182,263L182,262L181,262L181,261L180,261L180,260L179,260L179,259L177,256L176,255L175,254L174,252L172,250L172,249L170,247L169,246L168,244L167,242L166,242L165,240L164,239L163,238L163,236L160,233L159,231L157,228L156,227L156,226L155,224L155,223L156,223L156,222L158,222L157,220L158,220L159,220L160,219L161,219L162,219L163,218L163,217L162,216L162,215L162,213L162,212L162,211L161,211L161,210L161,209L161,208L160,208L160,207L161,207L161,206L162,206L163,206L164,206L165,205L166,205L167,205L168,204L169,204L170,204L170,203L171,203L172,203L173,203L174,204L174,207L175,207L175,209L176,211L176,212L176,213L177,214L177,215Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 9</title></path></a>
+  <a href="ward-10.html"><path d="M234,253L235,255L235,257L235,258L236,258L236,259L237,260L237,261L237,262L238,264L238,266L239,265L240,265L240,264L241,266L242,265L244,264L245,263L246,263L247,262L248,262L249,262L250,261L252,261L253,260L253,261L253,260L254,260L256,260L258,259L259,258L260,258L261,258L262,258L263,257L264,257L264,256L265,256L266,256L266,257L267,258L267,259L268,259L268,260L267,260L261,263L256,266L262,276L265,282L263,281L263,282L264,283L265,284L266,285L265,285L265,286L265,287L265,286L264,286L263,286L262,286L261,286L261,287L260,287L260,288L260,289L259,290L259,291L258,292L257,293L256,293L256,294L255,295L254,295L253,297L252,298L251,299L250,299L250,300L249,300L248,300L248,301L247,301L246,302L245,302L245,303L244,303L244,304L243,304L242,304L242,305L241,305L241,306L240,306L239,306L238,306L238,307L237,307L237,308L236,308L235,308L234,309L233,309L232,309L231,309L230,309L229,309L229,308L229,307L228,307L228,306L228,305L227,305L227,304L227,303L226,302L226,301L225,301L225,300L225,299L224,299L224,298L223,298L223,297L222,296L221,296L221,295L221,294L220,294L220,293L219,293L219,292L218,292L218,291L217,291L217,290L216,290L215,290L215,289L215,288L216,288L216,287L217,287L218,286L219,285L220,284L221,282L220,282L218,284L217,284L217,285L217,284L216,284L217,284L215,282L213,282L212,282L211,282L211,284L210,284L210,285L211,285L211,286L211,287L210,287L210,288L210,289L209,289L208,289L207,289L207,290L206,290L206,289L205,290L205,289L204,288L203,288L203,289L203,290L202,290L203,290L204,290L205,290L206,290L205,290L204,291L203,290L202,290L201,290L201,289L200,289L199,289L199,288L199,287L200,287L201,287L202,287L201,287L201,288L201,287L202,288L202,289L202,288L203,288L202,286L202,287L202,286L201,286L200,286L198,286L197,286L196,286L195,286L194,286L194,285L193,285L193,284L193,282L194,282L196,281L196,280L195,279L195,278L195,277L194,274L194,272L193,271L193,270L194,270L194,271L195,271L196,272L197,272L198,272L199,272L200,272L199,271L199,269L199,268L198,266L198,265L197,264L197,263L197,261L198,261L200,261L201,261L202,261L204,260L205,260L206,260L207,259L208,259L209,259L210,259L211,258L213,258L214,258L214,257L214,258L215,258L216,258L217,258L218,258L219,257L220,257L221,257L222,257L222,256L223,256L224,256L225,256L227,255L228,255L229,255L230,254L231,254L232,254L233,254L234,253Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 10</title></path></a>
+  <a href="ward-11.html"><path d="M228,209L228,208L228,209L228,208L229,208L230,208L229,207L229,206L233,205L236,204L236,203L237,204L238,204L239,205L240,205L240,206L241,206L242,206L243,207L244,207L244,208L245,208L245,209L246,209L247,208L247,207L248,206L250,204L250,205L251,205L252,205L253,205L253,206L254,206L254,207L254,208L254,209L253,209L253,210L253,211L252,211L252,212L253,212L253,211L254,211L254,212L254,213L254,214L254,215L254,216L254,217L253,218L252,219L251,219L251,220L250,220L250,221L250,222L251,222L251,223L252,223L252,224L253,224L253,225L252,225L252,226L251,226L251,227L252,227L252,228L253,228L253,229L253,230L253,231L254,231L254,232L255,232L255,233L256,233L256,234L256,235L255,235L254,235L253,234L252,234L251,233L250,233L249,233L248,233L248,232L247,232L246,232L245,232L244,231L243,231L242,231L241,231L240,231L240,232L238,233L238,234L238,235L237,235L236,236L235,236L234,236L232,237L231,237L230,237L229,237L230,238L230,239L230,240L231,241L231,242L231,243L231,244L232,245L232,246L232,247L234,246L235,246L235,247L235,248L236,249L236,250L236,251L236,252L237,252L234,253L233,254L232,254L231,254L230,254L229,255L228,255L227,255L225,256L224,256L223,256L222,256L222,257L221,257L220,257L219,257L218,258L217,258L216,258L215,258L214,258L214,257L214,258L213,258L211,258L210,259L209,259L208,259L207,259L206,260L205,260L204,260L202,261L201,261L200,261L200,260L200,259L199,259L199,258L199,257L199,256L199,255L198,255L198,254L198,252L197,251L197,250L197,248L196,246L196,245L195,244L195,243L194,240L194,239L194,238L193,238L193,237L193,236L193,235L192,234L195,233L198,232L199,232L201,231L204,231L206,230L207,230L208,230L209,229L212,228L213,228L215,228L216,227L217,227L218,227L218,226L219,226L220,226L220,225L221,225L222,225L223,224L225,222L227,221L227,220L227,219L226,217L226,216L228,215L228,214L229,213L230,213L231,213L231,212L230,212L230,211L229,211L229,210L228,210L228,209Z" fill="#1a4a7a" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 11</title></path></a>
+  <a href="ward-12.html"><path d="M230,208L229,208L228,208L228,209L228,208L228,209L228,210L229,210L229,211L230,211L230,212L231,212L231,213L230,213L229,213L228,214L228,215L226,216L226,217L227,219L227,220L227,221L225,222L223,224L222,225L221,225L220,225L220,226L219,226L218,226L218,227L217,227L216,227L215,228L213,228L212,228L209,229L208,230L207,230L206,230L204,231L201,231L199,232L198,232L195,233L192,234L192,233L192,231L191,230L191,229L192,229L191,229L191,227L190,224L189,222L189,221L189,220L189,219L188,219L188,218L189,218L188,217L188,216L188,215L188,214L188,213L187,214L186,214L185,214L184,214L184,213L183,214L182,214L181,214L180,215L179,215L178,215L177,215L177,214L176,213L176,212L176,211L175,209L175,207L174,207L174,204L173,203L174,202L176,202L178,201L179,201L180,201L182,200L183,200L183,199L184,199L185,199L186,199L187,199L187,198L188,198L189,198L190,198L191,197L192,197L193,197L194,196L195,196L196,196L198,195L199,195L200,195L201,194L202,194L203,194L204,194L205,193L206,193L207,193L208,192L209,192L210,192L211,191L212,191L213,191L214,191L215,190L216,190L217,190L218,189L219,189L221,189L221,187L220,187L220,186L220,185L225,184L227,183L228,185L228,186L229,189L229,191L230,192L230,193L230,194L231,195L231,196L231,197L231,198L232,199L232,200L233,205L229,206L229,207L230,208Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 12</title></path></a>
+  <a href="ward-13.html"><path d="M240,231L241,231L242,231L243,231L244,231L245,232L246,232L247,232L248,232L248,233L249,233L250,233L251,233L252,234L253,234L254,235L255,235L256,235L257,235L257,236L258,236L258,237L258,238L259,241L259,242L259,243L260,243L260,244L260,245L260,246L260,247L261,248L261,249L261,250L261,251L262,251L262,252L263,252L263,253L264,254L265,256L266,256L265,256L264,256L264,257L263,257L262,258L261,258L260,258L259,258L258,259L256,260L254,260L253,260L253,261L253,260L252,261L250,261L249,262L248,262L247,262L246,263L245,263L244,264L242,265L241,266L240,264L240,265L239,265L238,266L238,264L237,262L237,261L237,260L236,259L236,258L235,258L235,257L235,255L234,253L237,252L236,252L236,251L236,250L236,249L235,248L235,247L235,246L234,246L232,247L232,246L232,245L231,244L231,243L231,242L231,241L230,240L230,239L230,238L229,237L230,237L231,237L232,237L233,237L234,236L235,236L236,236L237,235L238,235L238,234L238,233L240,232L240,231Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 13</title></path></a>
+  <a href="ward-14.html"><path d="M281,193L282,194L282,195L283,195L284,195L285,195L286,195L286,196L285,197L284,198L284,199L284,200L285,202L285,205L286,207L287,209L287,210L287,211L287,212L288,213L288,214L288,215L289,216L289,217L289,218L289,219L290,220L290,221L290,222L291,223L291,224L291,225L292,227L292,228L292,229L293,231L294,234L294,235L295,237L295,238L295,239L296,240L296,241L297,243L297,245L295,246L295,247L295,246L294,246L295,247L294,247L295,247L296,248L297,248L297,249L298,249L298,250L299,250L299,251L298,251L297,251L296,251L296,252L296,253L295,253L295,254L295,255L294,255L294,256L294,257L293,258L293,259L293,260L293,261L292,261L292,262L292,263L293,263L293,264L293,265L293,266L292,266L292,267L292,268L292,269L291,270L292,270L292,271L292,272L291,272L291,273L291,274L291,275L291,276L291,277L290,277L290,278L290,279L290,280L290,281L291,281L292,282L291,282L291,283L291,284L290,285L290,286L291,286L291,287L292,287L291,287L290,287L290,288L290,290L290,291L291,291L290,291L290,292L290,293L290,294L290,295L291,295L291,296L290,296L289,296L289,297L289,300L289,301L289,302L288,302L288,301L287,301L287,302L286,302L286,301L287,301L287,300L288,300L288,299L288,298L288,297L288,296L287,296L286,296L285,296L285,297L286,298L286,299L286,300L285,300L285,299L284,298L283,298L282,298L281,298L280,298L279,299L278,299L277,299L277,300L276,301L275,302L275,303L274,303L274,304L273,305L272,306L272,307L272,308L271,308L271,307L270,307L271,307L271,306L271,305L271,304L271,303L270,301L270,300L271,300L271,299L271,298L271,297L270,297L270,296L271,296L271,297L272,297L272,298L272,299L273,299L274,299L274,298L275,298L275,297L274,297L274,296L273,296L273,295L272,295L271,295L271,294L272,294L273,294L274,294L274,293L274,294L275,295L275,296L276,296L276,295L277,295L277,294L277,295L276,295L276,294L276,295L276,294L277,294L277,293L277,292L277,291L276,290L276,289L276,288L275,288L275,287L274,287L275,287L276,287L275,287L276,287L277,287L277,288L277,289L278,289L279,289L279,290L278,290L278,291L279,292L280,292L279,292L279,291L280,291L279,291L280,291L281,291L282,291L283,291L282,291L282,290L282,289L283,289L283,288L284,288L284,287L284,286L285,286L285,285L284,285L284,284L283,284L282,284L282,285L281,285L281,286L281,285L280,285L280,286L280,287L279,287L279,286L278,286L278,287L277,287L278,287L278,286L278,285L279,285L279,284L280,284L281,284L281,283L282,283L283,283L283,282L284,282L284,281L284,282L284,281L284,282L285,282L284,282L284,283L285,283L285,284L286,284L286,283L287,283L287,282L287,281L287,280L286,280L285,280L285,281L284,281L285,281L285,280L286,280L287,280L287,279L286,279L287,279L287,278L288,278L289,277L289,276L290,276L290,275L290,274L290,273L290,272L290,271L291,271L291,270L291,269L291,268L291,267L289,267L288,268L288,270L287,272L288,273L287,273L286,273L286,274L285,274L285,275L284,276L285,276L284,277L284,276L283,276L283,275L283,274L284,274L284,273L283,273L284,273L285,273L285,272L286,272L286,271L286,270L286,269L286,268L285,268L286,268L287,268L287,267L287,266L288,266L288,265L287,265L287,264L286,264L285,264L285,263L285,264L284,264L283,264L283,265L283,266L282,266L282,267L281,267L281,268L280,268L280,269L279,269L279,270L278,271L278,272L277,272L277,273L277,274L278,274L278,273L279,273L279,272L279,273L278,273L278,274L277,274L276,274L275,274L274,274L273,275L273,276L272,276L271,276L271,277L271,278L270,278L270,279L269,279L269,280L268,280L268,281L268,282L265,282L262,276L256,266L261,263L267,260L268,260L268,259L267,259L267,258L266,257L266,256L265,256L264,254L263,253L263,252L262,252L262,251L261,251L261,250L261,249L261,248L260,247L260,246L260,245L260,244L260,243L259,243L259,242L259,241L258,238L258,237L258,236L257,236L257,235L256,235L256,234L256,233L255,233L255,232L254,232L254,231L253,231L253,230L253,229L253,228L252,228L252,227L251,227L251,226L252,226L252,225L253,225L253,224L252,224L252,223L251,223L251,222L250,222L250,221L250,220L251,220L251,219L252,219L253,218L254,217L254,216L254,215L254,214L254,213L254,212L254,211L255,211L255,210L255,209L256,209L256,208L256,207L255,207L255,206L254,206L254,205L254,204L255,204L255,203L256,203L257,203L258,203L259,203L259,202L260,201L260,200L261,199L262,199L263,199L264,199L264,198L265,198L265,197L266,197L267,197L267,198L268,198L268,199L269,199L270,199L271,199L272,198L273,198L273,197L274,197L274,196L275,196L275,195L276,195L277,194L278,193L279,193L280,193L281,193Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 14</title></path></a>
+  <a href="ward-15.html"><path d="M263,177L264,177L265,177L266,177L266,176L267,177L268,177L268,178L269,178L270,178L270,179L271,179L271,180L272,180L273,181L274,181L275,181L274,182L274,183L275,183L275,184L276,185L276,186L277,186L277,185L278,185L279,185L279,184L279,185L280,185L280,186L280,187L280,188L280,189L280,190L280,191L280,192L279,192L279,193L278,193L277,194L276,195L275,195L275,196L274,196L274,197L273,197L273,198L272,198L271,199L270,199L269,199L268,199L268,198L267,198L267,197L266,197L265,197L265,198L264,198L264,199L263,199L262,199L261,199L260,200L260,201L259,202L259,203L258,203L257,203L256,203L255,203L255,204L254,204L254,205L254,206L255,206L255,207L256,207L256,208L256,209L255,209L255,210L255,211L254,211L254,212L254,211L253,211L253,212L252,212L252,211L253,211L253,210L253,209L254,209L254,208L254,207L254,206L253,206L253,205L252,205L251,205L250,205L250,204L248,206L247,207L247,208L246,209L245,209L245,208L244,208L244,207L243,207L242,206L241,206L240,206L240,205L239,205L238,204L237,204L236,203L236,204L233,205L232,200L232,199L231,198L231,197L231,196L231,195L230,194L230,193L230,192L229,191L229,189L228,186L228,185L227,183L225,184L220,185L220,183L220,182L220,181L219,180L219,179L219,178L219,177L219,176L219,175L218,174L218,173L218,172L218,170L218,169L218,168L218,167L217,167L217,166L217,165L217,164L217,162L216,161L216,160L216,159L216,158L216,157L215,155L215,154L215,152L215,151L215,150L214,149L214,148L214,146L214,144L213,143L213,142L213,141L213,140L213,139L213,138L212,137L212,136L212,135L212,134L212,133L212,132L212,131L212,130L212,129L213,128L214,127L216,125L219,123L220,122L220,121L221,121L222,121L222,120L223,120L223,119L224,119L225,119L226,118L231,117L234,116L235,116L237,115L238,115L239,115L239,114L240,114L241,114L242,114L243,114L244,114L245,114L245,113L248,113L251,113L253,113L254,113L254,114L254,115L254,116L254,117L254,118L254,119L254,120L254,121L255,122L255,123L255,124L255,126L256,128L256,129L256,130L256,131L256,132L256,133L257,134L257,135L257,137L257,139L257,140L258,142L258,143L258,145L258,146L259,147L259,149L259,150L259,151L259,152L260,153L260,154L260,155L260,156L260,157L260,158L261,158L261,159L262,159L262,160L263,161L263,162L264,162L264,163L265,163L265,164L266,165L266,166L266,167L266,168L266,169L265,171L265,172L265,173L265,174L265,175L265,176L264,176L263,176L263,177Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 15</title></path></a>
+  <a href="ward-16.html"><path d="M299,176L293,177L292,177L293,178L292,178L292,179L292,180L291,181L291,182L292,182L292,181L293,181L293,182L294,182L294,183L293,183L293,184L292,184L291,184L290,184L289,184L289,185L288,185L288,186L287,186L287,187L286,187L285,187L284,188L284,189L283,189L282,189L281,190L281,191L281,192L281,193L280,193L279,193L279,192L280,192L280,191L280,190L280,189L280,188L280,187L280,186L280,185L279,185L279,184L279,185L278,185L277,185L277,186L276,186L276,185L275,184L275,183L274,183L274,182L275,181L274,181L273,181L272,180L271,180L271,179L270,179L270,178L269,178L268,178L268,177L267,177L266,176L266,177L265,177L264,177L263,177L263,176L264,176L265,176L265,175L265,174L265,173L265,172L265,171L266,169L266,168L266,167L266,166L266,165L265,164L265,163L264,163L264,162L263,162L263,161L262,160L262,159L261,159L261,158L260,158L260,157L260,156L260,155L260,154L260,153L259,152L259,151L259,150L259,149L259,147L258,146L258,145L258,143L258,142L257,140L257,139L257,137L257,135L257,134L256,133L256,132L256,131L256,130L256,129L256,128L255,126L255,124L255,123L255,122L254,121L254,120L254,119L254,118L254,117L254,116L254,115L254,114L254,113L253,113L256,113L257,113L259,113L262,112L264,112L266,112L268,112L271,112L274,112L275,111L276,111L277,111L278,111L280,111L282,111L283,111L284,111L287,110L288,110L289,110L290,110L291,110L292,110L293,110L293,111L293,112L293,113L294,113L294,114L294,115L294,116L295,117L295,118L295,119L296,120L296,121L296,122L297,123L297,124L297,125L297,126L298,126L298,128L298,129L298,130L299,131L299,132L299,133L299,134L300,135L300,136L300,137L300,138L301,139L301,140L301,141L301,142L302,143L302,144L302,145L302,146L303,147L303,148L304,150L304,151L305,153L305,155L305,156L306,157L306,158L306,159L307,160L307,161L307,162L308,163L308,166L309,167L309,169L310,171L310,172L307,173L305,174L303,174L300,175L299,176Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 16</title></path></a>
+  <a href="ward-17.html"><path d="M234,116L231,117L231,116L231,115L230,114L230,113L230,112L230,111L230,110L230,109L229,108L229,107L229,106L229,105L229,104L229,103L228,102L228,101L228,99L228,98L228,96L227,96L227,95L227,94L227,93L227,92L227,91L226,90L226,89L226,88L226,87L226,86L226,85L226,84L226,83L225,82L225,80L225,78L225,76L224,75L224,73L224,71L223,70L223,69L223,68L223,67L223,66L224,66L226,65L227,65L229,64L230,64L231,64L232,63L233,63L234,63L236,62L237,62L239,61L241,61L243,60L244,60L245,59L246,59L247,59L249,58L250,58L251,57L252,57L253,57L255,56L257,56L258,55L260,54L262,54L263,54L266,53L268,52L270,52L272,51L273,50L273,52L274,54L274,55L275,57L275,58L276,59L276,61L277,62L277,63L277,64L278,65L278,66L278,67L278,68L279,69L279,70L280,71L280,73L281,75L281,77L282,78L282,79L283,81L284,84L284,86L285,88L286,90L286,91L287,93L288,95L288,96L289,98L289,99L290,102L290,103L291,104L291,106L292,107L292,108L292,109L292,110L293,110L292,110L291,110L290,110L289,110L288,110L287,110L284,111L283,111L282,111L280,111L278,111L277,111L276,111L275,111L274,112L271,112L268,112L266,112L264,112L262,112L259,113L257,113L256,113L253,113L251,113L248,113L245,113L245,114L244,114L243,114L242,114L241,114L240,114L239,114L239,115L238,115L237,115L235,116L234,116Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 17</title></path></a>
+  <a href="ward-18.html"><path d="M224,119L223,119L223,120L222,120L222,121L221,121L220,121L220,122L219,123L216,125L214,127L213,128L212,129L209,132L209,131L208,131L208,132L207,132L206,132L206,131L205,131L205,132L204,133L204,134L203,134L202,134L201,134L201,135L200,135L200,134L199,134L198,134L198,133L198,132L197,132L197,131L196,131L196,130L195,130L195,129L194,129L194,128L193,128L193,127L193,126L192,126L192,125L192,124L191,124L190,124L189,125L189,124L188,124L188,123L187,123L187,122L186,122L185,122L184,122L184,121L185,121L185,120L184,120L184,119L183,119L182,117L182,116L182,114L182,113L181,112L181,111L181,110L181,109L181,108L180,106L180,105L180,103L179,101L179,100L179,99L179,98L179,96L178,95L178,94L178,91L177,88L177,85L176,85L177,84L177,83L178,82L178,81L177,80L180,79L182,79L184,78L186,77L189,76L192,75L195,75L198,74L201,73L202,72L204,72L206,71L208,71L211,70L214,69L216,68L217,68L218,68L218,67L220,67L221,67L222,66L223,66L223,67L223,68L223,69L223,70L224,71L224,73L224,75L225,76L225,78L225,80L225,82L226,83L226,84L226,85L226,86L226,87L226,88L226,89L226,90L227,91L227,92L227,93L227,94L227,95L227,96L228,96L228,98L228,99L228,101L228,102L229,103L229,104L229,105L229,106L229,107L229,108L230,109L230,110L230,111L230,112L230,113L230,114L231,115L231,116L231,117L226,118L225,119L224,119Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 18</title></path></a>
+  <a href="ward-19.html"><path d="M312,178L312,179L313,180L313,181L313,182L314,183L314,184L314,185L315,186L315,187L315,188L315,189L316,190L316,191L317,192L317,193L317,194L317,195L318,196L318,197L318,198L319,199L319,200L319,201L320,201L320,202L320,203L320,204L321,205L321,206L321,207L321,208L322,208L322,210L322,211L323,212L323,214L323,215L324,216L324,218L325,218L325,219L325,220L325,221L326,222L326,224L327,224L327,225L328,226L329,229L329,230L330,233L330,234L329,234L328,234L328,235L328,234L327,234L327,235L326,235L325,235L324,235L324,236L323,236L323,237L323,236L323,237L323,236L322,236L322,237L321,237L320,238L321,238L321,237L320,237L319,237L319,238L318,238L318,239L317,239L317,238L317,239L316,239L316,240L315,240L315,241L314,241L313,241L312,241L311,241L310,241L311,241L310,241L309,241L309,242L308,242L307,243L307,244L306,244L306,245L305,246L305,247L306,247L306,248L306,249L305,249L305,250L306,251L306,252L305,252L304,252L304,253L303,253L303,254L303,255L303,254L302,254L301,254L301,253L302,253L303,253L303,252L304,252L305,252L305,251L304,251L303,251L303,250L302,250L301,250L301,251L301,252L302,252L301,252L300,252L299,252L299,251L300,251L300,250L300,249L299,249L300,249L299,249L299,248L299,249L299,248L298,248L298,247L298,246L299,246L298,246L297,246L297,245L297,243L296,241L296,240L295,239L295,238L295,237L294,235L294,234L293,231L292,229L292,228L292,227L291,225L291,224L291,223L290,222L290,221L290,220L289,219L289,218L289,217L289,216L288,215L288,214L288,213L287,212L287,211L287,210L287,209L286,207L285,205L285,202L284,200L284,199L284,198L285,197L286,196L286,195L285,195L284,195L283,195L282,195L282,194L281,193L281,192L281,191L281,190L282,189L283,189L284,189L284,188L285,187L286,187L287,187L287,186L288,186L288,185L289,185L289,184L290,184L291,184L292,184L293,184L293,183L294,183L294,182L293,182L293,181L292,181L292,182L291,182L291,181L292,180L292,179L292,178L293,178L292,177L293,177L299,176L300,175L303,174L305,174L307,173L310,172L311,173L311,174L312,176L312,177L312,178Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 19</title></path></a>
+  <a href="ward-20.html"><path d="M330,233L329,230L329,229L328,226L327,225L327,224L326,224L326,222L325,221L325,220L325,219L325,218L324,218L324,216L323,215L323,214L323,212L322,211L322,210L322,208L321,208L321,207L321,206L321,205L320,204L320,203L320,202L320,201L319,201L319,200L319,199L318,198L318,197L318,196L317,195L317,194L317,193L317,192L316,191L316,190L315,189L315,188L315,187L315,186L314,185L314,184L314,183L313,182L313,181L313,180L312,179L312,178L312,177L312,176L311,174L311,173L310,172L310,171L309,169L309,167L308,166L309,166L310,166L310,165L311,165L313,165L316,164L319,163L320,162L322,162L324,161L325,161L327,160L328,160L329,160L330,159L331,159L333,159L335,158L336,158L337,157L339,157L340,156L341,156L342,156L343,155L345,155L346,154L347,154L348,154L349,153L350,153L352,153L353,152L354,152L355,152L356,151L358,151L360,150L362,149L364,149L367,148L370,147L373,146L375,146L376,145L377,145L379,144L382,143L384,143L385,142L386,144L386,146L387,147L387,148L387,149L388,151L389,155L389,156L390,158L390,159L391,161L391,162L390,162L391,162L390,162L390,163L390,164L389,164L389,165L389,166L388,166L389,165L388,165L388,166L388,167L387,168L387,167L387,168L387,169L386,169L386,170L386,169L385,169L385,170L384,170L384,171L383,171L383,172L382,172L382,173L381,173L381,174L381,175L380,175L380,176L380,177L380,178L379,178L379,179L379,180L379,181L379,182L379,183L380,183L379,183L379,184L378,185L378,186L379,186L379,187L379,188L378,188L378,187L377,187L377,186L378,186L378,185L378,184L378,183L378,182L378,181L377,181L376,181L375,181L375,182L375,183L374,183L375,183L375,184L376,184L376,183L376,182L377,182L378,182L378,183L377,183L377,184L377,185L376,185L375,185L375,186L376,186L376,187L375,187L375,186L374,186L373,186L374,186L374,185L375,185L375,184L374,184L373,184L373,185L372,185L372,186L372,185L372,186L372,187L372,188L373,188L373,189L374,189L375,189L375,190L376,189L376,188L377,188L376,188L376,189L376,190L376,191L375,191L375,190L374,190L373,191L373,190L372,190L372,189L373,189L372,188L372,189L372,188L372,189L371,189L372,189L372,190L371,190L371,191L370,191L370,192L369,192L369,193L369,194L370,194L370,195L370,196L369,196L369,195L369,194L368,194L367,194L367,195L367,194L368,194L368,193L368,192L369,192L369,191L368,191L367,191L367,192L368,192L367,192L366,192L367,192L367,193L368,193L368,194L367,194L367,193L366,193L365,193L364,194L363,194L363,195L363,196L362,196L362,197L361,197L361,198L360,198L359,199L358,199L358,200L358,199L357,200L358,200L357,200L356,200L356,201L355,201L354,202L353,202L353,203L352,203L351,204L351,205L351,204L350,204L350,205L350,206L349,206L349,207L348,207L348,208L348,209L347,209L347,210L346,211L346,212L345,212L345,213L344,213L344,214L344,215L343,215L343,216L342,216L342,217L341,217L341,218L341,217L341,218L340,218L340,219L340,220L339,220L339,221L339,222L339,221L338,221L338,222L338,223L337,223L337,224L336,224L336,225L335,225L335,226L335,227L334,227L335,227L334,227L334,228L334,229L334,228L333,228L333,229L333,230L332,230L332,231L332,232L331,232L331,233L331,232L331,233L330,233Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 20</title></path></a>
+  <a href="ward-21.html"><path d="M357,110L357,112L358,114L358,115L358,117L359,119L359,120L360,121L360,122L360,123L360,124L361,124L361,125L361,126L361,127L363,126L364,126L365,126L366,125L367,125L370,124L370,125L370,126L371,127L371,128L371,129L372,130L372,131L372,132L373,133L373,134L373,135L374,137L374,138L374,139L375,141L375,142L375,143L376,143L376,144L376,145L375,146L373,146L370,147L367,148L364,149L362,149L360,150L358,151L356,151L355,152L354,152L353,152L352,153L350,153L349,153L348,154L347,154L346,154L345,155L343,155L342,156L341,156L340,156L339,157L337,157L336,158L335,158L333,159L331,159L330,159L329,160L328,160L327,160L325,161L324,161L322,162L320,162L319,163L316,164L313,165L311,165L310,165L310,166L309,166L308,166L308,163L307,162L307,161L307,160L306,159L306,158L306,157L305,156L305,155L305,153L304,151L304,150L303,148L303,147L302,146L302,145L302,144L302,143L301,142L301,141L301,140L301,139L300,138L300,137L300,136L300,135L299,134L299,133L299,132L299,131L298,130L298,129L298,128L298,126L297,126L297,125L297,124L297,123L296,122L296,121L296,120L295,119L295,118L295,117L294,116L294,115L294,114L294,113L293,113L293,112L293,111L293,110L295,110L296,110L297,110L298,110L299,110L300,110L301,110L302,110L302,109L303,109L304,109L307,108L309,107L311,106L312,106L316,105L317,105L318,104L320,104L323,103L325,102L328,101L330,101L332,100L334,99L337,98L339,98L340,97L342,97L343,97L344,96L347,95L349,95L352,94L352,95L353,95L353,96L353,97L353,98L354,100L354,101L355,102L355,103L355,104L355,105L355,106L356,107L356,108L356,109L357,110Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 21</title></path></a>
+  <a href="ward-22.html"><path d="M296,110L295,110L293,110L292,110L292,109L292,108L292,107L291,106L291,104L290,103L290,102L289,99L289,98L288,96L288,95L287,93L286,91L286,90L285,88L284,86L284,84L283,81L282,79L282,78L281,77L281,75L280,73L280,71L279,70L279,69L278,68L278,67L278,66L278,65L277,64L277,63L277,62L276,61L276,59L275,58L275,57L274,55L274,54L273,52L273,50L274,50L275,50L277,49L278,49L279,48L281,48L282,48L282,47L283,47L284,47L285,47L285,46L286,46L287,46L288,45L290,45L292,44L294,44L295,43L296,43L298,42L300,42L302,41L304,40L306,40L307,39L309,39L310,38L311,38L312,38L313,37L313,38L314,38L314,40L314,41L315,41L315,42L315,43L315,44L316,44L316,45L316,46L317,47L317,48L317,49L317,50L318,52L318,53L319,54L319,55L320,56L320,57L320,58L320,59L321,60L321,61L321,62L322,62L322,63L323,64L323,65L323,66L324,66L324,67L324,69L325,70L325,72L326,72L326,73L326,74L326,75L327,76L327,77L327,78L327,79L328,80L328,82L329,83L329,84L329,85L330,86L330,87L330,88L331,89L331,90L331,91L332,91L332,92L332,93L333,95L333,97L334,99L332,100L330,101L328,101L325,102L323,103L320,104L318,104L317,105L316,105L312,106L311,106L309,107L307,108L304,109L303,109L302,109L302,110L301,110L300,110L299,110L298,110L297,110L296,110Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 22</title></path></a>
+  <a href="ward-23.html"><path d="M379,20L380,20L381,21L382,21L382,22L382,23L382,24L383,24L382,24L382,25L381,25L381,26L380,26L381,27L381,28L382,28L382,29L383,29L384,29L385,29L385,30L386,30L386,31L386,32L382,34L380,34L379,35L373,38L373,39L374,40L374,41L375,41L375,42L374,42L374,43L375,43L375,44L376,46L376,47L376,48L377,48L377,49L377,50L378,51L378,52L378,53L379,55L379,56L380,56L380,57L381,57L381,58L382,58L382,59L383,59L384,59L384,60L385,60L385,61L385,62L386,62L386,63L386,64L387,64L387,65L387,66L387,67L386,67L386,68L386,69L386,70L386,71L386,72L386,73L387,76L388,77L388,78L388,79L387,79L386,79L385,80L384,80L383,81L382,81L382,82L381,82L381,83L380,83L380,84L379,84L378,84L378,85L377,85L377,86L376,86L375,86L375,87L374,87L373,87L373,88L371,88L370,89L368,89L367,90L365,90L364,91L362,91L361,92L360,92L359,92L357,93L356,93L355,93L353,94L352,94L349,95L347,95L344,96L343,97L342,97L340,97L339,98L337,98L334,99L333,97L333,95L332,93L332,92L332,91L331,91L331,90L331,89L330,88L330,87L330,86L329,85L329,84L329,83L328,82L328,80L327,79L327,78L327,77L327,76L326,75L326,74L326,73L326,72L325,72L325,70L324,69L324,67L324,66L323,66L323,65L323,64L322,63L322,62L321,62L321,61L321,60L320,59L320,58L320,57L320,56L319,55L319,54L318,53L318,52L317,50L317,49L317,48L317,47L316,46L316,45L316,44L315,44L315,43L315,42L315,41L314,41L314,40L314,38L313,38L313,37L314,37L315,37L316,36L317,36L318,36L319,36L321,35L322,35L323,34L324,34L325,34L326,33L329,32L330,32L331,32L332,31L333,31L334,31L336,30L337,30L339,29L340,29L342,28L344,28L346,27L348,26L351,25L352,25L353,25L355,24L356,24L357,23L358,23L361,22L364,21L366,20L367,20L368,20L369,20L371,19L373,18L375,17L376,17L377,17L378,18L378,19L379,20Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 23</title></path></a>
+  <a href="ward-24.html"><path d="M419,123L420,126L420,128L421,130L422,131L421,131L421,132L420,132L420,133L419,133L419,134L418,134L418,135L417,135L416,135L416,136L415,136L415,137L414,137L414,138L413,138L413,137L414,137L413,137L413,138L412,138L412,139L411,139L411,140L410,141L410,142L409,142L409,143L408,143L407,144L407,145L406,145L406,146L405,146L405,147L405,148L404,148L404,149L403,149L403,150L402,150L402,151L401,151L400,152L399,152L399,153L398,153L397,153L397,154L396,154L396,155L395,155L395,156L394,156L394,157L393,157L393,158L394,158L393,159L392,159L392,160L391,160L391,161L390,159L390,158L389,156L389,155L388,151L387,149L387,148L387,147L386,146L386,144L385,142L384,143L382,143L379,144L376,145L376,144L376,143L375,143L375,142L375,141L374,139L374,138L374,137L373,135L373,134L373,133L372,132L372,131L372,130L371,129L371,128L371,127L370,126L370,125L370,124L367,125L366,125L365,126L364,126L363,126L361,127L361,126L361,125L361,124L360,124L360,123L360,122L360,121L359,120L359,119L358,117L358,115L358,114L357,112L357,110L356,109L356,108L356,107L355,106L355,105L355,104L355,103L355,102L354,101L354,100L353,98L353,97L353,96L353,95L352,95L352,94L353,94L355,93L356,93L357,93L359,92L360,92L361,92L362,91L364,91L365,90L367,90L368,89L370,89L371,88L373,88L373,87L374,87L375,87L375,86L376,86L377,86L377,85L378,85L378,84L379,84L380,84L380,83L381,83L381,82L382,82L382,81L383,81L384,80L385,80L386,79L387,79L388,79L388,78L389,78L390,78L394,77L397,76L400,76L402,75L405,75L406,76L406,77L406,78L406,79L407,80L408,84L408,85L408,86L408,87L408,88L408,89L409,89L410,92L411,95L411,97L412,99L412,100L412,101L413,102L413,103L414,105L415,108L415,109L415,110L415,111L415,112L416,113L416,114L416,115L417,116L418,119L418,120L418,121L419,123Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 24</title></path></a>
+  <a href="ward-25.html"><path d="M435,15L437,22L437,23L438,24L438,26L438,27L439,27L439,28L439,29L440,30L440,32L441,34L442,38L443,41L443,42L444,44L445,46L445,48L446,49L446,50L446,51L446,52L447,52L447,53L448,53L448,54L449,54L449,55L450,55L451,55L451,56L452,56L452,57L452,58L453,58L454,58L454,57L455,57L455,58L456,58L456,59L457,59L457,60L458,60L459,60L459,61L460,61L460,60L460,61L460,60L461,60L462,60L462,61L463,61L463,62L463,63L463,64L463,65L463,66L463,67L463,68L462,68L462,69L463,69L464,69L464,68L465,68L466,68L467,68L467,69L468,69L468,70L469,70L470,70L471,70L472,71L472,72L472,73L472,74L473,74L474,74L475,74L475,75L476,75L476,76L475,76L475,77L476,77L477,77L478,77L479,77L480,77L479,77L479,78L478,78L478,79L477,79L477,80L476,80L476,81L476,82L475,82L476,82L476,83L476,82L476,83L475,83L475,84L475,85L474,85L474,86L473,86L473,87L473,88L472,88L472,89L471,90L472,90L471,91L470,91L470,92L470,93L469,93L469,94L468,94L468,95L467,95L467,96L466,97L466,98L465,98L465,99L464,99L464,100L463,101L463,102L463,103L462,103L462,104L461,104L462,104L461,105L460,105L460,106L460,107L460,106L459,106L459,107L459,108L459,107L459,108L458,108L459,108L458,108L457,108L457,109L457,110L457,109L456,109L456,110L455,110L455,111L454,111L454,112L453,112L453,113L452,113L452,114L451,114L451,115L450,115L450,116L450,117L449,117L449,118L448,118L448,119L448,120L447,120L447,121L446,121L446,122L445,122L444,122L443,122L442,122L441,122L441,123L440,123L439,123L438,123L438,124L437,124L436,124L435,124L435,125L434,125L433,125L432,125L432,126L431,126L430,126L429,127L428,127L427,128L426,128L425,129L424,129L424,130L423,130L422,131L421,130L420,128L420,126L419,123L418,121L418,120L418,119L417,116L416,115L416,114L416,113L415,112L415,111L415,110L415,109L415,108L414,105L413,103L413,102L412,101L412,100L412,99L411,97L411,95L410,92L409,89L408,89L408,88L408,87L408,86L408,85L408,84L407,80L406,79L406,78L406,77L406,76L405,75L402,75L400,76L397,76L394,77L390,78L389,78L388,78L388,77L387,76L386,73L386,72L386,71L386,70L386,69L386,68L386,67L387,67L387,66L387,65L387,64L386,64L386,63L386,62L385,62L385,61L385,60L384,60L384,59L383,59L382,59L382,58L381,58L381,57L380,57L380,56L379,56L379,55L379,54L378,53L378,52L378,51L377,50L377,49L377,48L376,48L376,47L376,46L375,44L375,43L374,43L374,42L375,42L375,41L374,41L374,40L373,39L373,38L379,35L380,34L382,34L386,32L386,31L386,30L385,30L385,29L384,29L383,29L382,29L382,28L381,28L381,27L380,26L381,26L381,25L382,25L382,24L383,24L382,24L382,23L382,22L382,21L381,21L380,20L379,20L378,19L378,18L377,17L378,17L379,16L381,16L384,15L385,15L387,14L389,13L391,13L392,12L393,12L394,12L396,11L398,10L402,9L403,9L404,9L405,8L407,8L409,7L410,7L410,6L412,6L415,5L416,5L419,4L420,3L421,3L423,2L424,2L429,0L430,0L432,8L433,10L433,11L434,12L434,14L435,15Z" fill="#c5d6e8" stroke="#fff" stroke-width="0.7" stroke-linejoin="round"><title>Ward 25</title></path></a>
+</svg></div>
+</div>
+<nav class="page-nav" aria-label="Jump to section">
+  <a href="#at-a-glance">At a glance</a>
+  <a href="#results">2022 Results</a>
+  <a href="#census">Census</a>
+  <a href="#record">Councillor record</a>
+  <a href="#council-powers">Council powers</a>
+  <a href="#questions">Questions</a>
+  <a href="#vote-2026">How to vote</a>
+  <a href="#sources">Sources</a>
+</nav>
+<section id="at-a-glance" aria-labelledby="h-glance">
+  <h2 id="h-glance">At a glance — 2022 election</h2>
+  <dl class="stat-grid">
+    <div class="stat-item">
+      <dt>Registered voters</dt>
+      <dd>80,347</dd>
+    </div>
+    <div class="stat-item">
+      <dt>Ballots cast</dt>
+      <dd>25,703</dd>
+    </div>
+    <div class="stat-item">
+      <dt>Voter turnout 2022</dt>
+      <dd>32.0%
+        <div class="bar-wrap" role="meter" aria-valuenow="31.99" aria-valuemin="0"
+             aria-valuemax="100" aria-label="Turnout gauge">
+          <div class="bar-fill" style="width:32.0%"></div>
+        </div>
+        <span class="stat-sub">City-wide average: 29.7%</span>
+      </dd>
+    </div>
+    <div class="stat-item">
+      <dt>Turnout 2018 (change)</dt>
+      <dd>41.8% <span class="stat-sub">-9.83 percentage points</span></dd>
+    </div>
+    <div class="stat-item">
+      <dt>2022 winner</dt>
+      <dd>Dianne Saxe, 35.4% of valid votes (about 1 in every 9 registered voters)</dd>
+    </div>
+    <div class="stat-item">
+      <dt>Margin of victory</dt>
+      <dd>123 votes (0.50%) over Norm Di Pasquale</dd>
+    </div>
+    <div class="stat-item">
+      <dt>Open seat in 2022?</dt>
+      <dd>Yes — the 2018 councillor did not run in 2022.</dd>
+    </div>
+  </dl>
+</section>
+<section id="results" aria-labelledby="h-results">
+  <h2 id="h-results">2022 election results</h2>
+  <p>14 candidates. 24,351 valid votes counted.</p>
+  <div class="table-scroll">
+  <table class="cand-table" aria-label="2022 election results by candidate">
+    <thead>
+      <tr>
+        <th scope="col">Candidate</th>
+        <th scope="col">Votes</th>
+        <th scope="col">Share of valid votes</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr class="winner-row">
+      <td class="cand-name">Dianne Saxe <span class="winner-badge" aria-label="Winner">Won</span></td>
+      <td class="cand-votes">8,614</td>
+      <td class="cand-bar-cell" aria-label="35.4 percent">
+        <div class="cand-bar-wrap" role="presentation">
+          <div class="cand-bar" style="width:35.4%"></div>
+          <span class="cand-pct">35.4%</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="cand-name">Norm Di Pasquale</td>
+      <td class="cand-votes">8,491</td>
+      <td class="cand-bar-cell" aria-label="34.9 percent">
+        <div class="cand-bar-wrap" role="presentation">
+          <div class="cand-bar" style="width:34.9%"></div>
+          <span class="cand-pct">34.9%</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="cand-name">Robin Buxton Potts</td>
+      <td class="cand-votes">2,156</td>
+      <td class="cand-bar-cell" aria-label="8.8 percent">
+        <div class="cand-bar-wrap" role="presentation">
+          <div class="cand-bar" style="width:8.8%"></div>
+          <span class="cand-pct">8.8%</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="cand-name">Peter Lovering</td>
+      <td class="cand-votes">1,321</td>
+      <td class="cand-bar-cell" aria-label="5.4 percent">
+        <div class="cand-bar-wrap" role="presentation">
+          <div class="cand-bar" style="width:5.4%"></div>
+          <span class="cand-pct">5.4%</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="cand-name">Andrew Layman</td>
+      <td class="cand-votes">683</td>
+      <td class="cand-bar-cell" aria-label="2.8 percent">
+        <div class="cand-bar-wrap" role="presentation">
+          <div class="cand-bar" style="width:2.8%"></div>
+          <span class="cand-pct">2.8%</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="cand-name">Ann Rohmer</td>
+      <td class="cand-votes">589</td>
+      <td class="cand-bar-cell" aria-label="2.4 percent">
+        <div class="cand-bar-wrap" role="presentation">
+          <div class="cand-bar" style="width:2.4%"></div>
+          <span class="cand-pct">2.4%</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="cand-name">Adam Golding</td>
+      <td class="cand-votes">481</td>
+      <td class="cand-bar-cell" aria-label="2.0 percent">
+        <div class="cand-bar-wrap" role="presentation">
+          <div class="cand-bar" style="width:2.0%"></div>
+          <span class="cand-pct">2.0%</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="cand-name">Alison Pang</td>
+      <td class="cand-votes">465</td>
+      <td class="cand-bar-cell" aria-label="1.9 percent">
+        <div class="cand-bar-wrap" role="presentation">
+          <div class="cand-bar" style="width:1.9%"></div>
+          <span class="cand-pct">1.9%</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="cand-name">Axel Arvizu</td>
+      <td class="cand-votes">463</td>
+      <td class="cand-bar-cell" aria-label="1.9 percent">
+        <div class="cand-bar-wrap" role="presentation">
+          <div class="cand-bar" style="width:1.9%"></div>
+          <span class="cand-pct">1.9%</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="cand-name">Diana Yoon</td>
+      <td class="cand-votes">415</td>
+      <td class="cand-bar-cell" aria-label="1.7 percent">
+        <div class="cand-bar-wrap" role="presentation">
+          <div class="cand-bar" style="width:1.7%"></div>
+          <span class="cand-pct">1.7%</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="cand-name">Michael Borrelli</td>
+      <td class="cand-votes">245</td>
+      <td class="cand-bar-cell" aria-label="1.0 percent">
+        <div class="cand-bar-wrap" role="presentation">
+          <div class="cand-bar" style="width:1.0%"></div>
+          <span class="cand-pct">1.0%</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="cand-name">David Fielder</td>
+      <td class="cand-votes">177</td>
+      <td class="cand-bar-cell" aria-label="0.7 percent">
+        <div class="cand-bar-wrap" role="presentation">
+          <div class="cand-bar" style="width:0.7%"></div>
+          <span class="cand-pct">0.7%</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="cand-name">Pierre Therrien</td>
+      <td class="cand-votes">169</td>
+      <td class="cand-bar-cell" aria-label="0.7 percent">
+        <div class="cand-bar-wrap" role="presentation">
+          <div class="cand-bar" style="width:0.7%"></div>
+          <span class="cand-pct">0.7%</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="cand-name">Heather Shon</td>
+      <td class="cand-votes">82</td>
+      <td class="cand-bar-cell" aria-label="0.3 percent">
+        <div class="cand-bar-wrap" role="presentation">
+          <div class="cand-bar" style="width:0.3%"></div>
+          <span class="cand-pct">0.3%</span>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Candidate names as listed in the official City of Toronto results file
+  (format varies by name). Vote percentages are of valid votes only.</p>
+</section>
+<section id="census" aria-labelledby="h-census">
+  <h2 id="h-census">2021 Census — ward profile</h2>
+  <p class="note">Source: Statistics Canada 2021 Census, City of Toronto Ward Profiles custom tabulation.</p>
+  <dl class="stat-grid">
+    <div class="stat-item">
+      <dt>Population (2021)</dt>
+      <dd>102,385</dd>
+    </div>
+    <div class="stat-item">
+      <dt>Median age</dt>
+      <dd>36.8 <span class="stat-sub">City: 39.6</span></dd>
+    </div>
+    <div class="stat-item">
+      <dt>Median household income (2020)</dt>
+      <dd>$84,000 <span class="stat-sub">City: $84,000</span></dd>
+    </div>
+    <div class="stat-item">
+      <dt>Housing tenure</dt>
+      <dd>Owned: 43.1% / Rented: 56.9%
+        <span class="stat-sub">City: owned 51.9% / rented 48.1%</span>
+      </dd>
+    </div>
+  </dl>
+  <div class="census-langs">
+    <h3>Top 3 non-official home languages</h3>
+    <ol><li>Mandarin: 6,595 speakers</li><li>Yue (Cantonese): 3,845 speakers</li><li>Portuguese: 3,005 speakers</li></ol>
+    <p class="note">Single-language mother-tongue responses. English and French not included.</p>
+  </div>
+</section>
+<section id="record" aria-labelledby="h-record">
+  <h2 id="h-record">Councillor record — 2022–2026 term</h2>
+  
+  <p>Record shown for <strong>Dianne Saxe</strong>.</p>
+  <div class="att-block">
+    <p><strong>City Council attendance:</strong> 248 of 259 sessions
+       (95.8%)</p>
+    <div class="bar-wrap" role="meter" aria-valuenow="95.8"
+         aria-valuemin="0" aria-valuemax="100" aria-label="Attendance rate gauge">
+      <div class="bar-fill bar-fill--green" style="width:95.8%"></div>
+    </div>
+    <p class="stat-sub">Council average for 2022–2026 term: 92.1%</p>
+  </div>
+  <h3>Annual budget vote</h3>
+  <p class="note">The city budget is adopted in parts. This shows the most contested part
+  of each year's budget adoption vote (the sub-vote with the most votes against).</p>
+  <table class="data-table" aria-label="Budget votes">
+    <thead><tr><th scope="col">Year</th><th scope="col">Vote</th><th scope="col">Result</th></tr></thead>
+    <tbody><tr><td>2023</td><td><span class="vote-yes">Yes</span></td><td>Carried, 22-4</td></tr><tr><td>2024</td><td><span class="vote-yes">Yes</span></td><td>Carried, 16-10</td></tr><tr><td>2025</td><td><span class="vote-absent">Absent</span></td><td>Carried, 19-5</td></tr><tr><td>2026</td><td><span class="vote-yes">Yes</span></td><td>Carried, 19-5</td></tr></tbody>
+  </table>
+  <h3>Close votes — 76 total (margin of 3 or fewer)</h3>
+  <p class="note">City Council recorded votes where the margin between Yes and No was
+  3 or fewer, with at least 10 members voting. Purely procedural motions excluded.
+  Sorted most recent first.</p>
+  <div class="table-scroll">
+  <table class="data-table close-vote-tbl" aria-label="Close votes for this councillor">
+    <thead>
+      <tr><th scope="col">Date</th><th scope="col">Issue</th>
+          <th scope="col">Vote</th><th scope="col">Result</th></tr>
+    </thead>
+    <tbody><tr><td>2026-07-30</td><td title="922 Millwood Road - Official Plan Amendment and Zoning By-law Amendment Application - Decision Report - Approval">922 Millwood Road - Official Plan Amendment and Zoning By-law Ame…</td><td><span class="vote-yes">Yes</span></td><td>Carried, 12-11</td></tr><tr><td>2026-05-21</td><td title="3307 and 3313 Ellesmere Road - Official Plan Amendment and Zoning By-law Amendment - Decision Report - Approval">3307 and 3313 Ellesmere Road - Official Plan Amendment and Zoning…</td><td><span class="vote-absent">Absent</span></td><td>Carried, 12-9</td></tr><tr><td>2026-04-23</td><td title="2775 Jane Street - Zoning By-law Amendment - Decision Report - Approval">2775 Jane Street - Zoning By-law Amendment - Decision Report - Ap…</td><td><span class="vote-absent">Absent</span></td><td>Carried, 9-6</td></tr><tr><td>2025-12-17</td><td title="Showing Respect for Transit Customers: Implementing a Toronto Transit Commission Money-Back Guarantee - by Councillor Brad Bradford, seconded by Councillor Vincent Crisanti">Showing Respect for Transit Customers: Implementing a Toronto Tra…</td><td><span class="vote-yes">Yes</span></td><td>Lost, 12-11</td></tr><tr><td>2025-12-16</td><td title="FIFA Traffic Management">FIFA Traffic Management</td><td><span class="vote-yes">Yes</span></td><td>Carried, 13-10</td></tr><tr><td>2025-12-16</td><td title="Review of the Order Paper">Review of the Order Paper</td><td><span class="vote-no">No</span></td><td>Lost, 10-13</td></tr><tr><td>2025-11-13</td><td title="Protecting Playgrounds and Parks: Ensuring Safety for Children and Families - by Councillor Brad Bradford, seconded by Councillor Jon Burnside">Protecting Playgrounds and Parks: Ensuring Safety for Children an…</td><td><span class="vote-no">No</span></td><td>Lost, 9-10</td></tr><tr><td>2025-07-24</td><td title="2025 Winter Maintenance Program Review">2025 Winter Maintenance Program Review</td><td><span class="vote-yes">Yes</span></td><td>Lost, 12-10</td></tr><tr><td>2025-07-24</td><td title="Updated Coyote Coexistence and Response Strategy">Updated Coyote Coexistence and Response Strategy</td><td><span class="vote-yes">Yes</span></td><td>Lost, 10-12</td></tr><tr><td>2025-07-24</td><td title="250 Wincott Drive - Request for City Solicitor to Attend at the Ontario Land Tribunal - by Councillor Stephen Holyday, seconded by Councillor Parthi Kandavel">250 Wincott Drive - Request for City Solicitor to Attend at the O…</td><td><span class="vote-absent">Absent</span></td><td>Lost, 9-12</td></tr><tr><td>2025-06-26</td><td title="A Strategic Parking Framework for the City of Toronto">A Strategic Parking Framework for the City of Toronto</td><td><span class="vote-absent">Absent</span></td><td>Lost, 7-9</td></tr><tr><td>2025-06-26</td><td title="A Strategic Parking Framework for the City of Toronto">A Strategic Parking Framework for the City of Toronto</td><td><span class="vote-absent">Absent</span></td><td>Lost, 9-11</td></tr><tr><td>2025-06-26</td><td title="A Strategic Parking Framework for the City of Toronto">A Strategic Parking Framework for the City of Toronto</td><td><span class="vote-absent">Absent</span></td><td>Lost, 9-12</td></tr><tr><td>2025-06-26</td><td title="A Strategic Parking Framework for the City of Toronto">A Strategic Parking Framework for the City of Toronto</td><td><span class="vote-absent">Absent</span></td><td>Lost, 9-12</td></tr><tr><td>2025-06-26</td><td title="Updates on Vision Zero Road Safety Initiatives: Improving Crossings for Pedestrians, Updated Road Classification Criteria and Other Matters">Updates on Vision Zero Road Safety Initiatives: Improving Crossin…</td><td><span class="vote-no">No</span></td><td>Lost, 9-11</td></tr><tr><td>2025-06-26</td><td title="672 to 676 Birchmount Road - Official Plan and Zoning By-law Amendment Applications - Decision Report - Approval">672 to 676 Birchmount Road - Official Plan and Zoning By-law Amen…</td><td><span class="vote-yes">Yes</span></td><td>Lost, 10-11</td></tr><tr><td>2025-06-26</td><td title="Housing Action Plan: Avenues Policy Review - Phase Two Work Plan">Housing Action Plan: Avenues Policy Review - Phase Two Work Plan</td><td><span class="vote-absent">Absent</span></td><td>Carried, 10-9</td></tr><tr><td>2025-06-25</td><td title="Housing Accelerator Fund: Expanding Permissions in Neighbourhoods for Low-Rise Sixplexes - Final Report">Housing Accelerator Fund: Expanding Permissions in Neighbourhoods…</td><td><span class="vote-no">No</span></td><td>Lost, 11-12</td></tr><tr><td>2025-05-22</td><td title="Proposed By-law Amendment to Provide Access to Social Infrastructure">Proposed By-law Amendment to Provide Access to Social Infrastruct…</td><td><span class="vote-yes">Yes</span></td><td>Carried, 13-12</td></tr><tr><td>2025-05-22</td><td title="Proposed By-law Amendment to Provide Access to Social Infrastructure">Proposed By-law Amendment to Provide Access to Social Infrastruct…</td><td><span class="vote-yes">Yes</span></td><td>Carried, 13-12</td></tr><tr><td>2025-05-22</td><td title="Proposed By-law Amendment to Provide Access to Social Infrastructure">Proposed By-law Amendment to Provide Access to Social Infrastruct…</td><td><span class="vote-yes">Yes</span></td><td>Carried, 14-11</td></tr><tr><td>2025-05-22</td><td title="Proposed By-law Amendment to Provide Access to Social Infrastructure">Proposed By-law Amendment to Provide Access to Social Infrastruct…</td><td><span class="vote-no">No</span></td><td>Lost, 12-13</td></tr><tr><td>2025-03-27</td><td title="Update on Electric Ferries Shoreside Infrastructure and Ferry Terminal Improvement Projects">Update on Electric Ferries Shoreside Infrastructure and Ferry Ter…</td><td><span class="vote-yes">Yes</span></td><td>Lost, 11-12</td></tr><tr><td>2025-02-05</td><td title="Housing Action Plan: Avenues Policy Review - Decision Report">Housing Action Plan: Avenues Policy Review - Decision Report</td><td><span class="vote-no">No</span></td><td>Lost, 11-13</td></tr><tr><td>2024-12-18</td><td title="Toward Municipal Autonomy and Effective Local Governance - by Councillor Josh Matlow, seconded by Councillor Jamaal Myers">Toward Municipal Autonomy and Effective Local Governance - by Cou…</td><td><span class="vote-yes">Yes</span></td><td>Lost, 13-10</td></tr><tr><td>2024-11-14</td><td title="Respecting Local Democracy and Cities">Respecting Local Democracy and Cities</td><td><span class="vote-yes">Yes</span></td><td>Carried, 14-11</td></tr><tr><td>2024-11-14</td><td title="Culture Connects: An Action Plan for Culture in Toronto (2025-2035)">Culture Connects: An Action Plan for Culture in Toronto (2025-203…</td><td><span class="vote-yes">Yes</span></td><td>Lost, 10-12</td></tr><tr><td>2024-11-13</td><td title="Reinforcing the Importance of Openness, Fairness and Transparency in City Procurement: An Audit of the Procurement and Implementation of the PayIt Unsolicited Proposal">Reinforcing the Importance of Openness, Fairness and Transparency…</td><td><span class="vote-no">No</span></td><td>Lost (tie), 11-11</td></tr><tr><td>2024-10-09</td><td title="Billy Bishop Toronto City Airport - Runway End Safety Areas">Billy Bishop Toronto City Airport - Runway End Safety Areas</td><td><span class="vote-yes">Yes</span></td><td>Carried, 14-11</td></tr><tr><td>2024-07-24</td><td title="39 Dundalk Drive Modular Housing">39 Dundalk Drive Modular Housing</td><td><span class="vote-no">No</span></td><td>Lost, 11-13</td></tr><tr><td>2024-07-24</td><td title="Ontario Science Centre Update">Ontario Science Centre Update</td><td><span class="vote-absent">Absent</span></td><td>Carried, 12-10</td></tr><tr><td>2024-06-27</td><td title="Toronto International Pizza Festival - by Councillor Mike Colle, seconded by Councillor Frances Nunziata">Toronto International Pizza Festival - by Councillor Mike Colle, …</td><td><span class="vote-no">No</span></td><td>Lost, 10-13</td></tr><tr><td>2024-05-23</td><td title="Requesting the Province to Create Safety Zones Around Places of Worship, Faith-Based Schools and Vulnerable Community Social Infrastructure - by Councillor Brad Bradford, seconded by Councillor James Pasternak">Requesting the Province to Create Safety Zones Around Places of W…</td><td><span class="vote-no">No</span></td><td>Carried, 13-11</td></tr><tr><td>2024-05-22</td><td title="Yonge-Dundas Square Renaming Initiative">Yonge-Dundas Square Renaming Initiative</td><td><span class="vote-yes">Yes</span></td><td>Carried, 11-10</td></tr><tr><td>2024-04-18</td><td title="Alcohol in Parks Pilot: Evaluation Findings">Alcohol in Parks Pilot: Evaluation Findings</td><td><span class="vote-no">No</span></td><td>Lost, 11-12</td></tr><tr><td>2024-04-18</td><td title="Alcohol in Parks Pilot: Evaluation Findings">Alcohol in Parks Pilot: Evaluation Findings</td><td><span class="vote-no">No</span></td><td>Lost, 11-12</td></tr><tr><td>2024-04-18</td><td title="Alcohol in Parks Pilot: Evaluation Findings">Alcohol in Parks Pilot: Evaluation Findings</td><td><span class="vote-no">No</span></td><td>Lost, 10-12</td></tr><tr><td>2024-04-18</td><td title="Alcohol in Parks Pilot: Evaluation Findings">Alcohol in Parks Pilot: Evaluation Findings</td><td><span class="vote-no">No</span></td><td>Lost, 10-12</td></tr><tr><td>2024-04-18</td><td title="Alcohol in Parks Pilot: Evaluation Findings">Alcohol in Parks Pilot: Evaluation Findings</td><td><span class="vote-no">No</span></td><td>Lost, 10-13</td></tr><tr><td>2024-03-21</td><td title="Night Economy Manifesto - by Councillor Paul Ainslie, seconded by Councillor Jennifer McKelvie">Night Economy Manifesto - by Councillor Paul Ainslie, seconded by…</td><td><span class="vote-no">No</span></td><td>Lost, 11-14</td></tr><tr><td>2024-03-21</td><td title="Re-Opening and Amending Item 2023.IE7.4 on Updates on Vision Zero Road Safety Initiatives to Allow Optional Polling for Traffic - by Councillor Stephen Holyday, seconded by Councillor Jennifer McKelvie">Re-Opening and Amending Item 2023.IE7.4 on Updates on Vision Zero…</td><td><span class="vote-no">No</span></td><td>Lost, 10-13</td></tr><tr><td>2024-03-21</td><td title="Clarification on Municipal Licensing and Standards Poster Enforcement Policies and By-laws - Rules Governing Affixing and Removing of Posters - by Councillor James Pasternak, seconded by Councillor Brad Bradford">Clarification on Municipal Licensing and Standards Poster Enforce…</td><td><span class="vote-yes">Yes</span></td><td>Lost, 12-11</td></tr><tr><td>2024-03-20</td><td title="Renaming of Dundas Toronto Transit Commission Stations">Renaming of Dundas Toronto Transit Commission Stations</td><td><span class="vote-yes">Yes</span></td><td>Lost, 13-10</td></tr><tr><td>2024-03-20</td><td title="Prioritization of Planned Higher-Order Transit Projects">Prioritization of Planned Higher-Order Transit Projects</td><td><span class="vote-no">No</span></td><td>Lost, 12-13</td></tr><tr><td>2024-02-07</td><td title="No More Subsidies for New Gas Pipelines that Drive Up Torontonians&#x27; Energy Costs - by Councillor Dianne Saxe, seconded by Councillor Alejandra Bravo">No More Subsidies for New Gas Pipelines that Drive Up Torontonian…</td><td><span class="vote-yes">Yes</span></td><td>Lost, 14-12</td></tr><tr><td>2024-02-07</td><td title="Highway 401 Overpass Safety">Highway 401 Overpass Safety</td><td><span class="vote-yes">Yes</span></td><td>Carried, 13-11</td></tr><tr><td>2024-02-06</td><td title="Balanced Approach to Distributing Legislative Meeting Materials - by Councillor Chris Moise, seconded by Councillor Amber Morley">Balanced Approach to Distributing Legislative Meeting Materials -…</td><td><span class="vote-no">No</span></td><td>Lost, 10-12</td></tr><tr><td>2023-11-08</td><td title="25 Old York Mills Road - Official Plan and Zoning By-law Amendment Application - Ontario Land Tribunal Hearing - Request for Directions">25 Old York Mills Road - Official Plan and Zoning By-law Amendmen…</td><td><span class="vote-yes">Yes</span></td><td>Carried, 12-10</td></tr><tr><td>2023-09-06</td><td title="Updated Long-Term Financial Plan">Updated Long-Term Financial Plan</td><td><span class="vote-yes">Yes</span></td><td>Lost, 11-12</td></tr><tr><td>2023-09-06</td><td title="Updated Long-Term Financial Plan">Updated Long-Term Financial Plan</td><td><span class="vote-yes">Yes</span></td><td>Carried, 12-11</td></tr><tr><td>2023-09-06</td><td title="Updated Long-Term Financial Plan">Updated Long-Term Financial Plan</td><td><span class="vote-yes">Yes</span></td><td>Carried, 13-10</td></tr><tr><td>2023-09-06</td><td title="Updated Long-Term Financial Plan">Updated Long-Term Financial Plan</td><td><span class="vote-no">No</span></td><td>Lost, 10-13</td></tr><tr><td>2023-07-20</td><td title="Deadly Tanker Truck Crashes on Highway 401 - by Councillor Mike Colle, seconded by Councillor James Pasternak">Deadly Tanker Truck Crashes on Highway 401 - by Councillor Mike C…</td><td><span class="vote-no">No</span></td><td>Lost, 10-12</td></tr><tr><td>2023-07-20</td><td title="Request to Review the Nomination Requirements for Mayoral Candidates - by Councillor Stephen Holyday, seconded by Councillor Nick Mantas">Request to Review the Nomination Requirements for Mayoral Candida…</td><td><span class="vote-no">No</span></td><td>Lost (tie), 11-11</td></tr><tr><td>2023-06-15</td><td title="Appointment of Public Member to the Toronto Hydro Board">Appointment of Public Member to the Toronto Hydro Board</td><td><span class="vote-yes">Yes</span></td><td>Lost, 10-13</td></tr><tr><td>2023-06-15</td><td title="Improvements to the Modular Housing at 175 Cummer Avenue - by Councillor Lily Cheng, seconded by Councillor Jamaal Myers">Improvements to the Modular Housing at 175 Cummer Avenue - by Cou…</td><td><span class="vote-yes">Yes</span></td><td>Lost (tie), 10-10</td></tr><tr><td>2023-06-14</td><td title="Appointment of Public Members to the Toronto Transit Commission Board">Appointment of Public Members to the Toronto Transit Commission B…</td><td><span class="vote-yes">Yes</span></td><td>Lost, 12-13</td></tr><tr><td>2023-05-12</td><td title="Update on Alcohol in Parks Pilot - by Councillor Shelley Carroll, seconded by Councillor Chris Moise">Update on Alcohol in Parks Pilot - by Councillor Shelley Carroll,…</td><td><span class="vote-yes">Yes</span></td><td>Lost (tie), 12-12</td></tr><tr><td>2023-05-12</td><td title="Data on the Health of People Experiencing Homelessness">Data on the Health of People Experiencing Homelessness</td><td><span class="vote-no">No</span></td><td>Lost, 10-13</td></tr><tr><td>2023-05-11</td><td title="Redirecting the Proceeds of the Sale of a Residual Portion of City-owned land at 276 Lauder Avenue - by Councillor Alejandra Bravo, seconded by Councillor Ausma Malik">Redirecting the Proceeds of the Sale of a Residual Portion of Cit…</td><td><span class="vote-yes">Yes</span></td><td>Lost, 11-14</td></tr><tr><td>2023-05-11</td><td title="Fine Equity: Balancing Toronto Transit Commission Fare Evasion and Parking Fines - by Councillor Paula Fletcher, seconded by Councillor Alejandra Bravo">Fine Equity: Balancing Toronto Transit Commission Fare Evasion an…</td><td><span class="vote-absent">Absent</span></td><td>Carried, 10-8</td></tr><tr><td>2023-05-10</td><td title="Expanding Housing Options in Neighbourhoods: Multiplex Study - Final Report">Expanding Housing Options in Neighbourhoods: Multiplex Study - Fi…</td><td><span class="vote-no">No</span></td><td>Lost, 11-13</td></tr><tr><td>2023-03-31</td><td title="Making Electronic Participation for Council and its Local Boards Permanent">Making Electronic Participation for Council and its Local Boards …</td><td><span class="vote-no">No</span></td><td>Lost, 11-13</td></tr><tr><td>2023-03-31</td><td title="Ombudsman Toronto Report: Investigation into the City&#x27;s Processes for Clearing Encampments in 2021">Ombudsman Toronto Report: Investigation into the City&#x27;s Processes…</td><td><span class="vote-no">No</span></td><td>Lost, 11-12</td></tr><tr><td>2023-03-31</td><td title="Getting to the Root of the Issues - February 2023 Performance Update of Urban Forestry Contractors and City Crews">Getting to the Root of the Issues - February 2023 Performance Upd…</td><td><span class="vote-yes">Yes</span></td><td>Carried, 12-10</td></tr><tr><td>2023-03-29</td><td title="2023 Financial Update and Outlook">2023 Financial Update and Outlook</td><td><span class="vote-no">No</span></td><td>Carried, 13-10</td></tr><tr><td>2023-03-29</td><td title="2023 Financial Update and Outlook">2023 Financial Update and Outlook</td><td><span class="vote-no">No</span></td><td>Lost (tie), 12-12</td></tr><tr><td>2023-02-08</td><td title="Cold weather and the effects on those experiencing homelessness">Cold weather and the effects on those experiencing homelessness</td><td><span class="vote-yes">Yes</span></td><td>Lost (tie), 13-13</td></tr><tr><td>2023-02-08</td><td title="Cold weather and the effects on those experiencing homelessness">Cold weather and the effects on those experiencing homelessness</td><td><span class="vote-yes">Yes</span></td><td>Lost (tie), 13-13</td></tr><tr><td>2023-02-08</td><td title="Appointment of Public Members to the Board of Health">Appointment of Public Members to the Board of Health</td><td><span class="vote-no">No</span></td><td>Carried, 12-10</td></tr><tr><td>2023-02-07</td><td title="Regarding the Gardiner East Project">Regarding the Gardiner East Project</td><td><span class="vote-yes">Yes</span></td><td>Carried, 13-12</td></tr><tr><td>2022-12-15</td><td title="Implementing Bill 109, the More Homes for Everyone Act, 2022">Implementing Bill 109, the More Homes for Everyone Act, 2022</td><td><span class="vote-yes">Yes</span></td><td>Carried, 14-12</td></tr><tr><td>2022-12-15</td><td title="Implementing Bill 109, the More Homes for Everyone Act, 2022">Implementing Bill 109, the More Homes for Everyone Act, 2022</td><td><span class="vote-no">No</span></td><td>Lost (tie), 13-13</td></tr><tr><td>2022-12-15</td><td title="Legislative Changes to City Governance - Bill 3 and Bill 39">Legislative Changes to City Governance - Bill 3 and Bill 39</td><td><span class="vote-yes">Yes</span></td><td>Carried, 14-11</td></tr><tr><td>2022-12-15</td><td title="Ensuring Transparency in the 2022 Election: Amending the Contribution Rebate Program - by Councillor Paula Fletcher, seconded by Councillor Chris Moise">Ensuring Transparency in the 2022 Election: Amending the Contribu…</td><td><span class="vote-yes">Yes</span></td><td>Lost, 12-14</td></tr><tr><td>2022-12-15</td><td title="Request for Metrolinx Accountability and Financial Compensation Regarding the Ongoing Construction Delays of the Eglinton Crosstown - by Councillor Mike Colle, seconded by Councillor Josh Matlow">Request for Metrolinx Accountability and Financial Compensation R…</td><td><span class="vote-yes">Yes</span></td><td>Carried, 14-12</td></tr></tbody>
+  </table>
+  </div>
+</section>
+<section id="council-powers" aria-labelledby="h-powers">
+  <h2 id="h-powers">What City Council controls</h2>
+  <p>City Council makes decisions on matters within the City's jurisdiction.
+     Some services are managed by the province or the federal government, not the City.</p>
+  <div class="powers-grid">
+    <div>
+      <h3>City Council decides</h3>
+      <ul><li>Property taxes and most City fees</li><li>Toronto Transit Commission (TTC) — routes, fares, and service levels</li><li>City roads, traffic signals, and sidewalks</li><li>Garbage collection, recycling, and composting</li><li>Parks, arenas, and community centres</li><li>Building permits, zoning, and land-use planning</li><li>Toronto Public Library</li><li>City-funded affordable-housing programs</li><li>Toronto Public Health programs</li><li>Toronto Police Service budget</li><li>Toronto Water and wastewater services</li></ul>
+    </div>
+    <div>
+      <h3>Not under City Council control</h3>
+      <ul><li>Provincial highways (400, 401, 404, QEW) — managed by Ontario</li><li>School boards and education funding — set by the province</li><li>Hospitals — funded and regulated by Ontario</li><li>GO Transit and regional rail (Metrolinx) — a provincial Crown agency</li><li>Federal programs such as immigration and employment insurance</li></ul>
+    </div>
+  </div>
+</section>
+<section id="questions" aria-labelledby="h-questions">
+  <h2 id="h-questions">Questions to ask candidates</h2>
+  <p>The 2026 election is on Monday, October 26, 2026. These are general questions you can
+     ask any candidate at an all-candidates meeting or by email.
+     This site does not endorse any candidate or party.</p>
+  <ul class="q-list"><li>What are your three priorities for this ward in the next term?</li><li>How will you stay in contact with residents throughout the term?</li><li>How will you approach major spending decisions at City Council?</li><li>What is your view on housing affordability in this ward?</li><li>How will you balance the interests of renters and homeowners?</li><li>How will you work with other councillors and the Mayor to get things done?</li><li>What would you protect and what would you change in the city budget?</li></ul>
+  <p>For the official list of candidates in your ward, see the
+     <a href="https://www.toronto.ca/city-government/elections/candidate-list/">City of Toronto candidate list</a>.</p>
+</section>
+<section id="vote-2026" aria-labelledby="h-vote">
+  <h2 id="h-vote">How to vote — Monday, October 26, 2026</h2>
+  <dl class="vote-dl">
+    <div>
+      <dt>Find your polling station</dt>
+      <dd><a href="https://myvote.toronto.ca/home">MyVote (myvote.toronto.ca)</a> — enter your address
+          to find your ward, your voting location, and advance polling options.</dd>
+    </div>
+    <div>
+      <dt>Advance voting</dt>
+      <dd>Advance voting locations are available before election day.
+          <a href="https://www.toronto.ca/city-government/elections/voter-information/voting-options/">See advance voting options</a>.</dd>
+    </div>
+    <div>
+      <dt>What ID do I need?</dt>
+      <dd><a href="https://www.toronto.ca/city-government/elections/voter-information/acceptable-identification/">Accepted identification</a> — options include a
+          driver's licence, Ontario photo card, utility bill, and many others.</dd>
+    </div>
+    <div>
+      <dt>General voter information</dt>
+      <dd><a href="https://www.toronto.ca/city-government/elections/voter-information/">toronto.ca — voter information</a></dd>
+    </div>
+  </dl>
+</section>
+<section id="sources" aria-labelledby="h-sources">
+  <h2 id="h-sources">Data sources</h2>
+  <p>All numbers on this page come from official City of Toronto open data.
+     Nothing is estimated or invented. Where data is unavailable, the page says so.</p>
+  <table class="data-table" aria-label="Data sources for this ward">
+    <thead>
+      <tr><th scope="col">Data</th><th scope="col">File</th><th scope="col">Open Data link</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>2022 voter turnout</td>
+          <td>2022_voter_turnout_statistics_final.xlsx</td>
+          <td><a href="https://open.toronto.ca/dataset/elections-voter-statistics/">Elections – Voter Statistics</a></td></tr>
+      <tr><td>2018 voter turnout</td>
+          <td>2018-voter-statistics/2018_Voter_Turnout_Statistics_FINAL.XLSX</td>
+          <td><a href="https://open.toronto.ca/dataset/elections-voter-statistics/">Elections – Voter Statistics</a></td></tr>
+      <tr><td>2022 election results</td>
+          <td>2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx</td>
+          <td><a href="https://open.toronto.ca/dataset/election-results-official/">Election Results – Official</a></td></tr>
+      <tr><td>Current councillor</td>
+          <td>2022-2026-elected-officials-contact-info.json</td>
+          <td><a href="https://open.toronto.ca/dataset/elected-officials-contact-information/">Elected Officials Contact Information</a></td></tr>
+      <tr><td>By-election results</td>
+          <td>Individual by-election files</td>
+          <td><a href="https://open.toronto.ca/dataset/elections-official-by-election-results/">Elections – Official By-Election Results</a></td></tr>
+      <tr><td>2021 Census ward profiles</td>
+          <td>ward-profiles-2021-census.xlsx</td>
+          <td><a href="https://open.toronto.ca/dataset/ward-profiles-2011-2021-census/">Ward Profiles (2011–2021 Census)</a></td></tr>
+      <tr><td>Council voting record</td>
+          <td>council-voting-2022-2026.csv</td>
+          <td><a href="https://open.toronto.ca/dataset/members-of-toronto-city-council-voting-record/">Council Voting Record</a></td></tr>
+      <tr><td>Council attendance</td>
+          <td>council-attendance-2022-2026.csv</td>
+          <td><a href="https://open.toronto.ca/dataset/members-of-toronto-city-council-meeting-attendance/">Council Meeting Attendance</a></td></tr>
+      <tr><td>Ward boundaries (map)</td>
+          <td>city-wards-4326.geojson</td>
+          <td><a href="https://open.toronto.ca/dataset/city-wards/">City Wards</a></td></tr>
+    </tbody>
+  </table>
+  <p class="note">Data published under the
+     <a href="https://open.toronto.ca/open-data-licence/">Open Government Licence – Toronto</a>.
+     Numbers last verified 2026-10-15.</p>
+</section>
+</main>
+<footer class="site-footer">
+  <p>Data from <a href="https://open.toronto.ca/dataset/elections-voter-statistics/">City of Toronto Open Data</a> under the
+     <a href="https://open.toronto.ca/open-data-licence/">Open Government Licence – Toronto</a>.
+     Numbers last checked 2026-10-15. Corrections: <a href="mailto:ravi@perimtr.ca">ravi@perimtr.ca</a></p>
+  <p>This site is non-partisan and has no party affiliation.
+     <a href="about.html">About &amp; Sources</a></p>
+</footer>
 </body>
 </html>

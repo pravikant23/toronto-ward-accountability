@@ -1,132 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>About Toronto Ward Facts – Toronto Ward Facts</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About this site | Toronto Ward Facts</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header">
-  <div><a href="index.html">Toronto Ward Facts</a></div>
-  <div class="subtitle">Official numbers for every ward, before you vote on Oct 26</div>
+  <a class="site-logo" href="index.html">Toronto Ward Facts</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+  </nav>
 </header>
-<main>
+<main id="main">
 <h1>About Toronto Ward Facts</h1>
 
+<section aria-labelledby="h-what">
+  <h2 id="h-what">What this site is</h2>
+  <p>Toronto Ward Facts presents official municipal election and census data for all 25
+     Toronto wards. It is non-partisan and has no affiliation with any candidate, party,
+     or the City of Toronto. Every number comes from a City of Toronto or Statistics
+     Canada open data file. Nothing is estimated or invented.</p>
+</section>
 
-<p>Toronto Ward Facts is a non-partisan, static website that presents official City of
-Toronto data about the 2022 municipal election for each of Toronto's 25 wards.
-Every number on this site comes directly from a City of Toronto open-data file.
-Nothing has been estimated or modelled.</p>
+<section aria-labelledby="h-data">
+  <h2 id="h-data">Data sources</h2>
+  <table class="data-table" aria-label="Data sources">
+    <thead><tr><th scope="col">Dataset</th><th scope="col">Open Data link</th></tr></thead>
+    <tbody>
+      <tr><td>2022 and 2018 voter turnout statistics</td>
+          <td><a href="https://open.toronto.ca/dataset/elections-voter-statistics/">Elections – Voter Statistics</a></td></tr>
+      <tr><td>2022 official election results</td>
+          <td><a href="https://open.toronto.ca/dataset/election-results-official/">Election Results – Official</a></td></tr>
+      <tr><td>2023, 2024, 2025 by-election results</td>
+          <td><a href="https://open.toronto.ca/dataset/elections-official-by-election-results/">Elections – Official By-Election Results</a></td></tr>
+      <tr><td>Elected officials contact information</td>
+          <td><a href="https://open.toronto.ca/dataset/elected-officials-contact-information/">Elected Officials Contact Information</a></td></tr>
+      <tr><td>Ward Profiles (2021 Census)</td>
+          <td><a href="https://open.toronto.ca/dataset/ward-profiles-2011-2021-census/">Ward Profiles (2011–2021 Census)</a></td></tr>
+      <tr><td>Council voting record (2022–2026)</td>
+          <td><a href="https://open.toronto.ca/dataset/members-of-toronto-city-council-voting-record/">Members of Toronto City Council – Voting Record</a></td></tr>
+      <tr><td>Council attendance (2022–2026)</td>
+          <td><a href="https://open.toronto.ca/dataset/members-of-toronto-city-council-meeting-attendance/">Members of Toronto City Council – Meeting Attendance</a></td></tr>
+      <tr><td>City ward boundaries (GeoJSON)</td>
+          <td><a href="https://open.toronto.ca/dataset/city-wards/">City Wards</a></td></tr>
+    </tbody>
+  </table>
+  <p class="note">All data published under the
+     <a href="https://open.toronto.ca/open-data-licence/">Open Government Licence – Toronto</a>.</p>
+</section>
 
-<h2>What this site shows</h2>
-<ul>
-  <li>2022 voter turnout by ward (registered voters, ballots cast, turnout %).</li>
-  <li>2022 official councillor results: top 5 candidates with vote counts and percentages.</li>
-  <li>Current councillor, with a note where a by-election changed the seat after 2022.</li>
-  <li>Links to the City's 2026 candidate list and voter tools – no candidate names or
-      promises are copied here.</li>
-</ul>
+<section aria-labelledby="h-formula">
+  <h2 id="h-formula">Turnout formula</h2>
+  <p><strong>Turnout % = (Number Voted + Declined Ballots) ÷ Total Eligible Electors × 100</strong></p>
+  <p>This matches the City's own definition in the voter statistics file.
+     Subdivisions 97 (mail-in), 98, and 99 (advance voting) are included in the vote count
+     but not in the eligible-elector total, because those voters are already counted in
+     their home subdivision's eligible total.</p>
+  <p>City-wide 2022: 1,898,750 registered,
+     563,563 ballots cast,
+     29.7% turnout.</p>
+</section>
 
-<h2>Data Sources</h2>
-<table>
-  <thead><tr><th>Data</th><th>Source</th></tr></thead>
-  <tbody>
-    <tr>
-      <td>Voter turnout (registered voters, ballots cast, turnout %)</td>
-      <td><a href="https://open.toronto.ca/dataset/elections-voter-statistics/" target="_blank" rel="noopener">
-          City of Toronto Open Data – Elections – Voter Statistics</a><br>
-          File: 2022_voter_turnout_statistics_final.xlsx (resource 631b7042)</td>
-    </tr>
-    <tr>
-      <td>2022 vote counts per candidate per ward</td>
-      <td><a href="https://open.toronto.ca/dataset/election-results-official/" target="_blank" rel="noopener">
-          City of Toronto Open Data – Elections – Official Results</a><br>
-          File: 2022_Toronto_Poll_By_Poll_Councillor.xlsx (resource 3ad371de)</td>
-    </tr>
-    <tr>
-      <td>Current councillor names and websites</td>
-      <td><a href="https://open.toronto.ca/dataset/elected-officials-contact-information/" target="_blank" rel="noopener">
-          City of Toronto Open Data – Elected Officials Contact Information</a><br>
-          File: 2022-2026-elected-officials-contact-info.json (resource 161c66b5)</td>
-    </tr>
-    <tr>
-      <td>By-election results (Wards 15, 20, 25)</td>
-      <td><a href="https://open.toronto.ca/dataset/elections-official-by-election-results/" target="_blank" rel="noopener">
-          City of Toronto Open Data – Elections Official By-Election Results</a> and
-          <a href="https://www.toronto.ca/city-government/elections/election-results-reports/election-results/by-election-results/"
-             target="_blank" rel="noopener">City of Toronto By-Election Results page</a></td>
-    </tr>
-    <tr>
-      <td>2026 candidate list, voter tools</td>
-      <td><a href="https://www.toronto.ca/city-government/elections/" target="_blank" rel="noopener">
-          City of Toronto Elections</a></td>
-    </tr>
-  </tbody>
-</table>
+<section aria-labelledby="h-by">
+  <h2 id="h-by">By-election notes</h2>
+  <ul>
+    <li><strong>Ward 15 (Don Valley West):</strong> Rachel Chernos Lin won the
+        November 4, 2024 by-election, succeeding Jaye Robinson who won the 2022 general election.</li>
+    <li><strong>Ward 20 (Scarborough Southwest):</strong> Parthi Kandavel won the
+        November 30, 2023 by-election, succeeding Gary Crawford who won the 2022 general election.</li>
+    <li><strong>Ward 25 (Scarborough-Rouge Park):</strong> Neethan Shan won the
+        September 29, 2025 by-election, succeeding Jennifer McKelvie who won the 2022 general election.</li>
+  </ul>
+</section>
 
-<h2>How Numbers Are Calculated</h2>
-<h3>Registered voters</h3>
-<p>The "Total Eligible Electors" column from the voter statistics file, summed across
-all voting subdivisions (1–96) within each ward. Subdivisions 97 (mail-in), 98 and 99
-(advance vote locations) do not carry their own eligible-elector count – those voters
-are already counted in their home subdivisions – so they are excluded from the eligible
-total to avoid double-counting.</p>
-
-<h3>Ballots cast</h3>
-<p>The sum of "Number Voted" and "Declined Ballots" from all subdivisions (including
-97, 98, 99), per ward. This matches the City's own definition of turnout in the file's
-readme tab.</p>
-
-<h3>Turnout %</h3>
-<p>Ballots cast ÷ Registered voters × 100, rounded to two decimal places.
-Formula as described in the file's readme: "Percentage of voters that voted.
-Number Voted plus Declined Ballots divide by Total Eligible Electors."</p>
-
-<h3>Candidate percentages</h3>
-<p>Each candidate's votes ÷ total votes cast in that ward (councillor race only) × 100.
-The "Total" column from the City's poll-by-poll spreadsheet is used directly.</p>
-
-<h2>By-Election Notes</h2>
-<ul>
-  <li><strong>Ward 15 Don Valley West:</strong> Jaye Robinson won the 2022 general election.
-      She resigned. Rachel Chernos Lin won the <strong>November 4, 2024 by-election</strong>
-      (source: <a href="https://www.toronto.ca/wp-content/uploads/2024/11/9727-Declaration-of-Results-for-the-Councillor-Ward-15-ByElectionfor-posting.pdf"
-      target="_blank" rel="noopener">City Clerk's Declaration of Results</a>).</li>
-  <li><strong>Ward 20 Scarborough Southwest:</strong> Gary Crawford won the 2022 general election.
-      He resigned. Parthi Kandavel won the <strong>November 30, 2023 by-election</strong>
-      (source: <a href="https://www.toronto.ca/wp-content/uploads/2023/12/94c0-Declaration-of-Results-for-the-Councillor-Ward-20-ByElection-Final.pdf"
-      target="_blank" rel="noopener">City Clerk's Declaration of Results</a>).</li>
-  <li><strong>Ward 25 Scarborough-Rouge Park:</strong> Jennifer McKelvie won the 2022 general election.
-      She resigned. Neethan Shan won the <strong>September 29, 2025 by-election</strong>
-      (source: <a href="https://www.toronto.ca/wp-content/uploads/2025/09/97f1-Declaration-of-Results-Councillor-Ward-25-ByElection.pdf"
-      target="_blank" rel="noopener">City Clerk's Declaration of Results</a>).</li>
-</ul>
-
-<h2>Limitations</h2>
-<ul>
-  <li>All turnout data is from the 2022 general election. Ward populations and eligible
-      voter counts change year to year.</li>
-  <li>This site does not show 2026 candidates or results (those become available from
-      the City's open data after election night).</li>
-  <li>Candidate name formatting follows the City's own files (last name first in some
-      fields); this site reproduces the names as they appear in the official data.</li>
-</ul>
-
-<h2>Contact</h2>
-<p>To report a factual error: <a href="mailto:ravi@perimtr.ca">ravi@perimtr.ca</a></p>
-
-<h2>Data Last Checked</h2>
-<p>October 15, 2026</p>
-<div class="page-footer">
-  <p>
-    Data from <a href="https://open.toronto.ca/" target="_blank" rel="noopener">City of Toronto Open Data</a> under the
-    <a href="https://open.toronto.ca/open-data-licence/" target="_blank" rel="noopener">Open Government Licence – Toronto</a>.
-    Data last checked: October 15, 2026. Corrections: <a href="mailto:ravi@perimtr.ca">ravi@perimtr.ca</a>
-    · <a href="about.html">About &amp; Sources</a>
-  </p>
-</div>
+<section aria-labelledby="h-contact">
+  <h2 id="h-contact">Contact and corrections</h2>
+  <p>Corrections: <a href="mailto:ravi@perimtr.ca">ravi@perimtr.ca</a></p>
+  <p>This site is non-partisan and is not affiliated with any candidate, party, or the City of Toronto.</p>
+</section>
 </main>
+<footer class="site-footer">
+  <p>Data from <a href="https://open.toronto.ca/dataset/elections-voter-statistics/">City of Toronto Open Data</a> under the
+     <a href="https://open.toronto.ca/open-data-licence/">Open Government Licence – Toronto</a>.
+     Numbers last checked 2026-10-15. Corrections: <a href="mailto:ravi@perimtr.ca">ravi@perimtr.ca</a></p>
+  <p>This site is non-partisan and has no party affiliation.
+     <a href="about.html">About &amp; Sources</a></p>
+</footer>
 </body>
 </html>

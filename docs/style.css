@@ -1,145 +1,200 @@
-/* Toronto Ward Facts – single stylesheet */
 :root {
-  --accent:  #003F8A;   /* City of Toronto blue */
-  --accent2: #C8102E;   /* election red for bar highlight */
-  --text:    #111;
-  --muted:   #555;
-  --border:  #ddd;
-  --bg:      #fff;
-  --bar-bg:  #e8eef7;
-  font-size: 16px;
+  --clr-primary: #1a4a7a;
+  --clr-accent:  #0062a3;
+  --clr-bg:      #f5f7fa;
+  --clr-card:    #ffffff;
+  --clr-text:    #1a1a1a;
+  --clr-muted:   #666;
+  --clr-border:  #d8dde3;
+  --clr-bar:     #4a86c8;
+  --clr-yes:     #1a5c38;
+  --clr-no:      #8b1f1f;
+  --clr-absent:  #666;
+  --clr-green:   #2d6a4f;
+  --radius:      6px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
+body { font-family: system-ui, -apple-system, sans-serif;
+       background: var(--clr-bg); color: var(--clr-text); line-height: 1.6;
+       font-size: 1rem; }
+a { color: var(--clr-accent); }
+a:focus-visible { outline: 3px solid var(--clr-accent); outline-offset: 2px; }
+
+/* Skip link */
+.skip-link { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.skip-link:focus { position: fixed; left: 0; top: 0; width: auto; height: auto;
+                   padding: 0.5rem 1rem; background: var(--clr-primary); color: #fff;
+                   z-index: 9999; font-weight: bold; }
+
+/* Site header */
+.site-header { background: var(--clr-primary); color: #fff; padding: 0.7rem 1.25rem;
+               display: flex; justify-content: space-between; align-items: center;
+               flex-wrap: wrap; gap: 0.5rem; }
+.site-logo { color: #fff; text-decoration: none; font-weight: 700; font-size: 1.05rem; }
+.site-nav a { color: #b8d0e8; text-decoration: none; margin-left: 1.25rem; font-size: 0.9rem; }
+.site-nav a:hover { color: #fff; }
+
+/* Main */
+main { max-width: 960px; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
+
+/* Ward hero */
+.ward-hero { display: grid; grid-template-columns: 1fr auto; gap: 1.5rem;
+             align-items: start; padding: 1.5rem 0 1rem;
+             border-bottom: 2px solid var(--clr-border); margin-bottom: 1.5rem; }
+.ward-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em;
+              color: var(--clr-muted); }
+.ward-hero h1 { font-size: clamp(1.4rem, 4vw, 2rem); color: var(--clr-primary);
+                margin: 0.2rem 0 0.4rem; }
+.councillor-line { font-size: 1rem; }
+.ward-hero__map { max-width: 220px; width: 100%; }
+.by-election-strip { background: #fef9e6; border-left: 4px solid #d4ac0d;
+                     padding: 0.45rem 0.75rem; margin-top: 0.6rem;
+                     border-radius: 0 var(--radius) var(--radius) 0; font-size: 0.88rem; }
+
+/* Home hero */
+.home-hero { display: grid; grid-template-columns: 1fr auto; gap: 1.5rem;
+             align-items: start; padding: 1.5rem 0 1rem;
+             border-bottom: 2px solid var(--clr-border); margin-bottom: 2rem; }
+.home-hero h1 { font-size: clamp(1.5rem, 4vw, 2.1rem); color: var(--clr-primary);
+                margin-bottom: 0.5rem; }
+.home-hero__map { max-width: 300px; width: 100%; }
+.lead { font-size: 1rem; margin-bottom: 0.7rem; }
+.btn { display: inline-block; background: var(--clr-primary); color: #fff;
+       padding: 0.5rem 1.2rem; border-radius: var(--radius); text-decoration: none;
+       font-weight: 600; margin-top: 0.7rem; }
+.btn:hover { background: var(--clr-accent); }
+
+/* Section nav */
+.page-nav { display: flex; flex-wrap: wrap; gap: 0.35rem 0.9rem; margin-bottom: 1.75rem;
+            padding: 0.55rem 0; border-top: 1px solid var(--clr-border);
+            border-bottom: 1px solid var(--clr-border); }
+.page-nav a { font-size: 0.82rem; color: var(--clr-accent); text-decoration: none; }
+.page-nav a:hover { text-decoration: underline; }
+
+/* Sections */
+section { margin-bottom: 2.5rem; }
+h2 { font-size: 1.2rem; color: var(--clr-primary); border-bottom: 2px solid var(--clr-border);
+     padding-bottom: 0.3rem; margin-bottom: 0.9rem; }
+h3 { font-size: 0.97rem; color: var(--clr-primary); margin: 1.1rem 0 0.45rem; }
+
+/* Stat grid */
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+             gap: 0.85rem; }
+.stat-item { background: var(--clr-card); border: 1px solid var(--clr-border);
+             border-radius: var(--radius); padding: 0.8rem 1rem; }
+.stat-item dt { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.05em;
+                color: var(--clr-muted); margin-bottom: 0.2rem; }
+.stat-item dd { font-size: 1.05rem; font-weight: 600; }
+.stat-sub { display: block; font-size: 0.77rem; font-weight: 400; color: var(--clr-muted);
+            margin-top: 0.12rem; }
+
+/* Progress bars */
+.bar-wrap { background: #dde5ee; border-radius: 4px; height: 9px; margin-top: 0.4rem;
+            overflow: hidden; }
+.bar-fill { background: var(--clr-bar); height: 100%; border-radius: 4px; }
+.bar-fill--green { background: var(--clr-green); }
+
+/* Candidate table */
+.cand-table { width: 100%; border-collapse: collapse; margin-top: 0.6rem; }
+.cand-table th { background: #e5eaf0; text-align: left; padding: 0.4rem 0.55rem;
+                 font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.cand-table td { padding: 0.4rem 0.55rem; border-bottom: 1px solid var(--clr-border);
+                 vertical-align: middle; }
+.winner-row td { background: #eaf1fb; font-weight: 600; }
+.winner-badge { background: var(--clr-primary); color: #fff; font-size: 0.62rem;
+                font-weight: 700; padding: 0.12rem 0.35rem; border-radius: 3px;
+                margin-left: 0.45rem; vertical-align: middle; }
+.cand-name { min-width: 140px; }
+.cand-votes { text-align: right; white-space: nowrap; }
+.cand-bar-cell { min-width: 160px; }
+.cand-bar-wrap { position: relative; background: #dde5ee; height: 20px;
+                 border-radius: 3px; overflow: hidden; }
+.cand-bar { position: absolute; top: 0; left: 0; height: 100%; background: var(--clr-bar); }
+.winner-row .cand-bar { background: var(--clr-primary); }
+.cand-pct { position: absolute; right: 5px; top: 50%; transform: translateY(-50%);
+            font-size: 0.77rem; font-weight: 600; }
+
+/* Turnout chart */
+.chart-scroll { overflow-x: auto; margin-top: 0.75rem; }
+.turnout-chart { min-width: 420px; width: 100%; max-width: 760px; display: block; }
+.tc-label { font-size: 9px; fill: #444; }
+.tc-pct   { font-size: 9px; fill: #666; }
+.tc-avg   { font-size: 9px; }
+
+/* City map */
+.city-map { width: 100%; height: auto; display: block; }
+.city-map a:hover path { opacity: 0.8; }
+
+/* Attendance block */
+.att-block { background: var(--clr-card); border: 1px solid var(--clr-border);
+             border-radius: var(--radius); padding: 0.9rem 1rem; margin-bottom: 0.9rem; }
+
+/* Vote badges */
+.vote-yes    { color: var(--clr-yes);    font-weight: 700; }
+.vote-no     { color: var(--clr-no);     font-weight: 700; }
+.vote-absent { color: var(--clr-absent); }
+.vote-na     { color: var(--clr-muted);  }
+.pred-note   { font-size: 0.77rem; color: var(--clr-muted); font-weight: 400; }
+
+/* Generic data table */
+.data-table { width: 100%; border-collapse: collapse; margin-top: 0.6rem; font-size: 0.9rem; }
+.data-table th { background: #e5eaf0; text-align: left; padding: 0.4rem 0.55rem;
+                 font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.data-table td { padding: 0.4rem 0.55rem; border-bottom: 1px solid var(--clr-border);
+                 vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+
+/* Close vote table */
+.table-scroll { overflow-x: auto; }
+.close-vote-tbl td:nth-child(2) { max-width: 260px; overflow: hidden;
+                                   text-overflow: ellipsis; white-space: nowrap; }
+
+/* Ward directory */
+.ward-dir-tbl tr:hover td { background: #edf2f7; }
+
+/* Census languages */
+.census-langs { margin-top: 0.9rem; }
+.census-langs ol { padding-left: 1.2rem; margin-top: 0.35rem; }
+.census-langs li { margin-bottom: 0.15rem; }
+
+/* Council powers */
+.powers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+.powers-grid ul { padding-left: 1.2rem; }
+.powers-grid li { margin-bottom: 0.3rem; font-size: 0.92rem; }
+
+/* Questions */
+.q-list { padding-left: 1.2rem; }
+.q-list li { margin-bottom: 0.45rem; }
+
+/* Vote info */
+.vote-dl { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+           gap: 0.85rem; }
+.vote-dl > div { background: var(--clr-card); border: 1px solid var(--clr-border);
+                 border-radius: var(--radius); padding: 0.8rem 1rem; }
+.vote-dl dt { font-weight: 700; margin-bottom: 0.25rem; font-size: 0.92rem; }
+.vote-dl dd { font-size: 0.88rem; }
+
+/* By-election note in record */
+.by-election-note { background: #fef9e6; border-left: 4px solid #d4ac0d;
+                    padding: 0.45rem 0.75rem; margin-bottom: 0.9rem;
+                    border-radius: 0 var(--radius) var(--radius) 0; font-size: 0.88rem; }
+
+/* Notes */
+.note { font-size: 0.77rem; color: var(--clr-muted); margin-top: 0.35rem; }
+
+/* Site footer */
+.site-footer { background: var(--clr-primary); color: #b8d0e8; padding: 1.4rem 1.25rem;
+               font-size: 0.82rem; text-align: center; margin-top: 3rem; }
+.site-footer a { color: #8ebcd8; }
+.site-footer p { margin-bottom: 0.35rem; }
+
+/* Responsive */
+@media (max-width: 640px) {
+  .ward-hero, .home-hero { grid-template-columns: 1fr; }
+  .ward-hero__map, .home-hero__map { max-width: 100%; margin: 0 auto; }
+  .powers-grid { grid-template-columns: 1fr; }
 }
-a { color: var(--accent); }
-a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-
-.site-header {
-  background: var(--accent);
-  color: #fff;
-  padding: 1.25rem 1.5rem;
-}
-.site-header a { color: #fff; text-decoration: none; font-weight: 600; }
-.site-header .subtitle { font-size: .85rem; opacity: .85; margin-top: .15rem; }
-
-main { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
-
-h1 { font-size: 1.75rem; margin-bottom: .5rem; }
-h2 { font-size: 1.3rem; margin: 2rem 0 .75rem; border-bottom: 2px solid var(--accent); padding-bottom: .25rem; }
-h3 { font-size: 1.05rem; margin: 1.25rem 0 .4rem; }
-
-/* stat blocks */
-.stats-grid { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; }
-.stat {
-  flex: 1 1 160px;
-  background: var(--bar-bg);
-  border-left: 4px solid var(--accent);
-  padding: .75rem 1rem;
-  border-radius: 4px;
-}
-.stat .num { font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1.1; }
-.stat .label { font-size: .8rem; color: var(--muted); margin-top: .15rem; }
-
-/* ward grid on homepage */
-.ward-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: .6rem;
-  margin: 1rem 0;
-}
-.ward-card {
-  display: block;
-  padding: .6rem .8rem;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  text-decoration: none;
-  color: var(--text);
-  transition: border-color .15s, background .15s;
-}
-.ward-card:hover, .ward-card:focus-visible {
-  border-color: var(--accent);
-  background: var(--bar-bg);
-}
-.ward-card .ward-num { font-size: .7rem; color: var(--muted); }
-.ward-card .ward-name { font-size: .88rem; font-weight: 600; margin-top: .1rem; }
-.ward-card .ward-turnout { font-size: .78rem; color: var(--muted); }
-
-/* inline SVG chart */
-.chart-wrap { overflow-x: auto; margin: 1rem 0; }
-svg text { font-family: inherit; }
-
-/* ward-page specifics */
-.by-election-note {
-  background: #fff8e1;
-  border-left: 4px solid #f0a500;
-  padding: .6rem 1rem;
-  margin: .5rem 0 1rem;
-  font-size: .9rem;
-  border-radius: 3px;
-}
-
-/* vote bar */
-.vote-bar-wrap { margin: .75rem 0; }
-.vote-bar-track {
-  height: 24px;
-  background: var(--border);
-  border-radius: 4px;
-  overflow: hidden;
-  display: flex;
-}
-.vote-bar-voted   { background: var(--accent);  }
-.vote-bar-novote  { background: var(--border);   }
-.vote-bar-label {
-  display: flex; justify-content: space-between;
-  font-size: .78rem; color: var(--muted); margin-top: .3rem;
-}
-
-/* candidate table */
-table { border-collapse: collapse; width: 100%; margin: .5rem 0; }
-th, td { text-align: left; padding: .4rem .6rem; border-bottom: 1px solid var(--border); font-size: .9rem; }
-th { background: var(--bar-bg); font-weight: 600; }
-td:last-child { white-space: nowrap; }
-
-/* result bar inside table */
-.result-bar {
-  display: inline-block;
-  height: 12px;
-  background: var(--accent);
-  border-radius: 2px;
-  vertical-align: middle;
-  margin-right: .4rem;
-  min-width: 2px;
-}
-
-/* action links */
-.action-links { list-style: none; padding: 0; margin: .5rem 0; }
-.action-links li { margin: .4rem 0; }
-.action-links a { font-weight: 600; }
-
-/* source footnote */
-.source-note {
-  font-size: .75rem;
-  color: var(--muted);
-  margin-top: .3rem;
-  border-top: 1px solid var(--border);
-  padding-top: .3rem;
-}
-.source-note a { color: var(--muted); }
-
-.page-footer {
-  margin-top: 3rem;
-  border-top: 1px solid var(--border);
-  padding-top: 1rem;
-  font-size: .8rem;
-  color: var(--muted);
-}
-
-@media (max-width: 600px) {
-  h1 { font-size: 1.35rem; }
-  .stat .num { font-size: 1.6rem; }
+@media (max-width: 420px) {
+  .stat-grid { grid-template-columns: 1fr; }
+  .vote-dl { grid-template-columns: 1fr; }
 }
