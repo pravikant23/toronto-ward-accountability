@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ward 12: Toronto-St. Paul's | Toronto Ward Accountability</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-bottom: 5px;
+        }
+        
+        .breadcrumb {
+            margin-top: 15px;
+            font-size: 0.9em;
+            opacity: 0.85;
+        }
+        
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .breadcrumb a:hover {
+            border-bottom-color: white;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        section {
+            margin-bottom: 40px;
+        }
+        
+        section h2 {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .overview {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .overview-item {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .overview-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .overview-item p {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .party-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        .candidates-list {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .candidate-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .candidate-item:last-child {
+            border-bottom: none;
+        }
+        
+        .candidate-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .candidate-rank {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            font-weight: 700;
+            margin-right: 15px;
+        }
+        
+        .candidate-votes {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .data-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-size: 0.95em;
+            color: #856404;
+        }
+        
+        .sources {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+        
+        .sources h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .sources a {
+            color: #667eea;
+            text-decoration: none;
+            word-break: break-word;
+        }
+        
+        .sources a:hover {
+            text-decoration: underline;
+        }
+        
+        .sources ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .sources li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .sources li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+        
+        .comments-section {
+            border-top: 2px solid #f0f0f0;
+            padding-top: 30px;
+            margin-top: 30px;
+        }
+        
+        .disqus-placeholder {
+            background: #f8f9fa;
+            border: 2px dashed #ccc;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            color: #666;
+        }
+        
+        footer {
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: #f0f0f0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            header {
+                padding: 30px 20px;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section h2 {
+                font-size: 1.3em;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+            }
+            
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ward 12</h1>
+            <p>Toronto-St. Paul's</p>
+            <div class="breadcrumb">
+                <a href="/">← Back to All Wards</a>
+            </div>
+        </header>
+        
+        <div class="content">
+            <div class="nav-links">
+                <a href="ward-11.html">← Previous Ward</a>
+                <a href="/">All Wards</a>
+                <a href="ward-13.html">Next Ward →</a>
+            </div>
+            
+            <section class="election-overview">
+                <h2>Section 1: Ward Overview & 2022 Election Results</h2>
+                <div class="overview">
+                    <div>
+                        <strong style="color: #2c3e50; font-size: 0.9em; text-transform: uppercase;">Current Councillor</strong>
+                        <p>Josh Matlow</p>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 25px; margin-bottom: 15px; color: #2c3e50; font-size: 1.1em;">2022 Election Results — Top 5 Candidates</h3>
+                <div class="candidates-list">
+                    <div class="candidate-item">
+                        <div style="display: flex; align-items: center; flex-grow: 1;">
+                            <div class="candidate-rank">1</div>
+                            <div>
+                                <div class="candidate-name">Josh Matlow</div>
+                                <div class="candidate-votes">Toronto Restoration Caucus</div>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <strong>22,198</strong> votes
+                        </div>
+                    </div>
+                    <div class="candidate-item">
+                        <div style="display: flex; align-items: center; flex-grow: 1;">
+                            <div class="candidate-rank">2</div>
+                            <div>
+                                <div class="candidate-name">Candidate 2</div>
+                                <div class="candidate-votes">Unknown</div>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <strong>0</strong> votes
+                        </div>
+                    </div>
+                    <div class="candidate-item">
+                        <div style="display: flex; align-items: center; flex-grow: 1;">
+                            <div class="candidate-rank">3</div>
+                            <div>
+                                <div class="candidate-name">Candidate 3</div>
+                                <div class="candidate-votes">Unknown</div>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <strong>0</strong> votes
+                        </div>
+                    </div>
+                    <div class="candidate-item">
+                        <div style="display: flex; align-items: center; flex-grow: 1;">
+                            <div class="candidate-rank">4</div>
+                            <div>
+                                <div class="candidate-name">Candidate 4</div>
+                                <div class="candidate-votes">Unknown</div>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <strong>0</strong> votes
+                        </div>
+                    </div>
+                    <div class="candidate-item">
+                        <div style="display: flex; align-items: center; flex-grow: 1;">
+                            <div class="candidate-rank">5</div>
+                            <div>
+                                <div class="candidate-name">Candidate 5</div>
+                                <div class="candidate-votes">Unknown</div>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <strong>0</strong> votes
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="data-note">
+                    <strong>Note:</strong> Ward 12 elected Josh Matlow with 22,198 votes in the 2022 Toronto municipal election.
+                </div>
+            </section>
+            
+            <section class="neighbourhood-data">
+                <h2>Section 2: Neighbourhood Metrics (2022–2026)</h2>
+                <div class="data-note">
+                    <strong>Data Collection in Progress:</strong> Neighbourhood improvement metrics (schools, transit, trees, cycling, safety) are being gathered from Toronto Open Data. Check back soon for year-over-year comparisons.
+                </div>
+            </section>
+            
+            <section class="budget-section">
+                <h2>Section 3: Budget & Spending</h2>
+                <div class="data-note">
+                    <strong>Data Collection in Progress:</strong> Ward discretionary budgets and major capital projects approved by Josh Matlow will be displayed here as they are compiled from Toronto Open Data.
+                </div>
+            </section>
+            
+            <section class="development-section">
+                <h2>Section 4: Development Pipeline</h2>
+                <div class="data-note">
+                    <strong>Data Collection in Progress:</strong> Major development approvals, rezoning, and completed projects in Ward 12 will be shown here.
+                </div>
+            </section>
+            
+            <section class="narrative-section">
+                <h2>Section 5: The Narrative</h2>
+                <div class="data-note">
+                    <strong>Status:</strong> Mixed — Data for a comprehensive verdict is still being collected. This section will show whether Ward 12 improved, declined, or remained stable based on verified neighbourhood metrics.
+                </div>
+            </section>
+            
+            <section class="comments-section">
+                <h2>Section 6: Community Discussion</h2>
+                <div class="comments-section">
+                    <div class="disqus-placeholder">
+                        <p><strong>Have thoughts about Ward 12?</strong></p>
+                        <p style="margin-top: 10px; font-size: 0.95em;">Share your experiences, ask questions, and engage with other residents.</p>
+                        <p style="margin-top: 10px; font-size: 0.85em; color: #999;">[Disqus comment thread will be embedded here]</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="sources">
+                <h3>📚 Data Sources</h3>
+                <ul>
+                    <li><a href="https://open.toronto.ca/dataset/election-results-official/">Toronto Election Results 2022 — Toronto Open Data</a></li>
+                    <li><a href="https://torontoelections.com/council2022results">2022 Council Results — Toronto Elections Official</a></li>
+                    <li><a href="https://open.toronto.ca/">City of Toronto Open Data Portal</a></li>
+                    <li><a href="https://www.toronto.ca/city-government/elections/">City of Toronto Elections</a></li>
+                </ul>
+            </section>
+        </div>
+        
+        <footer>
+            <p>Toronto Ward Accountability Platform — Last Updated: October 14, 2026</p>
+            <p style="margin-top: 10px; font-size: 0.85em;">Made to help Toronto voters see neighbourhood changes and councillor accountability. <a href="/" style="color: #667eea;">View all wards</a></p>
+        </footer>
+    </div>
+</body>
+</html>

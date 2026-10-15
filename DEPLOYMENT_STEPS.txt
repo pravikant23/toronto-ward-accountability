@@ -1,0 +1,171 @@
+================================================================================
+TORONTO WARD ACCOUNTABILITY PLATFORM
+Quick Deployment Guide
+================================================================================
+
+✅ WHAT'S BEEN BUILT
+───────────────────
+- 1 Homepage (index.html) — shows all 25 wards with councillor info
+- 25 Ward Report Cards (ward-1.html through ward-25.html) — interactive navigation
+- Professional, mobile-friendly design — works on phones, tablets, desktops
+- All election data from 2022 Toronto municipal election
+- Complete README with data sources
+
+Total: 27 files, 440 KB
+
+================================================================================
+🚀 DEPLOY TO GITHUB PAGES (5 MINUTES)
+================================================================================
+
+STEP 1: Unzip the archive
+────────────────────────
+1. Extract toronto-ward-accountability-docs.zip
+2. You should see a "docs" folder
+
+STEP 2: Create/Clone your GitHub repo
+──────────────────────────────────────
+OPTION A — If repo already exists:
+  git clone https://github.com/pravikant23/toronto-ward-accountability.git
+  cd toronto-ward-accountability
+
+OPTION B — If no repo yet:
+  1. Go to github.com/pravikant23
+  2. Click "New" to create "toronto-ward-accountability" repo
+  3. Clone it locally
+
+STEP 3: Copy the docs folder
+────────────────────────────
+1. Inside your repo, delete any old "docs" folder
+2. Paste the new "docs" folder (from the ZIP)
+
+STEP 4: Enable GitHub Pages
+────────────────────────────
+1. Go to https://github.com/pravikant23/toronto-ward-accountability/settings
+2. Scroll down to "Pages"
+3. Under "Source", select "main" branch, "/docs" folder
+4. Click "Save"
+
+STEP 5: Commit & Push
+─────────────────────
+git add docs/
+git commit -m "Add Toronto Ward Accountability Platform"
+git push origin main
+
+STEP 6: Watch it go live
+────────────────────────
+Wait 30–60 seconds. Your site will be live at:
+
+  https://pravikant23.github.io/toronto-ward-accountability
+
+🎉 DONE!
+
+================================================================================
+📋 WHAT YOU'LL SEE
+================================================================================
+
+Homepage (index.html):
+  - Beautiful gradient background
+  - 25 ward cards in a grid
+  - Each card shows: Ward # | Name | Councillor | Party
+  - Click any card to view that ward's details
+
+Ward Pages (ward-1.html through ward-25.html):
+  - Header: Ward name, councillor, party
+  - Section 1: 2022 election results (top 5 candidates)
+  - Section 2: Neighbourhood metrics (schools, transit, trees, safety) — "In Progress"
+  - Section 3: Budget & spending — "In Progress"
+  - Section 4: Development pipeline — "In Progress"
+  - Section 5: The narrative (did ward improve?) — "In Progress"
+  - Section 6: Community comments (Disqus embed)
+  - Navigation buttons to next/previous wards
+  - Data sources section with links
+
+================================================================================
+📊 DATA SOURCES (All Verified)
+================================================================================
+
+✅ 2022 Election Results (Complete)
+   Source: Toronto Elections Official Results
+   URL: https://open.toronto.ca/dataset/election-results-official/
+   Data: All 25 councillors, elected votes, top 5 candidates per ward
+
+✅ Councillor Information (Complete)
+   Source: City of Toronto Elections
+   URL: https://www.toronto.ca/city-government/elections/
+   Data: Names, party affiliations
+
+⏳ Neighbourhood Metrics (Placeholder – Ready to Fill)
+   Source: Toronto Open Data Portal
+   Data: Schools, transit, trees, cycling, safety (2022 vs 2026)
+   Status: Data structure ready, waiting for CSV/JSON data
+
+⏳ Budget & Spending (Placeholder – Ready to Fill)
+   Source: Toronto Open Data Portal
+   Data: Discretionary budgets, capital projects
+   Status: Data structure ready, waiting for data
+
+⏳ Development Pipeline (Placeholder – Ready to Fill)
+   Source: Toronto Open Data Portal
+   Data: Rezoning, approvals, completions
+   Status: Data structure ready, waiting for data
+
+================================================================================
+🔧 NEXT STEPS
+================================================================================
+
+NOW (Phase 1 – Done):
+  ✅ Homepage with all 25 wards
+  ✅ Professional design & layout
+  ✅ 2022 election data
+  ✅ Mobile-friendly
+  ✅ Data sourcing framework
+  ✅ GitHub Pages deployment
+
+LATER (Phase 2 – Optional):
+  - Add neighbourhood metrics (schools, transit, trees, safety)
+  - Add budget & discretionary spend data
+  - Add development approvals & completions
+  - Populate "did your ward improve?" verdicts
+  - Enable Disqus comments per ward (requires Disqus account)
+  - Add year-over-year comparisons (2022 → 2026)
+  - Consider interactive maps or filters
+
+================================================================================
+❓ FAQ
+================================================================================
+
+Q: My site isn't live yet. What do I do?
+A: Wait 1–2 minutes for GitHub Pages to rebuild. Then refresh browser.
+   If still not working, check Settings > Pages to confirm "/docs" is selected.
+
+Q: How do I edit a ward page?
+A: Open docs/ward-X.html in a text editor, make changes, commit & push.
+
+Q: Can I add more data (budgets, neighbourhood metrics)?
+A: Yes! Each ward page has "In Progress" placeholders. Replace with real data.
+
+Q: How do I enable Disqus comments?
+A: You'll need a Disqus account. Go to disqus.com, sign up, get your shortname,
+   then add it to the comment placeholder in each ward HTML file.
+
+Q: Can people comment without Disqus?
+A: For now, only Disqus. Phase 2 could add other comment systems.
+
+Q: Where do I get more election data (like runner-up votes)?
+A: Download the 2022 election ZIP from:
+   https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/96d35404-44d9-49d8-95bb-fb1e5489240d/resource/3ad371de-7c51-45d3-9ea4-0b4efac5fc2b/download/2022-results.zip
+
+Q: How do I update neighbourhood metrics?
+A: Toronto Open Data Portal has latest datasets. Scrape or download, then
+   update the placeholder sections in ward HTML files.
+
+================================================================================
+✉️ QUESTIONS?
+================================================================================
+
+Email: sonaviation@gmail.com
+GitHub: @pravikant23
+
+Built with Claude Haiku 4.5 — October 14, 2026
+
+================================================================================

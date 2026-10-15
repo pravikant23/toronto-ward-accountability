@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toronto Ward Accountability Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            padding: 40px 20px;
+        }
+        
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .tagline {
+            margin-top: 15px;
+            font-size: 1em;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+        
+        .wards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        
+        .ward-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: #2c3e50;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .ward-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        
+        .ward-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .ward-number {
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        
+        .ward-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            opacity: 0.95;
+        }
+        
+        .ward-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .councillor-name {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .councillor-label {
+            font-size: 0.8em;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+        
+        .party-badge {
+            display: inline-block;
+            background: #f0f0f0;
+            color: #667eea;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .view-button {
+            align-self: flex-start;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9em;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .view-button:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+        
+        .info-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .info-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .info-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .feature {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .feature strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .feature p {
+            margin: 0;
+            font-size: 0.95em;
+            color: #666;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding: 30px 20px;
+            opacity: 0.9;
+            font-size: 0.95em;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            header p {
+                font-size: 1em;
+            }
+            
+            .wards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏛️ Toronto Ward Accountability</h1>
+            <p>See how your neighbourhood changed under your elected councillor.</p>
+            <p class="tagline"><strong>Did your ward improve from 2022–2026? Let the data tell the story.</strong></p>
+        </header>
+        
+        <div class="info-section">
+            <h2>What This Platform Does</h2>
+            <p>
+                Toronto voters often ask: <em>"Did my neighbourhood actually improve? What did my councillor do? Where did the money go?"</em>
+            </p>
+            <p>
+                This platform gives you a single, data-driven view of each of Toronto's 25 wards:
+            </p>
+            <div class="features-grid">
+                <div class="feature">
+                    <strong>📊 Election Data</strong>
+                    <p>2022 election results, top candidates, and vote counts—see how competitive the race was.</p>
+                </div>
+                <div class="feature">
+                    <strong>🏘️ Neighbourhood Changes</strong>
+                    <p>Schools, transit, green space, and safety metrics year-over-year.</p>
+                </div>
+                <div class="feature">
+                    <strong>💰 Budget Snapshot</strong>
+                    <p>How the councillor spent discretionary funds and what major projects they brought in.</p>
+                </div>
+                <div class="feature">
+                    <strong>🏗️ Development Pipeline</strong>
+                    <p>What got rezoned, approved, or built during their term.</p>
+                </div>
+                <div class="feature">
+                    <strong>💬 Community Voice</strong>
+                    <p>Comment on your ward's progress and engage with neighbours.</p>
+                </div>
+                <div class="feature">
+                    <strong>✅ Fully Transparent</strong>
+                    <p>Every fact is sourced from Toronto Open Data—no opinions, just verified data.</p>
+                </div>
+            </div>
+        </div>
+        
+        <h2 style="color: white; text-align: center; margin-bottom: 30px; font-size: 2em;">All 25 Toronto Wards</h2>
+        
+        <div class="wards-grid">
+            <a href="ward-1.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">1</div>
+                    <div class="ward-name">Etobicoke North</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Michael Ford</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-2.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">2</div>
+                    <div class="ward-name">Etobicoke Centre</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Stephen Holyday</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-3.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">3</div>
+                    <div class="ward-name">Etobicoke-Lakeshore</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Amber Morley</div>
+                        <span class="party-badge">Independent</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-4.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">4</div>
+                    <div class="ward-name">Parkdale-High Park</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Gord Perks</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-5.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">5</div>
+                    <div class="ward-name">York South-Weston</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Frances Nunziata</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-6.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">6</div>
+                    <div class="ward-name">York Centre</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">James Pasternak</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-7.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">7</div>
+                    <div class="ward-name">Humber River-Black Creek</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Anthony Perruzza</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-8.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">8</div>
+                    <div class="ward-name">Eglinton-Lawrence</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Mike Colle</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-9.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">9</div>
+                    <div class="ward-name">Davenport</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Alejandro Bravo</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-10.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">10</div>
+                    <div class="ward-name">Spadina-Fort York</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Ausma Malik</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-11.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">11</div>
+                    <div class="ward-name">University-Rosedale</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Dianne Saxe</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-12.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">12</div>
+                    <div class="ward-name">Toronto-St. Paul's</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Josh Matlow</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-13.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">13</div>
+                    <div class="ward-name">Toronto Centre</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Kristyn Wong-Tam</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-14.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">14</div>
+                    <div class="ward-name">Toronto-Danforth</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Paula Fletcher</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-15.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">15</div>
+                    <div class="ward-name">Don Valley West</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Rachel Chernos Lin</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-16.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">16</div>
+                    <div class="ward-name">Don Valley East</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Stephanie Bowman</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-17.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">17</div>
+                    <div class="ward-name">Don Valley North</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Shelley Carroll</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-18.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">18</div>
+                    <div class="ward-name">Willowdale</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Lily Cheng</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-19.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">19</div>
+                    <div class="ward-name">Beaches-East York</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Brad Bradford</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-20.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">20</div>
+                    <div class="ward-name">Scarborough Southwest</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Paul Ainslie</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-21.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">21</div>
+                    <div class="ward-name">Scarborough Centre</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Michael Thompson</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-22.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">22</div>
+                    <div class="ward-name">Scarborough-Agincourt</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Nick Mantas</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-23.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">23</div>
+                    <div class="ward-name">Scarborough North</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Cynthia Lai</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-24.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">24</div>
+                    <div class="ward-name">Scarborough-Guildwood</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Mitch Wong</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+            
+            <a href="ward-25.html" class="ward-card">
+                <div class="ward-header">
+                    <div class="ward-number">25</div>
+                    <div class="ward-name">Scarborough-Rouge Park</div>
+                </div>
+                <div class="ward-body">
+                    <div>
+                        <div class="councillor-label">Councillor</div>
+                        <div class="councillor-name">Jamaal Myers</div>
+                        <span class="party-badge">Toronto Restoration Caucus</span>
+                    </div>
+                    <button class="view-button">View Ward →</button>
+                </div>
+            </a>
+        </div>
+        
+        <footer>
+            <p><strong>Toronto Ward Accountability Platform</strong> — Making municipal accountability data accessible.</p>
+            <p style="margin-top: 15px;">All data sourced from <a href="https://open.toronto.ca/">City of Toronto Open Data</a> · Last updated: October 14, 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
