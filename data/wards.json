@@ -1,0 +1,1317 @@
+{
+  "city": {
+    "registered_voters": 1898750,
+    "ballots_cast": 563563,
+    "turnout_pct": 29.68,
+    "turnout_formula": "ballots_cast (number_voted + declined_ballots) divided by registered_voters (total_eligible_electors)",
+    "election_date": "October 25, 2022",
+    "data_checked": "2026-10-15"
+  },
+  "wards": [
+    {
+      "ward_num": 1,
+      "ward_name": "Etobicoke North",
+      "councillor_name": "Vincent Crisanti",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-1/",
+      "by_election": null,
+      "registered_voters": 70797,
+      "ballots_cast": 16974,
+      "turnout_pct": 23.98,
+      "candidates_2022": [
+        {
+          "name": "Crisanti Vincent",
+          "votes": 6815,
+          "pct": 41.1
+        },
+        {
+          "name": "Minhas Avtar",
+          "votes": 3409,
+          "pct": 20.5
+        },
+        {
+          "name": "Ozzoude Charles",
+          "votes": 1023,
+          "pct": 6.2
+        },
+        {
+          "name": "Chand Subhash",
+          "votes": 934,
+          "pct": 5.6
+        },
+        {
+          "name": "Britton Bill",
+          "votes": 805,
+          "pct": 4.9
+        },
+        {
+          "name": "Garcia Michelle",
+          "votes": 620,
+          "pct": 3.7
+        },
+        {
+          "name": "Santos Kristian",
+          "votes": 613,
+          "pct": 3.7
+        },
+        {
+          "name": "Narang Dev",
+          "votes": 436,
+          "pct": 2.6
+        },
+        {
+          "name": "Santos Ricardo",
+          "votes": 421,
+          "pct": 2.5
+        },
+        {
+          "name": "Abbey Abraham",
+          "votes": 285,
+          "pct": 1.7
+        },
+        {
+          "name": "Stephen Keith",
+          "votes": 282,
+          "pct": 1.7
+        },
+        {
+          "name": "Noor Christopher",
+          "votes": 261,
+          "pct": 1.6
+        },
+        {
+          "name": "Genser John",
+          "votes": 198,
+          "pct": 1.2
+        },
+        {
+          "name": "Courtney Alistair",
+          "votes": 185,
+          "pct": 1.1
+        },
+        {
+          "name": "Sharma Mohit",
+          "votes": 185,
+          "pct": 1.1
+        },
+        {
+          "name": "Pell Donald",
+          "votes": 123,
+          "pct": 0.7
+        }
+      ],
+      "total_candidates_2022": 16,
+      "total_votes_2022": 16595,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 2,
+      "ward_name": "Etobicoke Centre",
+      "councillor_name": "Stephen Holyday",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-2/",
+      "by_election": null,
+      "registered_voters": 89491,
+      "ballots_cast": 26800,
+      "turnout_pct": 29.95,
+      "candidates_2022": [
+        {
+          "name": "Holyday Stephen",
+          "votes": 18559,
+          "pct": 72.3
+        },
+        {
+          "name": "Yanuziello Thomas",
+          "votes": 2653,
+          "pct": 10.3
+        },
+        {
+          "name": "Habus Catherine",
+          "votes": 2318,
+          "pct": 9.0
+        },
+        {
+          "name": "Hashimi Maryam",
+          "votes": 1591,
+          "pct": 6.2
+        },
+        {
+          "name": "Raufi Sam",
+          "votes": 557,
+          "pct": 2.2
+        }
+      ],
+      "total_candidates_2022": 5,
+      "total_votes_2022": 25678,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 3,
+      "ward_name": "Etobicoke-Lakeshore",
+      "councillor_name": "Amber Morley",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-3/",
+      "by_election": null,
+      "registered_voters": 102797,
+      "ballots_cast": 33569,
+      "turnout_pct": 32.66,
+      "candidates_2022": [
+        {
+          "name": "Morley Amber",
+          "votes": 15271,
+          "pct": 46.4
+        },
+        {
+          "name": "Grimes Mark",
+          "votes": 13258,
+          "pct": 40.3
+        },
+        {
+          "name": "Markovic Mary",
+          "votes": 2625,
+          "pct": 8.0
+        },
+        {
+          "name": "Valle Marco",
+          "votes": 644,
+          "pct": 2.0
+        },
+        {
+          "name": "Hu Bonnie",
+          "votes": 618,
+          "pct": 1.9
+        },
+        {
+          "name": "Ari Zeynel",
+          "votes": 467,
+          "pct": 1.4
+        }
+      ],
+      "total_candidates_2022": 6,
+      "total_votes_2022": 32883,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 4,
+      "ward_name": "Parkdale-High Park",
+      "councillor_name": "Gord Perks",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-4/",
+      "by_election": null,
+      "registered_voters": 83800,
+      "ballots_cast": 32231,
+      "turnout_pct": 38.46,
+      "candidates_2022": [
+        {
+          "name": "Perks Gord",
+          "votes": 11149,
+          "pct": 35.5
+        },
+        {
+          "name": "Lhamo Chemi",
+          "votes": 9919,
+          "pct": 31.6
+        },
+        {
+          "name": "Agrell Siri",
+          "votes": 8077,
+          "pct": 25.7
+        },
+        {
+          "name": "Jurik Christopher",
+          "votes": 827,
+          "pct": 2.6
+        },
+        {
+          "name": "Yuen Steve",
+          "votes": 827,
+          "pct": 2.6
+        },
+        {
+          "name": "Gorham Andrew",
+          "votes": 626,
+          "pct": 2.0
+        }
+      ],
+      "total_candidates_2022": 6,
+      "total_votes_2022": 31425,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 5,
+      "ward_name": "York South-Weston",
+      "councillor_name": "Frances Nunziata",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-5/",
+      "by_election": null,
+      "registered_voters": 76907,
+      "ballots_cast": 21824,
+      "turnout_pct": 28.38,
+      "candidates_2022": [
+        {
+          "name": "Nunziata Frances",
+          "votes": 10077,
+          "pct": 47.6
+        },
+        {
+          "name": "Padovani Chiara",
+          "votes": 9983,
+          "pct": 47.2
+        },
+        {
+          "name": "Takang Gabriel",
+          "votes": 1107,
+          "pct": 5.2
+        }
+      ],
+      "total_candidates_2022": 3,
+      "total_votes_2022": 21167,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 6,
+      "ward_name": "York Centre",
+      "councillor_name": "James Pasternak",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-6/",
+      "by_election": null,
+      "registered_voters": 68296,
+      "ballots_cast": 17130,
+      "turnout_pct": 25.08,
+      "candidates_2022": [
+        {
+          "name": "Pasternak James",
+          "votes": 12187,
+          "pct": 73.5
+        },
+        {
+          "name": "Arkin Mike",
+          "votes": 1916,
+          "pct": 11.6
+        },
+        {
+          "name": "Schrier Hope",
+          "votes": 1292,
+          "pct": 7.8
+        },
+        {
+          "name": "Canning Basil",
+          "votes": 1179,
+          "pct": 7.1
+        }
+      ],
+      "total_candidates_2022": 4,
+      "total_votes_2022": 16574,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 7,
+      "ward_name": "Humber River-Black Creek",
+      "councillor_name": "Anthony Perruzza",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-7/",
+      "by_election": null,
+      "registered_voters": 66162,
+      "ballots_cast": 14626,
+      "turnout_pct": 22.11,
+      "candidates_2022": [
+        {
+          "name": "Perruzza Anthony",
+          "votes": 8707,
+          "pct": 61.3
+        },
+        {
+          "name": "Mammoliti Christopher",
+          "votes": 3215,
+          "pct": 22.6
+        },
+        {
+          "name": "Coombs Amanda",
+          "votes": 2282,
+          "pct": 16.1
+        }
+      ],
+      "total_candidates_2022": 3,
+      "total_votes_2022": 14204,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 8,
+      "ward_name": "Eglinton-Lawrence",
+      "councillor_name": "Mike Colle",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-8/",
+      "by_election": null,
+      "registered_voters": 79418,
+      "ballots_cast": 25098,
+      "turnout_pct": 31.6,
+      "candidates_2022": [
+        {
+          "name": "Colle Mike",
+          "votes": 17109,
+          "pct": 70.3
+        },
+        {
+          "name": "Sambasivam Evan",
+          "votes": 3447,
+          "pct": 14.2
+        },
+        {
+          "name": "Weston Wendy",
+          "votes": 1990,
+          "pct": 8.2
+        },
+        {
+          "name": "Davidovits Philip",
+          "votes": 1275,
+          "pct": 5.2
+        },
+        {
+          "name": "Maiolo Domenico",
+          "votes": 513,
+          "pct": 2.1
+        }
+      ],
+      "total_candidates_2022": 5,
+      "total_votes_2022": 24334,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 9,
+      "ward_name": "Davenport",
+      "councillor_name": "Alejandra Bravo",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-9/",
+      "by_election": null,
+      "registered_voters": 81355,
+      "ballots_cast": 24900,
+      "turnout_pct": 30.61,
+      "candidates_2022": [
+        {
+          "name": "Bravo Alejandra",
+          "votes": 17009,
+          "pct": 70.7
+        },
+        {
+          "name": "Gonzales Grant",
+          "votes": 3192,
+          "pct": 13.3
+        },
+        {
+          "name": "Jamal Shaker",
+          "votes": 1414,
+          "pct": 5.9
+        },
+        {
+          "name": "Spencer Allie",
+          "votes": 882,
+          "pct": 3.7
+        },
+        {
+          "name": "Leca Steven",
+          "votes": 675,
+          "pct": 2.8
+        },
+        {
+          "name": "Fogel Simon",
+          "votes": 381,
+          "pct": 1.6
+        },
+        {
+          "name": "Maydansky Jacob",
+          "votes": 207,
+          "pct": 0.9
+        },
+        {
+          "name": "Houghron Mosea",
+          "votes": 151,
+          "pct": 0.6
+        },
+        {
+          "name": "Shorter Lazare",
+          "votes": 139,
+          "pct": 0.6
+        }
+      ],
+      "total_candidates_2022": 9,
+      "total_votes_2022": 24050,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 10,
+      "ward_name": "Spadina-Fort York",
+      "councillor_name": "Ausma Malik",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-10/",
+      "by_election": null,
+      "registered_voters": 95433,
+      "ballots_cast": 23306,
+      "turnout_pct": 24.42,
+      "candidates_2022": [
+        {
+          "name": "Malik Ausma",
+          "votes": 8033,
+          "pct": 36.6
+        },
+        {
+          "name": "Engelberg April",
+          "votes": 4690,
+          "pct": 21.3
+        },
+        {
+          "name": "Achampong Rocco",
+          "votes": 1906,
+          "pct": 8.7
+        },
+        {
+          "name": "George Peter",
+          "votes": 1757,
+          "pct": 8.0
+        },
+        {
+          "name": "Samardzic Igor",
+          "votes": 1686,
+          "pct": 7.7
+        },
+        {
+          "name": "Nation Karlene",
+          "votes": 1001,
+          "pct": 4.6
+        },
+        {
+          "name": "Soltermann Stephanie",
+          "votes": 661,
+          "pct": 3.0
+        },
+        {
+          "name": "Puci Arber",
+          "votes": 603,
+          "pct": 2.7
+        },
+        {
+          "name": "Nikolareizi Laura-Maria",
+          "votes": 471,
+          "pct": 2.1
+        },
+        {
+          "name": "Enslen Kyle",
+          "votes": 439,
+          "pct": 2.0
+        },
+        {
+          "name": "Cooke Robb",
+          "votes": 434,
+          "pct": 2.0
+        },
+        {
+          "name": "Zodian Andrei",
+          "votes": 297,
+          "pct": 1.4
+        }
+      ],
+      "total_candidates_2022": 12,
+      "total_votes_2022": 21978,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 11,
+      "ward_name": "University-Rosedale",
+      "councillor_name": "Dianne Saxe",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-11/",
+      "by_election": null,
+      "registered_voters": 80347,
+      "ballots_cast": 25703,
+      "turnout_pct": 31.99,
+      "candidates_2022": [
+        {
+          "name": "Saxe Dianne",
+          "votes": 8614,
+          "pct": 35.4
+        },
+        {
+          "name": "Di Pasquale Norm",
+          "votes": 8491,
+          "pct": 34.9
+        },
+        {
+          "name": "Buxton Potts Robin",
+          "votes": 2156,
+          "pct": 8.9
+        },
+        {
+          "name": "Lovering Peter",
+          "votes": 1321,
+          "pct": 5.4
+        },
+        {
+          "name": "Layman Andrew",
+          "votes": 683,
+          "pct": 2.8
+        },
+        {
+          "name": "Rohmer Ann",
+          "votes": 589,
+          "pct": 2.4
+        },
+        {
+          "name": "Golding Adam",
+          "votes": 481,
+          "pct": 2.0
+        },
+        {
+          "name": "Pang Alison",
+          "votes": 465,
+          "pct": 1.9
+        },
+        {
+          "name": "Arvizu Axel",
+          "votes": 463,
+          "pct": 1.9
+        },
+        {
+          "name": "Yoon Diana",
+          "votes": 415,
+          "pct": 1.7
+        },
+        {
+          "name": "Borrelli Michael",
+          "votes": 245,
+          "pct": 1.0
+        },
+        {
+          "name": "Fielder David",
+          "votes": 177,
+          "pct": 0.7
+        },
+        {
+          "name": "Therrien Pierre",
+          "votes": 169,
+          "pct": 0.7
+        },
+        {
+          "name": "Shon Heather",
+          "votes": 82,
+          "pct": 0.3
+        }
+      ],
+      "total_candidates_2022": 14,
+      "total_votes_2022": 24351,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 12,
+      "ward_name": "Toronto-St. Paul's",
+      "councillor_name": "Josh Matlow",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-12/",
+      "by_election": null,
+      "registered_voters": 83877,
+      "ballots_cast": 28209,
+      "turnout_pct": 33.63,
+      "candidates_2022": [
+        {
+          "name": "Matlow Josh",
+          "votes": 22670,
+          "pct": 84.6
+        },
+        {
+          "name": "Ashworth Bryan",
+          "votes": 2045,
+          "pct": 7.6
+        },
+        {
+          "name": "Murphy Bob",
+          "votes": 1175,
+          "pct": 4.4
+        },
+        {
+          "name": "Corpuz Antonio",
+          "votes": 892,
+          "pct": 3.3
+        }
+      ],
+      "total_candidates_2022": 4,
+      "total_votes_2022": 26782,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 13,
+      "ward_name": "Toronto Centre",
+      "councillor_name": "Chris Moise",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-13/",
+      "by_election": null,
+      "registered_voters": 80096,
+      "ballots_cast": 23104,
+      "turnout_pct": 28.85,
+      "candidates_2022": [
+        {
+          "name": "Moise Chris",
+          "votes": 10457,
+          "pct": 48.5
+        },
+        {
+          "name": "Ward Nicki",
+          "votes": 3940,
+          "pct": 18.3
+        },
+        {
+          "name": "Murphy Caroline",
+          "votes": 2625,
+          "pct": 12.2
+        },
+        {
+          "name": "Johnson Colin",
+          "votes": 1087,
+          "pct": 5.0
+        },
+        {
+          "name": "Manalo Dan Cortez",
+          "votes": 1055,
+          "pct": 4.9
+        },
+        {
+          "name": "Avila Miguel",
+          "votes": 1049,
+          "pct": 4.9
+        },
+        {
+          "name": "Lester Ryan",
+          "votes": 648,
+          "pct": 3.0
+        },
+        {
+          "name": "Marshall Cleveland",
+          "votes": 400,
+          "pct": 1.9
+        },
+        {
+          "name": "Ramsumair Dev",
+          "votes": 307,
+          "pct": 1.4
+        }
+      ],
+      "total_candidates_2022": 9,
+      "total_votes_2022": 21568,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 14,
+      "ward_name": "Toronto-Danforth",
+      "councillor_name": "Paula Fletcher",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-14/",
+      "by_election": null,
+      "registered_voters": 79533,
+      "ballots_cast": 28421,
+      "turnout_pct": 35.73,
+      "candidates_2022": [
+        {
+          "name": "Fletcher Paula",
+          "votes": 20305,
+          "pct": 74.0
+        },
+        {
+          "name": "Abro Wali",
+          "votes": 1982,
+          "pct": 7.2
+        },
+        {
+          "name": "Dyson James",
+          "votes": 1937,
+          "pct": 7.1
+        },
+        {
+          "name": "Walcott Denise",
+          "votes": 1740,
+          "pct": 6.3
+        },
+        {
+          "name": "De Marco John",
+          "votes": 1469,
+          "pct": 5.4
+        }
+      ],
+      "total_candidates_2022": 5,
+      "total_votes_2022": 27433,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 15,
+      "ward_name": "Don Valley West",
+      "councillor_name": "Rachel Chernos Lin",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-15/",
+      "by_election": {
+        "date": "November 4, 2024",
+        "winner": "Rachel Chernos Lin",
+        "seats_winner_2022": "Jaye Robinson",
+        "note": "Jaye Robinson (2022 winner) resigned; Rachel Chernos Lin won the November 4, 2024 by-election."
+      },
+      "registered_voters": 69118,
+      "ballots_cast": 22534,
+      "turnout_pct": 32.6,
+      "candidates_2022": [
+        {
+          "name": "Robinson Jaye",
+          "votes": 16142,
+          "pct": 74.2
+        },
+        {
+          "name": "Sharp Sheena",
+          "votes": 2780,
+          "pct": 12.8
+        },
+        {
+          "name": "Ricci David",
+          "votes": 2438,
+          "pct": 11.2
+        },
+        {
+          "name": "Vaz Gregory",
+          "votes": 389,
+          "pct": 1.8
+        }
+      ],
+      "total_candidates_2022": 4,
+      "total_votes_2022": 21749,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 16,
+      "ward_name": "Don Valley East",
+      "councillor_name": "Jon Burnside",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-16/",
+      "by_election": null,
+      "registered_voters": 61583,
+      "ballots_cast": 18808,
+      "turnout_pct": 30.54,
+      "candidates_2022": [
+        {
+          "name": "Burnside Jon",
+          "votes": 8147,
+          "pct": 44.7
+        },
+        {
+          "name": "Ksiazek Stephen",
+          "votes": 3778,
+          "pct": 20.7
+        },
+        {
+          "name": "Mousley Jonathan",
+          "votes": 1282,
+          "pct": 7.0
+        },
+        {
+          "name": "Mahovlich Colin",
+          "votes": 1059,
+          "pct": 5.8
+        },
+        {
+          "name": "Alim Samina",
+          "votes": 945,
+          "pct": 5.2
+        },
+        {
+          "name": "Kargiannakis Stella",
+          "votes": 700,
+          "pct": 3.8
+        },
+        {
+          "name": "Alvarez-Bardales Walter",
+          "votes": 616,
+          "pct": 3.4
+        },
+        {
+          "name": "Pachis Nick",
+          "votes": 579,
+          "pct": 3.2
+        },
+        {
+          "name": "Popov Dimitre",
+          "votes": 549,
+          "pct": 3.0
+        },
+        {
+          "name": "Simms John",
+          "votes": 410,
+          "pct": 2.2
+        },
+        {
+          "name": "Asimakis George",
+          "votes": 169,
+          "pct": 0.9
+        }
+      ],
+      "total_candidates_2022": 11,
+      "total_votes_2022": 18234,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 17,
+      "ward_name": "Don Valley North",
+      "councillor_name": "Shelley Carroll",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-17/",
+      "by_election": null,
+      "registered_voters": 70517,
+      "ballots_cast": 18718,
+      "turnout_pct": 26.54,
+      "candidates_2022": [
+        {
+          "name": "Carroll Shelley",
+          "votes": 12897,
+          "pct": 71.8
+        },
+        {
+          "name": "Christoff Daryl",
+          "votes": 2429,
+          "pct": 13.5
+        },
+        {
+          "name": "Xu Calvin",
+          "votes": 1367,
+          "pct": 7.6
+        },
+        {
+          "name": "Lindow Angela",
+          "votes": 577,
+          "pct": 3.2
+        },
+        {
+          "name": "Knott Justin",
+          "votes": 409,
+          "pct": 2.3
+        },
+        {
+          "name": "Ekanayake Sandakie",
+          "votes": 286,
+          "pct": 1.6
+        }
+      ],
+      "total_candidates_2022": 6,
+      "total_votes_2022": 17965,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 18,
+      "ward_name": "Willowdale",
+      "councillor_name": "Lily Cheng",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-18/",
+      "by_election": null,
+      "registered_voters": 69996,
+      "ballots_cast": 20444,
+      "turnout_pct": 29.21,
+      "candidates_2022": [
+        {
+          "name": "Cheng Lily",
+          "votes": 8337,
+          "pct": 41.7
+        },
+        {
+          "name": "O'Brien Fehr Markus",
+          "votes": 6709,
+          "pct": 33.6
+        },
+        {
+          "name": "Lee Daniel",
+          "votes": 4617,
+          "pct": 23.1
+        },
+        {
+          "name": "Shahban Elham",
+          "votes": 318,
+          "pct": 1.6
+        }
+      ],
+      "total_candidates_2022": 4,
+      "total_votes_2022": 19981,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 19,
+      "ward_name": "Beaches-East York",
+      "councillor_name": "Brad Bradford",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-19/",
+      "by_election": null,
+      "registered_voters": 77782,
+      "ballots_cast": 28335,
+      "turnout_pct": 36.43,
+      "candidates_2022": [
+        {
+          "name": "Bradford Brad",
+          "votes": 15169,
+          "pct": 54.7
+        },
+        {
+          "name": "Worden Jennie",
+          "votes": 6291,
+          "pct": 22.7
+        },
+        {
+          "name": "Smith Adam",
+          "votes": 1902,
+          "pct": 6.9
+        },
+        {
+          "name": "Thompson Steven",
+          "votes": 1735,
+          "pct": 6.3
+        },
+        {
+          "name": "Marra Frank",
+          "votes": 1460,
+          "pct": 5.3
+        },
+        {
+          "name": "Braniff Donna",
+          "votes": 702,
+          "pct": 2.5
+        },
+        {
+          "name": "Auger S\u00e9bastien",
+          "votes": 469,
+          "pct": 1.7
+        }
+      ],
+      "total_candidates_2022": 7,
+      "total_votes_2022": 27728,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 20,
+      "ward_name": "Scarborough Southwest",
+      "councillor_name": "Parthi Kandavel",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-20/",
+      "by_election": {
+        "date": "November 30, 2023",
+        "winner": "Parthi Kandavel",
+        "seats_winner_2022": "Gary Crawford",
+        "note": "Gary Crawford (2022 winner) resigned; Parthi Kandavel won the November 30, 2023 by-election."
+      },
+      "registered_voters": 74104,
+      "ballots_cast": 23990,
+      "turnout_pct": 32.37,
+      "candidates_2022": [
+        {
+          "name": "Crawford Gary",
+          "votes": 8216,
+          "pct": 35.1
+        },
+        {
+          "name": "Kandavel Parthi",
+          "votes": 6936,
+          "pct": 29.6
+        },
+        {
+          "name": "Rupasinghe Kevin",
+          "votes": 3208,
+          "pct": 13.7
+        },
+        {
+          "name": "Berardinetti Lorenzo",
+          "votes": 2773,
+          "pct": 11.8
+        },
+        {
+          "name": "Ahmad Malik",
+          "votes": 709,
+          "pct": 3.0
+        },
+        {
+          "name": "David Corey",
+          "votes": 615,
+          "pct": 2.6
+        },
+        {
+          "name": "Ahmed Sharif",
+          "votes": 608,
+          "pct": 2.6
+        },
+        {
+          "name": "Mills Philip",
+          "votes": 363,
+          "pct": 1.5
+        }
+      ],
+      "total_candidates_2022": 8,
+      "total_votes_2022": 23428,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 21,
+      "ward_name": "Scarborough Centre",
+      "councillor_name": "Michael Thompson",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-21/",
+      "by_election": null,
+      "registered_voters": 71240,
+      "ballots_cast": 18872,
+      "turnout_pct": 26.49,
+      "candidates_2022": [
+        {
+          "name": "Thompson Michael",
+          "votes": 9977,
+          "pct": 55.3
+        },
+        {
+          "name": "Ayub Muhammad",
+          "votes": 2478,
+          "pct": 13.7
+        },
+        {
+          "name": "Beatty Paul",
+          "votes": 1857,
+          "pct": 10.3
+        },
+        {
+          "name": "Vadivelu Kiri",
+          "votes": 1800,
+          "pct": 10.0
+        },
+        {
+          "name": "Daniel Hansie",
+          "votes": 1375,
+          "pct": 7.6
+        },
+        {
+          "name": "Lisciandro Luigi",
+          "votes": 570,
+          "pct": 3.2
+        }
+      ],
+      "total_candidates_2022": 6,
+      "total_votes_2022": 18057,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 22,
+      "ward_name": "Scarborough-Agincourt",
+      "councillor_name": "Nick Mantas",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-22/",
+      "by_election": null,
+      "registered_voters": 67123,
+      "ballots_cast": 17481,
+      "turnout_pct": 26.04,
+      "candidates_2022": [
+        {
+          "name": "Mantas Nick",
+          "votes": 8228,
+          "pct": 48.9
+        },
+        {
+          "name": "Wu Bill",
+          "votes": 3153,
+          "pct": 18.7
+        },
+        {
+          "name": "Mantas Antonios",
+          "votes": 1841,
+          "pct": 10.9
+        },
+        {
+          "name": "Lin Roland",
+          "votes": 1549,
+          "pct": 9.2
+        },
+        {
+          "name": "Khatchadourian Serge",
+          "votes": 1383,
+          "pct": 8.2
+        },
+        {
+          "name": "Internicola Anthony",
+          "votes": 677,
+          "pct": 4.0
+        }
+      ],
+      "total_candidates_2022": 6,
+      "total_votes_2022": 16831,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 23,
+      "ward_name": "Scarborough North",
+      "councillor_name": "Jamaal Myers",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-23/",
+      "by_election": null,
+      "registered_voters": 61338,
+      "ballots_cast": 15397,
+      "turnout_pct": 25.1,
+      "candidates_2022": [
+        {
+          "name": "Myers Jamaal",
+          "votes": 5315,
+          "pct": 51.1
+        },
+        {
+          "name": "Francis Phillip",
+          "votes": 2755,
+          "pct": 26.5
+        },
+        {
+          "name": "Jones Virginia",
+          "votes": 2333,
+          "pct": 22.4
+        }
+      ],
+      "total_candidates_2022": 3,
+      "total_votes_2022": 10403,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 24,
+      "ward_name": "Scarborough-Guildwood",
+      "councillor_name": "Paul Ainslie",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-24/",
+      "by_election": null,
+      "registered_voters": 64080,
+      "ballots_cast": 17025,
+      "turnout_pct": 26.57,
+      "candidates_2022": [
+        {
+          "name": "Ainslie Paul",
+          "votes": 12483,
+          "pct": 76.5
+        },
+        {
+          "name": "Parker Vivian",
+          "votes": 1820,
+          "pct": 11.2
+        },
+        {
+          "name": "Desai Habiba",
+          "votes": 1307,
+          "pct": 8.0
+        },
+        {
+          "name": "Ross Keiosha",
+          "votes": 703,
+          "pct": 4.3
+        }
+      ],
+      "total_candidates_2022": 4,
+      "total_votes_2022": 16313,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    },
+    {
+      "ward_num": 25,
+      "ward_name": "Scarborough-Rouge Park",
+      "councillor_name": "Neethan Shan",
+      "councillor_website": "https://www.toronto.ca/city-government/council/members-of-council/councillor-ward-25/",
+      "by_election": {
+        "date": "September 29, 2025",
+        "winner": "Neethan Shan",
+        "seats_winner_2022": "Jennifer McKelvie",
+        "note": "Jennifer McKelvie (2022 winner) resigned; Neethan Shan won the September 29, 2025 by-election."
+      },
+      "registered_voters": 73560,
+      "ballots_cast": 20064,
+      "turnout_pct": 27.28,
+      "candidates_2022": [
+        {
+          "name": "McKelvie Jennifer",
+          "votes": 14168,
+          "pct": 72.3
+        },
+        {
+          "name": "Kanakaratnam Jacinta",
+          "votes": 3449,
+          "pct": 17.6
+        },
+        {
+          "name": "Fernando Ashan",
+          "votes": 1984,
+          "pct": 10.1
+        }
+      ],
+      "total_candidates_2022": 3,
+      "total_votes_2022": 19601,
+      "data_sources": {
+        "turnout": "City of Toronto Open Data \u2013 2022 voter turnout statistics (resource 631b7042)",
+        "results": "City of Toronto Open Data \u2013 Elections \u2013 Official Results 2022 (resource 3ad371de)",
+        "councillors": "City of Toronto Open Data \u2013 Elected Officials Contact Information (resource 161c66b5)"
+      }
+    }
+  ]
+}
