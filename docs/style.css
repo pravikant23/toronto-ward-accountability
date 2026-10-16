@@ -245,7 +245,7 @@ h3 { font-size: 0.97rem; color: var(--clr-primary); margin: 1.1rem 0 0.45rem; }
 /* Site footer */
 .site-footer { background: var(--clr-primary); color: #b8d0e8; padding: 1.4rem 1.25rem;
                font-size: 0.82rem; text-align: center; margin-top: 3rem; }
-.site-footer a { color: #8ebcd8; }
+.site-footer a { color: #aacfe6; }
 .site-footer p { margin-bottom: 0.35rem; }
 
 /* What matters here — poll bars */

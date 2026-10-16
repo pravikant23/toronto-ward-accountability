@@ -273,7 +273,12 @@ def build_councillor_page(w, ward_paths, bounds):
     dot_svg = _dot_strip_svg(cur)
 
     return '\n'.join([
-        page_open(f'{cur} — Ward {wn} Councillor Record'),
+        page_open(
+            f'{cur} — Ward {wn} Councillor Record',
+            description=(f'{cur}\'s attendance, voting record, and close decisions '
+                         f'on Toronto City Council 2022–2026. Ward {wn} — {h(w["ward_name"])}.'),
+            og_url=f'councillor-ward-{wn}.html',
+        ),
         f'''<div class="councillor-detail">
   <p class="breadcrumb"><a href="ward-{wn}.html">&#8592; Ward {wn} — {h(w["ward_name"])}</a></p>
   <h1>{h(cur)}</h1>
@@ -479,8 +484,9 @@ def build_ward_paths(gj, bounds):
         paths[wn] = _ward_path_d(feat, MAP_W, bounds)
     return paths
 
-def city_map_svg(ward_paths, bounds, highlight=None, link_all=True):
-    """Full-city outline SVG. highlight=ward_num draws that ward in dark blue."""
+def city_map_svg(ward_paths, bounds, highlight=None, link_all=True, tab_stop=True):
+    """Full-city outline SVG. highlight=ward_num draws that ward in dark blue.
+    tab_stop=False adds tabindex="-1" to all links (use in aria-hidden containers)."""
     h_val = _svg_height(MAP_W, bounds)
     has_hl = highlight is not None
     lines = [
@@ -489,13 +495,14 @@ def city_map_svg(ward_paths, bounds, highlight=None, link_all=True):
         + (f', ward {highlight} highlighted' if has_hl else '') + '">',
         '  <desc>Outline map showing all 25 Toronto municipal wards.</desc>',
     ]
+    a_attrs = ' tabindex="-1" aria-hidden="true"' if not tab_stop else ''
     for wn in sorted(ward_paths):
         d    = ward_paths[wn]
         fill = '#1a4a7a' if wn == highlight else ('#c5d6e8' if has_hl else '#4a86c8')
         path = (f'<path d="{d}" fill="{fill}" stroke="#fff" stroke-width="0.7" '
                 f'stroke-linejoin="round"><title>Ward {wn}</title></path>')
         if link_all or wn == highlight:
-            lines.append(f'  <a href="ward-{wn}.html">{path}</a>')
+            lines.append(f'  <a href="ward-{wn}.html"{a_attrs}>{path}</a>')
         else:
             lines.append(f'  {path}')
     lines.append('</svg>')
@@ -504,13 +511,26 @@ def city_map_svg(ward_paths, bounds, highlight=None, link_all=True):
 
 # ── HTML chrome ────────────────────────────────────────────────────────────────
 
-def page_open(title, is_home=False):
+def page_open(title, is_home=False, description=None, og_url=None):
     pt = 'Toronto Ward Facts' if is_home else f'{h(title)} | Toronto Ward Facts'
+    base_url = 'https://pravikant23.github.io/toronto-ward-accountability'
+    canonical = f'{base_url}/{og_url}' if og_url else None
+    desc_tag = (f'\n  <meta name="description" content="{h(description)}">'
+                if description else '')
+    og_tags = ''
+    if description and og_url:
+        og_tags = (
+            f'\n  <meta property="og:type" content="website">'
+            f'\n  <meta property="og:title" content="{h(pt)}">'
+            f'\n  <meta property="og:description" content="{h(description)}">'
+            f'\n  <meta property="og:url" content="{canonical}">'
+        )
+    canonical_tag = f'\n  <link rel="canonical" href="{canonical}">' if canonical else ''
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">{desc_tag}{og_tags}{canonical_tag}
   <title>{pt}</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -555,10 +575,7 @@ def turnout_chart_svg(wards, city_pct):
 
     lines = [
         f'<svg viewBox="0 0 {total_w} {total_h}" xmlns="http://www.w3.org/2000/svg" '
-        f'class="turnout-chart" role="img" '
-        f'aria-label="2022 voter turnout by ward, sorted lowest to highest">',
-        f'  <desc>Bar chart of 2022 voter turnout for each of Toronto\'s 25 wards. '
-        f'City average {city_pct}% shown as a dashed red line.</desc>',
+        f'class="turnout-chart" aria-hidden="true">',
     ]
     for i, ward in enumerate(sorted_w):
         y     = i * bar_h + 8
@@ -567,7 +584,7 @@ def turnout_chart_svg(wards, city_pct):
         wn    = ward['ward_num']
         label = f"W{wn}"
         lines.append(
-            f'  <a href="ward-{wn}.html">'
+            f'  <a href="ward-{wn}.html" tabindex="-1" aria-hidden="true">'
             f'<text x="{label_w - 6}" y="{y + 14}" text-anchor="end" '
             f'class="tc-label">{h(label)}</text>'
             f'<rect x="{label_w}" y="{y + 3}" width="{bw}" height="{bar_h - 8}" '
@@ -1176,7 +1193,7 @@ def build_ward_page(w, ward_paths, bounds, city_census):
     cur  = f"{w['councillor_first']} {w['councillor_last']}"
     bye  = w.get('by_election')
 
-    map_svg  = city_map_svg(ward_paths, bounds, highlight=wn)
+    map_svg  = city_map_svg(ward_paths, bounds, highlight=wn, tab_stop=False)
     bye_html = (f'<p class="by-election-strip"><strong>By-election:</strong> {h(bye)}</p>'
                 if bye else '')
 
@@ -1193,7 +1210,12 @@ def build_ward_page(w, ward_paths, bounds, city_census):
 </nav>'''
 
     return '\n'.join([
-        page_open(f'Ward {wn} — {name}'),
+        page_open(
+            f'Ward {wn} — {name}',
+            description=(f'Ward {wn} {name}: 2022 voter turnout, election results, '
+                         f'councillor voting record, and neighbourhood data for the 2026 Toronto election.'),
+            og_url=f'ward-{wn}.html',
+        ),
         f'''<div class="ward-hero">
   <div class="ward-hero__text">
     <p class="ward-label">Ward {wn}</p>
@@ -1227,7 +1249,7 @@ def build_index(data, ward_paths, bounds):
     tp22   = fmt_pct(city22['turnout_pct'])
     tp18   = fmt_pct(city18['turnout_pct'])
 
-    map_svg   = city_map_svg(ward_paths, bounds, link_all=True)
+    map_svg   = city_map_svg(ward_paths, bounds, link_all=True, tab_stop=False)
     chart_svg = turnout_chart_svg(wards, city22['turnout_pct'])
 
     def _issue_val(ward, key, sub, default=''):
@@ -1291,7 +1313,14 @@ def build_index(data, ward_paths, bounds):
 </script>'''
 
     return '\n'.join([
-        page_open('Toronto Ward Facts', is_home=True),
+        page_open(
+            'Toronto Ward Facts',
+            is_home=True,
+            description=('Independent, non-partisan data on all 25 Toronto wards — '
+                         'voter turnout, 2022 election results, councillor voting records, '
+                         'and ward-level data on traffic, crime, and housing.'),
+            og_url='index.html',
+        ),
         f'''<div class="home-hero">
   <div class="home-hero__text">
     <h1>Toronto Ward Facts</h1>
@@ -1348,7 +1377,12 @@ def build_index(data, ward_paths, bounds):
 def build_about(data):
     city22 = data['city_2022']
     return '\n'.join([
-        page_open('About this site'),
+        page_open(
+            'About this site',
+            description=('How Toronto Ward Facts works — data sources, methodology, '
+                         'definitions, and how to report a correction.'),
+            og_url='about.html',
+        ),
         f'''<h1>About Toronto Ward Facts</h1>
 
 <section aria-labelledby="h-what">
@@ -1703,7 +1737,7 @@ h3 { font-size: 0.97rem; color: var(--clr-primary); margin: 1.1rem 0 0.45rem; }
 /* Site footer */
 .site-footer { background: var(--clr-primary); color: #b8d0e8; padding: 1.4rem 1.25rem;
                font-size: 0.82rem; text-align: center; margin-top: 3rem; }
-.site-footer a { color: #8ebcd8; }
+.site-footer a { color: #aacfe6; }
 .site-footer p { margin-bottom: 0.35rem; }
 
 /* What matters here — poll bars */

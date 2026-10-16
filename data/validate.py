@@ -293,6 +293,18 @@ if w4:
         else:
             fail(f"Ward  4: {name} = {got} (expected {expected})")
 
+# 11b-2. Ward 4 turnout spot-check: 2022 and 2018 values traced to raw xlsx files
+w4_tp22 = w4.get("turnout_pct") if w4 else None
+w4_tp18 = w4.get("turnout_2018_pct") if w4 else None
+if w4_tp22 == 38.45:
+    ok("Ward  4: turnout_2022_pct = 38.45% (confirmed against raw xlsx)")
+else:
+    fail(f"Ward  4: turnout_2022_pct = {w4_tp22}, expected 38.45%")
+if w4_tp18 == 46.53:
+    ok("Ward  4: turnout_2018_pct = 46.53% (confirmed against raw xlsx, NOT 46.57)")
+else:
+    fail(f"Ward  4: turnout_2018_pct = {w4_tp18}, expected 46.53%")
+
 # 11c. City-wide ballots = 563,124 (Number Voted only, not including declined)
 bc_city = city_bc
 if bc_city == 563_124:
