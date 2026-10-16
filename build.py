@@ -10,7 +10,7 @@ Set to False before public launch.
 """
 
 # ── Preview mode ───────────────────────────────────────────────────────────────
-PREVIEW = True   # flip to False before public launch
+PREVIEW = False  # flip to True to re-enable staff preview mode
 
 import csv
 import json

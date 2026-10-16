@@ -1,4 +1,0 @@
-# Staff preview — not for public indexing.
-# Remove this file (or set Disallow: ) before public launch.
-User-agent: *
-Disallow: /
