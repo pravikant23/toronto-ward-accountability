@@ -95,14 +95,14 @@ All data published under the [Open Government Licence – Toronto](https://open.
 
 ## Turnout formula
 
-**Turnout % = (Number Voted + Declined Ballots) ÷ Total Eligible Electors × 100**
+**Turnout % = Number Voted ÷ Total Eligible Electors × 100**
 
-This matches the City's own definition in the voter statistics file.
+Ballots cast = Number Voted only (column 14 of the voter statistics file).
 Subdivisions 97 (mail-in), 98 and 99 (advance vote) are included in the vote count
 but not the eligible-elector total (those voters are already counted in their home
 subdivisions).
 
-City-wide 2022: 1,898,750 registered — 563,563 ballots cast — 29.68% turnout.
+City-wide 2022: 1,898,750 registered — 563,124 ballots cast — 29.66% turnout.
 
 ## By-election notes
 

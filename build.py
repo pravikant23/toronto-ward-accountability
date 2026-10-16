@@ -6,17 +6,323 @@ Writes docs/style.css, docs/index.html, docs/about.html, docs/ward-N.html (25 pa
 Run: python3 build.py
 """
 
+import csv
 import json
 import os
 import math
+import re
 import html as html_lib
 
 # ── Paths ──────────────────────────────────────────────────────────────────────
-BASE      = os.path.dirname(os.path.abspath(__file__))
-DATA_JSON = os.path.join(BASE, 'data', 'wards.json')
-GEOJSON   = os.path.join(BASE, 'data', 'raw', 'city-wards-4326.geojson')
-DOCS      = os.path.join(BASE, 'docs')
+BASE         = os.path.dirname(os.path.abspath(__file__))
+DATA_JSON    = os.path.join(BASE, 'data', 'wards.json')
+METRICS_CSV  = os.path.join(BASE, 'data', 'councillor_metrics.csv')
+GEOJSON      = os.path.join(BASE, 'data', 'raw', 'city-wards-4326.geojson')
+DOCS         = os.path.join(BASE, 'docs')
 os.makedirs(DOCS, exist_ok=True)
+
+# ── Councillor metrics (from data/councillor_metrics.csv) ─────────────────────
+def _load_councillor_metrics():
+    metrics = {}
+    with open(METRICS_CSV, newline='', encoding='utf-8') as f:
+        for row in csv.DictReader(f):
+            for k in ('attendance_pct', 'council_avg_att', 'with_majority_pct',
+                      'with_mayor_pct', 'majority_n', 'mayor_n', 'contested_cast',
+                      'votes_eligible', 'votes_cast', 'votes_missed', 'votes_ai',
+                      'sessions_present', 'sessions_total'):
+                v = row.get(k, '')
+                try:
+                    row[k] = float(v) if '.' in v else (int(v) if v else None)
+                except ValueError:
+                    row[k] = None
+            metrics[row['fullname']] = row
+    return metrics
+
+COUNCILLOR_METRICS = _load_councillor_metrics()
+
+# Range of with_mayor_pct among current members (pre-verified: 22.7%–95.2%)
+_current_mayor_pcts = [
+    m['with_mayor_pct']
+    for m in COUNCILLOR_METRICS.values()
+    if m.get('is_current') == 'Y' and m['with_mayor_pct'] is not None
+]
+COUNCIL_MAYOR_RANGE = (min(_current_mayor_pcts), max(_current_mayor_pcts))
+COUNCIL_AVG_ATT     = next(iter(COUNCILLOR_METRICS.values()))['council_avg_att']
+
+# ── Vote summaries (from data/vote_summaries.csv — edit then rebuild) ─────────
+SUMMARIES_CSV = os.path.join(BASE, 'data', 'vote_summaries.csv')
+
+def _load_vote_summaries():
+    if not os.path.exists(SUMMARIES_CSV):
+        return {}
+    out = {}
+    with open(SUMMARIES_CSV, newline='', encoding='utf-8') as f:
+        for row in csv.DictReader(f):
+            out[row['item_num']] = row
+    return out
+
+VOTE_SUMMARIES = _load_vote_summaries()
+
+# ── Close-vote / councillor-page helpers ──────────────────────────────────────
+MOTION_TYPE_PLAIN = {
+    'Adopt Item':             'Final decision',
+    'Adopt Item as Amended':  'Final decision (as amended)',
+    'Amend Item':             'Proposed amendment',
+    'Amend Item (Additional)':'Additional proposed amendment',
+    'Amend Item (Two-Thirds)':'Proposed amendment (two-thirds required)',
+    'Amend Motion':           'Proposed change to a motion',
+    'Refer Item':             'Refer back to committee',
+    'Defer Item':             'Defer the decision',
+}
+
+VOTE_IN_WORDS = {
+    'Yes':                     'Voted yes',
+    'No':                      'Voted no',
+    'Absent':                  'Was absent',
+    'Absent(Interest Declared)':'Declared an interest and did not vote',
+}
+
+FINAL_MOTION_TYPES = {'Adopt Item', 'Adopt Item as Amended'}
+
+def _result_words(result_str, two_thirds):
+    carried = 'Carried' in result_str
+    m = re.search(r'(\d+)-(\d+)', result_str)
+    label = 'Passed' if carried else 'Did not pass'
+    if m:
+        label += f' ({m.group(1)} yes, {m.group(2)} no)'
+    if two_thirds:
+        label += ' — required two-thirds majority'
+    return label
+
+
+def _dot_strip_svg(cur_name):
+    """SVG dot chart: where cur_name sits among current councillors on with_mayor_pct."""
+    W, H = 600, 90
+    TY   = 52            # track y
+    X0, X1 = 20, 580
+    TL = X1 - X0
+
+    dots = []
+    for fname, m in COUNCILLOR_METRICS.items():
+        if m.get('is_current') == 'Y' and m['with_mayor_pct'] is not None:
+            pct = m['with_mayor_pct']
+            x   = round(X0 + (pct / 100) * TL)
+            dots.append((pct, x, fname, fname == cur_name))
+
+    lines = [
+        f'<svg viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg" '
+        f'class="dot-strip-svg" role="img" '
+        f'aria-label="Council range chart for voted with the Mayor, {h(cur_name)} highlighted">',
+        f'  <desc>Each dot is one current ward councillor. '
+        f'Blue dot is {h(cur_name)}. Left = less often with Mayor, right = more often.</desc>',
+        f'  <line x1="{X0}" y1="{TY}" x2="{X1}" y2="{TY}" stroke="#c5d6e8" stroke-width="2"/>',
+    ]
+    for tick in (0, 25, 50, 75, 100):
+        tx = round(X0 + (tick / 100) * TL)
+        lines.append(f'  <line x1="{tx}" y1="{TY-4}" x2="{tx}" y2="{TY+4}" stroke="#bbb" stroke-width="1"/>')
+        lines.append(f'  <text x="{tx}" y="{TY+18}" text-anchor="middle" font-size="9" fill="#888">{tick}%</text>')
+
+    # Others first (drawn underneath)
+    for pct, x, name, is_cur in dots:
+        if not is_cur:
+            lines.append(
+                f'  <circle cx="{x}" cy="{TY}" r="5" fill="#c5d6e8" stroke="#8ba8c4" stroke-width="1">'
+                f'<title>{h(name)}: {pct}%</title></circle>'
+            )
+    # Highlighted dot on top with label
+    for pct, x, name, is_cur in dots:
+        if is_cur:
+            lx = max(30, min(x, W - 30))   # keep label inside canvas
+            lines.append(f'  <line x1="{x}" y1="{TY-8}" x2="{lx}" y2="{TY-22}" stroke="#1a4a7a" stroke-width="1"/>')
+            lines.append(
+                f'  <text x="{lx}" y="{TY-25}" text-anchor="middle" '
+                f'font-size="10" font-weight="bold" fill="#1a4a7a">{pct}%</text>'
+            )
+            lines.append(
+                f'  <circle cx="{x}" cy="{TY}" r="8" fill="#1a4a7a" stroke="#0d2a4a" stroke-width="1.5">'
+                f'<title>{h(name)}: {pct}%</title></circle>'
+            )
+    lines.append('</svg>')
+    return '\n'.join(lines)
+
+
+def _close_vote_cards(w, cur):
+    """Build the 'Closest decisions' section for a councillor detail page."""
+    from collections import defaultdict
+    cvs = [cv for cv in (w.get('close_votes') or []) if cv.get('voted_by') == cur]
+    if not cvs:
+        return '<p>No close votes recorded for this councillor.</p>'
+
+    by_item = defaultdict(list)
+    for cv in cvs:
+        by_item[cv['item']].append(cv)
+
+    # Sort items most-recent-first using the first vote's date for that item
+    item_dates = {k: min(v['date'] for v in vs) for k, vs in by_item.items()}
+    sorted_items = sorted(by_item, key=lambda i: item_dates[i], reverse=True)
+
+    def _vote_row(cv):
+        mt   = cv.get('motion_type', '')
+        mt_p = MOTION_TYPE_PLAIN.get(mt, mt)
+        vote = cv.get('vote', '')
+        vi   = VOTE_IN_WORDS.get(vote, vote)
+        res  = _result_words(cv.get('result', ''), cv.get('two_thirds_required', False))
+        vd   = cv.get('vote_description', '')
+        vd_h = f'<div class="cv-desc">{h(vd)}</div>' if vd else ''
+        return (
+            f'<div class="vote-row">'
+            f'<span class="vote-row__type">{h(mt_p)}</span>'
+            f'<span class="vote-row__cast">{h(vi)}</span>'
+            f'<span class="vote-row__result">{h(res)}</span>'
+            f'{vd_h}</div>'
+        )
+
+    cards = []
+    for item_num in sorted_items:
+        votes   = by_item[item_num]
+        title   = votes[0]['title']
+        date    = item_dates[item_num]
+        si      = VOTE_SUMMARIES.get(item_num, {})
+        summary = si.get('summary', '')
+        url     = si.get('official_url',
+                         f'https://secure.toronto.ca/council/agenda-item.do?item={item_num}')
+
+        finals  = [v for v in votes if v['motion_type'] in FINAL_MOTION_TYPES]
+        others  = [v for v in votes if v['motion_type'] not in FINAL_MOTION_TYPES]
+
+        if finals:
+            final_h = ''.join(_vote_row(v) for v in finals)
+            other_h = ''
+            if others:
+                rows = ''.join(_vote_row(v) for v in others)
+                s    = '' if len(others) == 1 else 's'
+                other_h = (f'<details class="other-votes"><summary>{len(others)} '
+                           f'other vote{s} on this item</summary>{rows}</details>')
+        else:
+            # No final decision among the close votes for this item — show all prominently
+            final_h = ''.join(_vote_row(v) for v in others)
+            other_h = ''
+
+        sum_h = f'<p class="vote-card__summary">{h(summary)}</p>' if summary else ''
+        cards.append(
+            f'<div class="vote-card">'
+            f'<div class="vote-card__meta"><span class="vote-card__date">{h(date)}</span>'
+            f'<span class="vote-card__item">{h(item_num)}</span></div>'
+            f'<h3 class="vote-card__title">{h(title)}</h3>'
+            f'{sum_h}'
+            f'<div class="vote-card__votes">{final_h}{other_h}</div>'
+            f'<p class="vote-card__link"><a href="{h(url)}">Read the official record &#8594;</a></p>'
+            f'</div>'
+        )
+
+    n_items = len(sorted_items)
+    return (
+        f'<section class="closest-decisions" aria-labelledby="h-decisions">'
+        f'<h2 id="h-decisions">Closest decisions, 2022–2026</h2>'
+        f'<p class="note">City Council votes where the margin between Yes and No was 3 or fewer, '
+        f'with at least 10 members voting. Procedural motions excluded. '
+        f'{n_items} items, most recent first. Expand items to see amendment votes.</p>'
+        f'<div class="vote-cards">{"".join(cards)}</div>'
+        f'</section>'
+    )
+
+
+def build_councillor_page(w, ward_paths, bounds):
+    wn  = w['ward_num']
+    cur = f"{w['councillor_first']} {w['councillor_last']}"
+    m   = COUNCILLOR_METRICS.get(cur, {})
+    bye = w.get('by_election')
+
+    att_pct  = m.get('attendance_pct')
+    sess_pre = m.get('sessions_present')
+    sess_tot = m.get('sessions_total')
+    mayor_pct= m.get('with_mayor_pct')
+    mayor_n  = m.get('mayor_n') or 0
+    maj_pct  = m.get('with_majority_pct')
+    maj_n    = m.get('majority_n') or 0
+    elig     = m.get('votes_eligible') or 0
+    cast_n   = m.get('votes_cast') or 0
+    missed   = m.get('votes_missed') or 0
+    ai       = m.get('votes_ai') or 0
+    contested_cast = m.get('contested_cast') or 0
+    first_vote     = m.get('first_vote') or ''
+
+    bv_list = [bv for bv in (w.get('budget_votes') or []) if bv.get('voted_by') == cur]
+    bv_str  = ' · '.join(f'{bv["year"]} {h(bv.get("vote","—"))}' for bv in bv_list) or 'Not available'
+
+    mayor_str = (f'{fmt_pct(mayor_pct)} of contested final decisions '
+                 f'<span class="stat-sub">(based on {mayor_n} votes · '
+                 f'council range: {COUNCIL_MAYOR_RANGE[0]}%–{COUNCIL_MAYOR_RANGE[1]}%)</span>'
+                 if mayor_pct is not None else 'Not calculated')
+
+    maj_str = (f'{fmt_pct(maj_pct)} of contested final decisions '
+               f'<span class="stat-sub">(based on {maj_n} votes)</span>'
+               if maj_pct is not None else 'Not available')
+
+    ai_txt  = f' · {ai} interest declared' if ai else ''
+    votes_str = f'{fmt_num(elig)} eligible · {fmt_num(cast_n)} cast · {missed} absent{ai_txt}'
+
+    low_n_html = ''
+    if 0 < contested_cast < 100 and first_vote:
+        low_n_html = (f'<p class="note">Based on {contested_cast} contested votes '
+                      f'since {h(first_vote)}.</p>')
+
+    bye_html = (f'<p class="by-election-note"><strong>Note:</strong> {h(bye)}</p>'
+                if bye else '')
+
+    dot_svg = _dot_strip_svg(cur)
+
+    return '\n'.join([
+        page_open(f'{cur} — Ward {wn} Councillor Record'),
+        f'''<div class="councillor-detail">
+  <p class="breadcrumb"><a href="ward-{wn}.html">&#8592; Ward {wn} — {h(w["ward_name"])}</a></p>
+  <h1>{h(cur)}</h1>
+  <p class="detail-subtitle">Ward {wn} councillor &middot; City Council record, 2022–2026 term</p>
+  {bye_html}
+
+  <div class="record-card">
+    <dl class="record-metrics">
+      <div class="record-metric">
+        <dt>Attendance</dt>
+        <dd>{fmt_pct(att_pct)} of Council sessions
+          <span class="stat-sub">({fmt_num(sess_pre)} of {fmt_num(sess_tot)} sessions &middot; council average: {fmt_pct(COUNCIL_AVG_ATT)})</span></dd>
+      </div>
+      <div class="record-metric">
+        <dt>Voted with the Mayor <sup class="record-sup">1</sup></dt>
+        <dd>{mayor_str}</dd>
+      </div>
+      <div class="record-metric">
+        <dt>On the winning side</dt>
+        <dd>{maj_str}</dd>
+      </div>
+      <div class="record-metric">
+        <dt>Property tax and fee votes <sup class="record-sup">2</sup></dt>
+        <dd>{bv_str}</dd>
+      </div>
+      <div class="record-metric">
+        <dt>Votes recorded</dt>
+        <dd>{votes_str}</dd>
+      </div>
+    </dl>
+    {low_n_html}
+    <p class="note record-footnotes">
+      <sup>1</sup> Contested final decisions are final votes on an item where at least 3 councillors voted No (191 votes). Mayor Olivia Chow joined Council in July 2023; only votes she took part in are counted.<br>
+      <sup>2</sup> Under Ontario&#x27;s strong-mayor rules, the Mayor&#x27;s budget takes effect without a Council vote to adopt it. Council votes on amendments and on tax rates and fees.
+    </p>
+  </div>
+
+  <div class="dot-strip-block">
+    <h2>Where {h(cur)} sits on &#8220;voted with the Mayor&#8221;</h2>
+    <p class="note">Each dot is one current ward councillor. Blue = {h(cur)}. Left = voted with Mayor less often, right = more often.
+       Only contested final decisions where both the councillor and Mayor Chow cast a Yes or No vote are counted.</p>
+    {dot_svg}
+  </div>
+
+  {_close_vote_cards(w, cur)}
+
+</div>''',
+        page_close(),
+    ])
 
 # ── Constants ──────────────────────────────────────────────────────────────────
 ELECTION_DATE = 'Monday, October 26, 2026'
@@ -305,8 +611,9 @@ def sec_glance(w, city_census):
     winner   = next((c for c in w['candidates_2022'] if c.get('is_winner')), None)
     w_name   = display_name(winner['name']) if winner else 'Not available'
     w_pct    = fmt_pct(winner.get('vote_pct')) if winner else 'Not available'
-    w_1_in_n = w.get('winner_1_in_n')
-    in_n     = f' (about 1 in every {w_1_in_n} registered voters)' if w_1_in_n else ''
+    w_share  = w.get('winner_share_of_registered')
+    in_n     = (f' ({w_share * 100:.1f}% of registered voters)'
+                if w_share else '')
 
     margin_v  = fmt_num(w.get('margin_votes'))
     margin_pp = fmt_pct(w.get('margin_pct_points'), 2) if w.get('margin_pct_points') is not None else '—'
@@ -450,9 +757,9 @@ def sec_census(w, city_census):
     </div>
   </dl>
   <div class="census-langs">
-    <h3>Top 3 non-official home languages</h3>
+    <h3>Top languages spoken at home (other than English and French)</h3>
     {lang_html}
-    <p class="note">Single-language mother-tongue responses. English and French not included.</p>
+    <p class="note">Language spoken most often at home (2021 Census, 25% sample). English and French not included.</p>
   </div>
 </section>'''
 
@@ -476,12 +783,17 @@ def sec_what_matters(w, city_census):
     poll_html = '\n    '.join(poll_rows)
 
     # Traffic/roads card
-    three11_yr = (issues.get('three11') or {}).get('years', {}).get('2025') or {}
-    road311    = three11_yr.get('road_related')
-    ksi_yr     = (issues.get('ksi') or {}).get('years', {}).get('2025') or {}
-    ksi_cnt    = ksi_yr.get('collisions')
-    ksi_ped    = ksi_yr.get('pedestrian', 0)
-    ksi_cyc    = ksi_yr.get('cyclist', 0)
+    three11_yr  = (issues.get('three11') or {}).get('years', {}).get('2025') or {}
+    road311     = three11_yr.get('road_related')
+    ksi_issues  = issues.get('ksi') or {}
+    ksi_yr25    = ksi_issues.get('years', {}).get('2025') or {}
+    ksi_yr26    = ksi_issues.get('years', {}).get('2026') or {}
+    ksi_ytd25   = ksi_issues.get('ytd_jan_sep_2025') or {}
+    ksi_cnt25   = ksi_yr25.get('collisions')   # full year 2025
+    ksi_ped25   = ksi_yr25.get('pedestrian', 0)
+    ksi_cyc25   = ksi_yr25.get('cyclist', 0)
+    ksi_cnt26   = ksi_yr26.get('collisions')   # Jan-Sep 2026
+    ksi_ytd25_n = ksi_ytd25.get('collisions')  # Jan-Sep 2025 (for comparison)
 
     if road311 is not None and pop:
         road_rate = round(road311 / pop * 1000, 1)
@@ -489,14 +801,20 @@ def sec_what_matters(w, city_census):
     else:
         road_line = 'Not available'
 
-    if ksi_cnt is not None:
+    if ksi_cnt25 is not None:
         ped_cyc_parts = []
-        if ksi_ped: ped_cyc_parts.append(f'{ksi_ped} pedestrian-involved')
-        if ksi_cyc: ped_cyc_parts.append(f'{ksi_cyc} cyclist-involved')
+        if ksi_ped25: ped_cyc_parts.append(f'{ksi_ped25} pedestrian-involved')
+        if ksi_cyc25: ped_cyc_parts.append(f'{ksi_cyc25} cyclist-involved')
         ped_cyc_txt = (': ' + ', '.join(ped_cyc_parts)) if ped_cyc_parts else ''
-        ksi_line = f'{ksi_cnt} serious-injury or fatal collisions, Jan–Sep 2025{ped_cyc_txt}'
+        ksi_line25 = f'{ksi_cnt25} serious-injury or fatal collisions, 2025 (full year){ped_cyc_txt}'
+        if ksi_cnt26 is not None:
+            sp25 = f'same period 2025: {ksi_ytd25_n}' if ksi_ytd25_n is not None else ''
+            ksi_line26 = f'{ksi_cnt26} collisions, Jan 1–Sep 30, 2026' + (f' ({sp25})' if sp25 else '')
+        else:
+            ksi_line26 = None
     else:
-        ksi_line = None
+        ksi_line25 = None
+        ksi_line26 = None
 
     # Housing card
     pct_rnt = (w.get('census') or {}).get('pct_rented')
@@ -512,19 +830,42 @@ def sec_what_matters(w, city_census):
                if med_inc is not None else 'Not available'
 
     # Safety card
-    crime_yr    = (issues.get('crime') or {}).get('years', {}).get('2025') or {}
-    crime_cnt   = crime_yr.get('count')
-    crime_rate  = crime_yr.get('rate_per_1k')
-    city_rate   = (issues.get('crime') or {}).get('city_rate_per_1k', {}).get('2025')
+    crime_issues = issues.get('crime') or {}
+    crime_yr25   = crime_issues.get('years', {}).get('2025') or {}
+    crime_cnt25  = crime_yr25.get('count')
+    crime_rate25 = crime_yr25.get('rate_per_1k')
+    city_rate25  = crime_issues.get('city_rate_per_1k', {}).get('2025')
+    ytd24_ward   = crime_issues.get('ytd_jan_sep_2024') or {}
+    crime_cnt24  = ytd24_ward.get('count')
+    city_ytd24   = crime_issues.get('city_ytd_jan_sep_2024') or {}
+    city_cnt24   = city_ytd24.get('count')
+    city_ytd25   = crime_issues.get('city_jan_sep_2025') or {}
+    city_cnt25   = city_ytd25.get('count')
 
-    if crime_cnt is not None:
-        crime_line = f'{fmt_num(crime_cnt)} police-reported MCI incidents, Jan–Sep 2025'
-        rate_line  = (f'{crime_rate:.1f} per 1,000 residents'
-                      + (f' <span class="stat-sub">(city avg: {city_rate:.1f})</span>'
-                         if city_rate is not None else '')) if crime_rate is not None else ''
+    if crime_cnt25 is not None:
+        crime_line = f'{fmt_num(crime_cnt25)} police-reported offences, Jan–Sep 2025'
+        rate_line  = (f'{crime_rate25:.1f} per 1,000 residents'
+                      + (f' <span class="stat-sub">(city avg: {city_rate25:.1f})</span>'
+                         if city_rate25 is not None else '')) if crime_rate25 is not None else ''
+        # YoY ward Jan-Sep comparison
+        if crime_cnt24 is not None and crime_cnt24 > 0:
+            yoy_pct  = round((crime_cnt25 - crime_cnt24) / crime_cnt24 * 100, 0)
+            yoy_sign = '+' if yoy_pct >= 0 else ''
+            yoy_ward = f'{crime_cnt24:,} → {crime_cnt25:,} ({yoy_sign}{int(yoy_pct)}%)'
+        else:
+            yoy_ward = None
+        # YoY city Jan-Sep comparison
+        if city_cnt24 and city_cnt25 and city_cnt24 > 0:
+            city_pct  = round((city_cnt25 - city_cnt24) / city_cnt24 * 100, 0)
+            city_sign = '+' if city_pct >= 0 else ''
+            yoy_city  = f'{city_cnt24:,} → {city_cnt25:,} ({city_sign}{int(city_pct)}%)'
+        else:
+            yoy_city = None
     else:
         crime_line = 'Not available'
         rate_line  = ''
+        yoy_ward   = None
+        yoy_city   = None
 
     # Property taxes card — only current councillor's votes
     cur_name = f"{w['councillor_first']} {w['councillor_last']}"
@@ -558,11 +899,12 @@ def sec_what_matters(w, city_census):
       </div>
       <div class="issue-card__body">
         <p>{road_line}</p>
-        {f'<p class="stat-sub">{h(ksi_line)}</p>' if ksi_line else ''}
-        <p class="note">311 calls about potholes, road damage, traffic signals, sidewalks, and related issues.
-           KSI = killed or seriously injured collisions (Toronto Police, by date of occurrence).
-           Sources: <a href="{LINKS["three11"]}">311 Service Requests</a>,
-           <a href="{LINKS["ksi"]}">Motor Vehicle Collisions — KSI</a>.</p>
+        <p class="note">The City renamed its 311 categories in 2025, so earlier years cannot be compared.
+           Source: <a href="{LINKS["three11"]}">311 Service Requests</a>.</p>
+        {f'<p class="stat-sub">{h(ksi_line25)}</p>' if ksi_line25 else ''}
+        {f'<p class="stat-sub">{h(ksi_line26)}</p>' if ksi_line26 else ''}
+        <p class="note">KSI = killed or seriously injured collisions (Toronto Police, by date of occurrence).
+           Source: <a href="{LINKS["ksi"]}">Motor Vehicle Collisions — KSI</a>.</p>
       </div>
     </div>
 
@@ -589,10 +931,13 @@ def sec_what_matters(w, city_census):
       <div class="issue-card__body">
         <p>{crime_line}</p>
         {f'<p>{rate_line}</p>' if rate_line else ''}
+        {f'<p class="stat-sub">Jan–Sep 2024 vs Jan–Sep 2025 — this ward: {h(yoy_ward)}</p>' if yoy_ward else ''}
+        {f'<p class="stat-sub">City-wide: {h(yoy_city)}</p>' if yoy_city else ''}
         <p class="note">Includes: Assault, Auto Theft, Break and Enter, Robbery, Theft Over.
-           2025 = Jan–Sep only (most recent available in the dataset).
-           Incidents are located to the nearest intersection for privacy; 1–2% dropped per year
+           The dataset covers Jan–Sep 2025 only (most recent available).
+           Offences are located to the nearest intersection for privacy; 1–2% dropped per year
            due to missing coordinates.
+           Downtown wards have many commuters and visitors, so offences per resident can look higher.
            Source: <a href="{LINKS["crime_mci"]}">Major Crime Indicators</a>.</p>
       </div>
     </div>
@@ -616,92 +961,99 @@ def sec_what_matters(w, city_census):
 
 
 def sec_record(w):
+    wn  = w['ward_num']
     cur = f"{w['councillor_first']} {w['councillor_last']}"
     bye = w.get('by_election')
+    m   = COUNCILLOR_METRICS.get(cur, {})
 
-    # Attendance
-    att = w.get('attendance')
-    if att and att.get('sessions_total'):
-        att_pct  = att.get('attendance_pct') or 0
-        present  = fmt_num(att.get('sessions_present'))
-        total    = fmt_num(att.get('sessions_total'))
-        avg      = fmt_pct(att.get('council_avg_pct'))
-        att_html = f'''<div class="att-block">
-    <p><strong>City Council attendance:</strong> {present} of {total} sessions
-       ({fmt_pct(att_pct)})</p>
-    <div class="bar-wrap" role="meter" aria-valuenow="{att_pct:.1f}"
-         aria-valuemin="0" aria-valuemax="100" aria-label="Attendance rate gauge">
-      <div class="bar-fill bar-fill--green" style="width:{min(att_pct,100):.1f}%"></div>
-    </div>
-    <p class="stat-sub">Council average for 2022–2026 term: {avg}</p>
-  </div>'''
+    # ── Attendance ────────────────────────────────────────────────────────────
+    att_pct = m.get('attendance_pct')
+    att_str = fmt_pct(att_pct) if att_pct is not None else 'Not available'
+    avg_str = fmt_pct(COUNCIL_AVG_ATT)
+
+    # ── Voted with the Mayor ──────────────────────────────────────────────────
+    mayor_pct = m.get('with_mayor_pct')
+    mayor_n   = m.get('mayor_n') or 0
+    if mayor_pct is not None:
+        rng_lo, rng_hi = COUNCIL_MAYOR_RANGE
+        mayor_str = (f'{fmt_pct(mayor_pct)} of contested final decisions '
+                     f'<span class="stat-sub">(council range: {rng_lo}%–{rng_hi}%)</span>')
     else:
-        att_html = '<p>Attendance data not available.</p>'
+        mayor_str = 'Not calculated'
 
-    # Budget votes
-    bv_list = w.get('budget_votes', [])
+    # ── On the winning side ───────────────────────────────────────────────────
+    maj_pct = m.get('with_majority_pct')
+    maj_str = (f'{fmt_pct(maj_pct)} of contested final decisions'
+               if maj_pct is not None else 'Not available')
+
+    # ── Property tax and fee votes ────────────────────────────────────────────
+    bv_list = [bv for bv in (w.get('budget_votes') or [])
+               if bv.get('voted_by') == cur]
     if bv_list:
-        bv_rows = ''
+        bv_parts = []
         for bv in bv_list:
-            yr      = bv.get('year', '—')
-            vote    = bv.get('vote')
-            result  = h(bv.get('result', '—'))
-            voted_b = h(bv.get('voted_by', '—'))
-            note    = ('' if bv.get('voted_by') == cur
-                       else f' <span class="pred-note">(voted by {voted_b})</span>')
-            bv_rows += f'<tr><td>{yr}</td><td>{vote_badge(vote)}{note}</td><td>{result}</td></tr>'
-        bv_html = f'''<h3>Annual budget vote</h3>
-  <p class="note">The city budget is adopted in parts. This shows the most contested part
-  of each year's budget adoption vote (the sub-vote with the most votes against).</p>
-  <table class="data-table" aria-label="Budget votes">
-    <thead><tr><th scope="col">Year</th><th scope="col">Vote</th><th scope="col">Result</th></tr></thead>
-    <tbody>{bv_rows}</tbody>
-  </table>'''
+            v = bv.get('vote') or '—'
+            bv_parts.append(f'{bv["year"]} {h(v)}')
+        bv_str = ' · '.join(bv_parts)
     else:
-        bv_html = ''
+        bv_str = 'Not available'
 
-    # Close votes — filter to current councillor
-    all_cv = w.get('close_votes', [])
-    cur_cv = [cv for cv in all_cv if cv.get('voted_by') == cur]
+    # ── Low-n note (by-election councillors) ─────────────────────────────────
+    contested_cast = m.get('contested_cast') or 0
+    first_vote     = m.get('first_vote') or ''
+    low_n_html = ''
+    if 0 < contested_cast < 100 and first_vote:
+        low_n_html = (f'<p class="note">Based on {contested_cast} contested votes '
+                      f'since {h(first_vote)}.</p>')
 
-    if cur_cv:
-        cv_rows = ''
-        for cv in sorted(cur_cv, key=lambda x: x['date'], reverse=True):
-            dt     = cv['date']
-            title  = cv['title']
-            short  = title[:65] + ('…' if len(title) > 65 else '')
-            vote   = cv.get('vote')
-            result = h(cv.get('result', '—'))
-            cv_rows += (f'<tr><td>{h(dt)}</td>'
-                        f'<td title="{h(title)}">{h(short)}</td>'
-                        f'<td>{vote_badge(vote)}</td>'
-                        f'<td>{result}</td></tr>')
-        cv_html = f'''<h3>Close votes — {len(cur_cv)} total (margin of 3 or fewer)</h3>
-  <p class="note">City Council recorded votes where the margin between Yes and No was
-  3 or fewer, with at least 10 members voting. Purely procedural motions excluded.
-  Sorted most recent first.</p>
-  <div class="table-scroll">
-  <table class="data-table close-vote-tbl" aria-label="Close votes for this councillor">
-    <thead>
-      <tr><th scope="col">Date</th><th scope="col">Issue</th>
-          <th scope="col">Vote</th><th scope="col">Result</th></tr>
-    </thead>
-    <tbody>{cv_rows}</tbody>
-  </table>
-  </div>'''
-    else:
-        cv_html = '<p>No close votes recorded for this councillor in the 2022–2026 term.</p>'
+    # ── Footnotes ─────────────────────────────────────────────────────────────
+    footnote_mayor = (
+        'Contested final decisions are final votes on an item where at least 3 councillors '
+        'voted No (191 votes). Mayor Olivia Chow joined Council in July 2023; only votes '
+        'she took part in are counted.'
+    )
+    footnote_budget = (
+        'Under Ontario\'s strong-mayor rules, the Mayor\'s budget takes effect without a '
+        'Council vote to adopt it. Council votes on amendments and on tax rates and fees.'
+    )
 
     bye_html = (f'<p class="by-election-note"><strong>Note:</strong> {h(bye)}</p>'
                 if bye else '')
 
+    detail_url = f'councillor-ward-{wn}.html'
+
     return f'''<section id="record" aria-labelledby="h-record">
-  <h2 id="h-record">Councillor record — 2022–2026 term</h2>
+  <h2 id="h-record">{h(cur)}'s record, 2022–2026</h2>
   {bye_html}
-  <p>Record shown for <strong>{h(cur)}</strong>.</p>
-  {att_html}
-  {bv_html}
-  {cv_html}
+  <div class="record-card">
+    <dl class="record-metrics">
+      <div class="record-metric">
+        <dt>Attendance</dt>
+        <dd>{att_str} of Council sessions
+          <span class="stat-sub">(council average: {avg_str})</span></dd>
+      </div>
+      <div class="record-metric">
+        <dt>Voted with the Mayor <sup class="record-sup">1</sup></dt>
+        <dd>{mayor_str}</dd>
+      </div>
+      <div class="record-metric">
+        <dt>On the winning side</dt>
+        <dd>{maj_str}</dd>
+      </div>
+      <div class="record-metric">
+        <dt>Property tax and fee votes <sup class="record-sup">2</sup></dt>
+        <dd>{bv_str}</dd>
+      </div>
+    </dl>
+    {low_n_html}
+    <p class="note record-footnotes">
+      <sup>1</sup> {h(footnote_mayor)}<br>
+      <sup>2</sup> {h(footnote_budget)}
+    </p>
+    <p class="record-detail-link">
+      <a href="{detail_url}">See every vote, explained &#8594;</a>
+    </p>
+  </div>
 </section>'''
 
 def sec_powers():
@@ -799,13 +1151,13 @@ def sec_sources(w):
       <tr><td>Ward boundaries (map)</td>
           <td>city-wards-4326.geojson</td>
           <td><a href="{LINKS["wards_geo"]}">City Wards</a></td></tr>
-      <tr><td>Major crime indicators (2018–2025, Jan–Sep)</td>
+      <tr><td>Major crime indicators (2018–2025; 2025 = Jan–Sep only)</td>
           <td>major-crime-indicators.csv</td>
           <td><a href="{LINKS["crime_mci"]}">Major Crime Indicators</a></td></tr>
-      <tr><td>Motor vehicle collisions — KSI (2018–2026, Jan–Sep)</td>
+      <tr><td>Motor vehicle collisions — KSI (2018–2025 full year; 2026 Jan–Sep)</td>
           <td>motor-vehicle-collisions-ksi-4326.csv</td>
           <td><a href="{LINKS["ksi"]}">Motor Vehicle Collisions — KSI</a></td></tr>
-      <tr><td>311 service requests (2022–2026, Jan–Sep)</td>
+      <tr><td>311 service requests (2022–2025 full year; 2026 Jan–Sep)</td>
           <td>sr2022.zip – sr2026.zip</td>
           <td><a href="{LINKS["three11"]}">311 Service Requests — Customer Initiated</a></td></tr>
     </tbody>
@@ -970,7 +1322,7 @@ def build_index(data, ward_paths, bounds):
 
 <section id="ward-list" aria-labelledby="h-wards">
   <h2 id="h-wards">All 25 wards</h2>
-  <p class="note">Click any column heading to sort. Crime rate and road 311 are for Jan–Sep 2025 (most recent available). KSI = serious-injury or fatal collisions.</p>
+  <p class="note">Click any column heading to sort. Crime rate is for Jan–Sep 2025 (most recent available in the dataset). Road 311 and KSI are full-year 2025. KSI = serious-injury or fatal collisions.</p>
   <div class="table-scroll">
   <table class="data-table ward-dir-tbl" id="ward-table" aria-label="All 25 Toronto wards">
     <thead>
@@ -979,9 +1331,9 @@ def build_index(data, ward_paths, bounds):
         <th scope="col" data-sort="1">Name</th>
         <th scope="col" data-sort="2">Current councillor</th>
         <th scope="col" data-sort="3">2022 turnout</th>
-        <th scope="col" data-sort="4">Crime/1k (2025 YTD)</th>
-        <th scope="col" data-sort="5">Road 311 (2025)</th>
-        <th scope="col" data-sort="6">KSI (2025 YTD)</th>
+        <th scope="col" data-sort="4">Crime/1k (Jan–Sep 2025)</th>
+        <th scope="col" data-sort="5">Road 311 (2025 full year)</th>
+        <th scope="col" data-sort="6">KSI (2025 full year)</th>
       </tr>
     </thead>
     <tbody>{tbl_rows}</tbody>
@@ -1028,11 +1380,11 @@ def build_about(data):
           <td><a href="{LINKS["attendance"]}">Members of Toronto City Council – Meeting Attendance</a></td></tr>
       <tr><td>City ward boundaries (GeoJSON)</td>
           <td><a href="{LINKS["wards_geo"]}">City Wards</a></td></tr>
-      <tr><td>Major crime indicators (2018–2025, Jan–Sep)</td>
+      <tr><td>Major crime indicators (2018–2025, Jan–Sep 2025 only)</td>
           <td><a href="{LINKS["crime_mci"]}">Major Crime Indicators</a></td></tr>
-      <tr><td>Motor vehicle collisions — KSI (2018–2026, Jan–Sep)</td>
+      <tr><td>Motor vehicle collisions — KSI (2018–2025 full year; 2026 Jan–Sep)</td>
           <td><a href="{LINKS["ksi"]}">Motor Vehicle Collisions — KSI</a></td></tr>
-      <tr><td>311 service requests (2022–2026, Jan–Sep)</td>
+      <tr><td>311 service requests (2022–2025 full year; 2026 Jan–Sep)</td>
           <td><a href="{LINKS["three11"]}">311 Service Requests — Customer Initiated</a></td></tr>
     </tbody>
   </table>
@@ -1046,28 +1398,33 @@ def build_about(data):
      the four issues Toronto residents named most often in a September 2026 survey.</p>
   <ul>
     <li><strong>Traffic and roads:</strong> 311 service request counts for potholes, road damage,
-        traffic signals, sidewalks, and related categories (2022–2026). Request type names
-        were renamed by the City in 2025; pre-2025 equivalent names are mapped for consistent
-        year-over-year counting. KSI collision counts use unique collision IDs where the outcome
-        was a fatality or serious injury.</li>
+        traffic signals, sidewalks, and related categories (2025 full year shown; 2026 Jan–Sep shown separately).
+        The City renamed its 311 service categories in 2025, so earlier years cannot be compared directly
+        and are not shown. KSI collision counts use unique collision IDs where the outcome was a fatality
+        or serious injury. 2025 KSI is full year (Jan–Dec); 2026 KSI covers Jan–Sep only.</li>
     <li><strong>Housing costs:</strong> Renter share and median household income from the 2021 Census.
+        Language spoken most often at home (excluding English and French) from the 2021 Census 25% sample.
         Building permits per ward are not available: the City's permits file uses a map-grid
         reference code that does not correspond to ward boundaries.</li>
     <li><strong>Public safety:</strong> Five MCI categories (Assault, Auto Theft, Break and Enter,
         Robbery, Theft Over) by date of occurrence. Ward assignment uses a spatial join of
         WGS84 coordinates against ward polygons (1–2% of records dropped per year due to
-        missing coordinates). 2025 data covers January–September only.</li>
-    <li><strong>Property taxes:</strong> Rates are set city-wide by City Council.
-        Per-ward tax-rate data does not exist. The section links to the councillor's budget
-        vote record.</li>
+        missing coordinates). 2025 data covers January–September only (the full dataset does not
+        include Oct–Dec 2025). A Jan–Sep 2024 comparison is provided for each ward and city-wide.
+        Downtown wards have many commuters and visitors, so offences per resident can look higher.</li>
+    <li><strong>Property taxes:</strong> Rates are set city-wide by City Council under Ontario's
+        strong-mayor rules (since 2023). Per-ward tax-rate data does not exist. The section shows
+        the councillor's vote on tax rates and fees for each budget year (2023–2026), including
+        which sub-vote is shown.</li>
   </ul>
   <p>Poll source: Nanos Research for CTV News/CP24, Sept 30–Oct 4, 2026. n=755, MOE ±3.6%, 19 times out of 20.</p>
 </section>
 
 <section aria-labelledby="h-formula">
   <h2 id="h-formula">Turnout formula</h2>
-  <p><strong>Turnout % = (Number Voted + Declined Ballots) ÷ Total Eligible Electors × 100</strong></p>
-  <p>This matches the City's own definition in the voter statistics file.
+  <p><strong>Turnout % = Number Voted ÷ Total Eligible Electors × 100</strong></p>
+  <p>Ballots cast = Number Voted only (column 14 of the voter statistics file).
+     Declined ballots are not included.
      Subdivisions 97 (mail-in), 98, and 99 (advance voting) are included in the vote count
      but not in the eligible-elector total, because those voters are already counted in
      their home subdivision's eligible total.</p>
@@ -1235,7 +1592,11 @@ h3 { font-size: 0.97rem; color: var(--clr-primary); margin: 1.1rem 0 0.45rem; }
 .vote-no     { color: var(--clr-no);     font-weight: 700; }
 .vote-absent { color: var(--clr-absent); }
 .vote-na     { color: var(--clr-muted);  }
-.pred-note   { font-size: 0.77rem; color: var(--clr-muted); font-weight: 400; }
+.pred-note      { font-size: 0.77rem; color: var(--clr-muted); font-weight: 400; }
+.vote-twothirds { font-size: 0.72rem; color: #7a4a00; background: #fef3cd;
+                  border: 1px solid #d4ac0d; border-radius: 3px;
+                  padding: 0 4px; margin-left: 4px; white-space: nowrap; }
+.cv-desc        { font-size: 0.76rem; color: var(--clr-muted); margin-top: 2px; }
 
 /* Generic data table */
 .data-table { width: 100%; border-collapse: collapse; margin-top: 0.6rem; font-size: 0.9rem; }
@@ -1279,6 +1640,62 @@ h3 { font-size: 0.97rem; color: var(--clr-primary); margin: 1.1rem 0 0.45rem; }
 .by-election-note { background: #fef9e6; border-left: 4px solid #d4ac0d;
                     padding: 0.45rem 0.75rem; margin-bottom: 0.9rem;
                     border-radius: 0 var(--radius) var(--radius) 0; font-size: 0.88rem; }
+
+/* Compact councillor record card */
+.record-card { background: var(--clr-card); border: 1px solid var(--clr-border);
+               border-radius: var(--radius); padding: 1rem 1.1rem; }
+.record-metrics { margin: 0 0 0.7rem; }
+.record-metric { display: grid; grid-template-columns: 11rem 1fr; gap: 0.4rem 0.75rem;
+                 padding: 0.45rem 0; border-bottom: 1px solid var(--clr-border); }
+.record-metric:last-child { border-bottom: none; }
+.record-metric dt { font-weight: 600; font-size: 0.88rem; color: var(--clr-text); }
+.record-metric dd { font-size: 0.92rem; margin: 0; }
+.record-sup { font-size: 0.7rem; vertical-align: super; line-height: 0; color: var(--clr-muted); }
+.record-footnotes { line-height: 1.55; margin-top: 0.6rem; }
+.record-detail-link { margin-top: 0.85rem; }
+.record-detail-link a { display: inline-block; font-size: 0.9rem; font-weight: 600;
+                        color: var(--clr-link); text-decoration: none; border-bottom: 1px solid; }
+.record-detail-link a:hover { color: var(--clr-primary); }
+@media (max-width: 480px) {
+  .record-metric { grid-template-columns: 1fr; gap: 0.1rem; }
+}
+
+/* Councillor detail page */
+.councillor-detail { max-width: 780px; margin: 0 auto; padding: 0 1rem 3rem; }
+.breadcrumb { font-size: 0.85rem; margin-bottom: 1.1rem; }
+.detail-subtitle { color: var(--clr-muted); font-size: 0.92rem; margin-top: 0.1rem;
+                   margin-bottom: 0.8rem; }
+
+/* Dot strip */
+.dot-strip-block { margin: 1.8rem 0; }
+.dot-strip-block h2 { margin-bottom: 0.3rem; }
+.dot-strip-svg { width: 100%; max-width: 600px; display: block; margin-top: 0.5rem; }
+
+/* Close-vote cards */
+.closest-decisions { margin-top: 2rem; }
+.vote-cards { display: flex; flex-direction: column; gap: 1rem; margin-top: 0.8rem; }
+.vote-card { background: var(--clr-card); border: 1px solid var(--clr-border);
+             border-radius: var(--radius); padding: 0.9rem 1.1rem; }
+.vote-card__meta { display: flex; gap: 1rem; font-size: 0.78rem; color: var(--clr-muted);
+                   margin-bottom: 0.3rem; }
+.vote-card__title { font-size: 0.97rem; font-weight: 600; margin: 0 0 0.4rem; line-height: 1.4; }
+.vote-card__summary { font-size: 0.85rem; color: var(--clr-muted); margin: 0 0 0.6rem; }
+.vote-card__votes { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 0.6rem; }
+.vote-row { display: grid; grid-template-columns: 13rem 8rem 1fr; gap: 0.3rem 0.6rem;
+            font-size: 0.85rem; padding: 0.35rem 0; border-top: 1px solid var(--clr-border); }
+.vote-row:first-child { border-top: none; }
+.vote-row__type { font-weight: 600; }
+.vote-row__cast { }
+.vote-row__result { color: var(--clr-muted); }
+.other-votes { margin-top: 0.4rem; }
+.other-votes summary { font-size: 0.82rem; cursor: pointer; color: var(--clr-link);
+                       padding: 0.2rem 0; }
+.vote-card__link { font-size: 0.82rem; margin: 0; }
+.vote-card__link a { color: var(--clr-link); }
+@media (max-width: 560px) {
+  .vote-row { grid-template-columns: 1fr 1fr; }
+  .vote-row__result { grid-column: 1 / -1; }
+}
 
 /* Notes */
 .note { font-size: 0.77rem; color: var(--clr-muted); margin-top: 0.35rem; }
@@ -1374,7 +1791,19 @@ def main():
             f.write(build_ward_page(w, paths, bounds, city_census))
         print(f'  ward-{wn}.html — {w["ward_name"]}')
 
-    total = len(data['wards']) + 3  # wards + index + about + style
+    # Councillor detail pages (only if vote_summaries.csv exists)
+    if VOTE_SUMMARIES:
+        print('\nGenerating councillor detail pages…')
+        for w in sorted(data['wards'], key=lambda x: x['ward_num']):
+            wn = w['ward_num']
+            with open(os.path.join(DOCS, f'councillor-ward-{wn}.html'), 'w', encoding='utf-8') as f:
+                f.write(build_councillor_page(w, paths, bounds))
+            print(f'  councillor-ward-{wn}.html — {w["councillor_first"]} {w["councillor_last"]}')
+        total = len(data['wards']) * 2 + 3
+    else:
+        print('\nNote: data/vote_summaries.csv not found — skipping councillor detail pages.')
+        total = len(data['wards']) + 3
+
     print(f'\nDone. {total} files written to docs/')
 
 

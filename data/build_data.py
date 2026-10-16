@@ -59,9 +59,10 @@ CENSUS_ROWS = {
     "rented":          58,   # "  Rented"
     "median_income":  1384,  # "  Median total income of households in 2020 ($)"
 }
-# Non-official language rows: 0-indexed rows 315–633 in the same sheet
-LANG_ROW_START = 315
-LANG_ROW_END   = 633
+# "Language spoken most often at home" rows: 0-indexed 655–987 in the same sheet
+# English (row 658) and French (row 659) are excluded explicitly.
+LANG_HOME_START = 655
+LANG_HOME_END   = 987
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
@@ -129,14 +130,14 @@ def load_voter_stats(xlsx_path, sheet_name):
 
     for ward in sorted(ward_eligible):
         reg = int(ward_eligible[ward])
-        bc  = int(ward_voted[ward] + ward_declined[ward])
+        bc  = int(ward_voted[ward])   # Number Voted only (City definition)
         tp  = round(bc / reg * 100, 2) if reg > 0 else None
         wards[ward] = {"registered": reg, "ballots_cast": bc, "turnout_pct": tp}
         city_eligible += ward_eligible[ward]
         city_voted    += ward_voted[ward]
         city_declined += ward_declined[ward]
 
-    city_bc = int(city_voted + city_declined)
+    city_bc = int(city_voted)   # Number Voted only
     city_tp = round(city_bc / int(city_eligible) * 100, 2) if city_eligible > 0 else None
     city = {
         "registered":   int(city_eligible),
@@ -237,19 +238,28 @@ def load_census():
     def ward_val(row_idx, ward_num):
         return rows[row_idx][ward_num + 1]  # ward 1 → col index 2
 
-    # Build the list of individual non-official language rows
+    # Build the list of individual "spoken most often at home" language rows
     lang_entries = []
-    for i in range(LANG_ROW_START, LANG_ROW_END + 1):
+    for i in range(LANG_HOME_START, LANG_HOME_END + 1):
         r = rows[i]
         label   = r[0]
         c_count = r[1]
         if not label or not isinstance(c_count, (int, float)) or c_count <= 0:
             continue
         stripped = label.strip()
-        # Exclude aggregate category rows ("… languages") and n.e.c.
-        if "languages" in stripped.lower() or "n.e.c." in stripped.lower():
+        sl = stripped.lower()
+        # Exclude official languages
+        if stripped in ('English', 'French'):
             continue
-        if "responses" in stripped.lower():
+        # Exclude aggregate / header rows
+        if sl.startswith('total'):
+            continue
+        if 'non-official' in sl:
+            continue
+        if 'languages' in sl or 'n.e.c.' in sl or 'responses' in sl:
+            continue
+        # Exclude composite bilingual categories (e.g. "English and non-official language(s)")
+        if ' and ' in sl and 'language' in sl:
             continue
         ward_counts = [r[w + 1] for w in range(1, 26)]  # wards 1-25
         lang_entries.append(
@@ -548,7 +558,7 @@ def main():
               "Sum of col 13 (Total Eligible Electors) for subs 1-96 only")
         audit("ballots_cast",               ballots_cast,
               "2022_voter_turnout_statistics_final.xlsx",
-              "Sum of col 14+17 (Number Voted + Declined) for all subs")
+              "Sum of col 14 (Number Voted) for all subs; declined ballots not included")
         audit("turnout_pct",                tp22,
               "2022_voter_turnout_statistics_final.xlsx",
               "ballots_cast / registered_voters * 100")

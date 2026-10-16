@@ -47,11 +47,11 @@
           <td><a href="https://open.toronto.ca/dataset/members-of-toronto-city-council-meeting-attendance/">Members of Toronto City Council – Meeting Attendance</a></td></tr>
       <tr><td>City ward boundaries (GeoJSON)</td>
           <td><a href="https://open.toronto.ca/dataset/city-wards/">City Wards</a></td></tr>
-      <tr><td>Major crime indicators (2018–2025, Jan–Sep)</td>
+      <tr><td>Major crime indicators (2018–2025, Jan–Sep 2025 only)</td>
           <td><a href="https://open.toronto.ca/dataset/major-crime-indicators/">Major Crime Indicators</a></td></tr>
-      <tr><td>Motor vehicle collisions — KSI (2018–2026, Jan–Sep)</td>
+      <tr><td>Motor vehicle collisions — KSI (2018–2025 full year; 2026 Jan–Sep)</td>
           <td><a href="https://open.toronto.ca/dataset/motor-vehicle-collisions-involving-killed-or-seriously-injured-persons/">Motor Vehicle Collisions — KSI</a></td></tr>
-      <tr><td>311 service requests (2022–2026, Jan–Sep)</td>
+      <tr><td>311 service requests (2022–2025 full year; 2026 Jan–Sep)</td>
           <td><a href="https://open.toronto.ca/dataset/311-service-requests-customer-initiated/">311 Service Requests — Customer Initiated</a></td></tr>
     </tbody>
   </table>
@@ -65,33 +65,38 @@
      the four issues Toronto residents named most often in a September 2026 survey.</p>
   <ul>
     <li><strong>Traffic and roads:</strong> 311 service request counts for potholes, road damage,
-        traffic signals, sidewalks, and related categories (2022–2026). Request type names
-        were renamed by the City in 2025; pre-2025 equivalent names are mapped for consistent
-        year-over-year counting. KSI collision counts use unique collision IDs where the outcome
-        was a fatality or serious injury.</li>
+        traffic signals, sidewalks, and related categories (2025 full year shown; 2026 Jan–Sep shown separately).
+        The City renamed its 311 service categories in 2025, so earlier years cannot be compared directly
+        and are not shown. KSI collision counts use unique collision IDs where the outcome was a fatality
+        or serious injury. 2025 KSI is full year (Jan–Dec); 2026 KSI covers Jan–Sep only.</li>
     <li><strong>Housing costs:</strong> Renter share and median household income from the 2021 Census.
+        Language spoken most often at home (excluding English and French) from the 2021 Census 25% sample.
         Building permits per ward are not available: the City's permits file uses a map-grid
         reference code that does not correspond to ward boundaries.</li>
     <li><strong>Public safety:</strong> Five MCI categories (Assault, Auto Theft, Break and Enter,
         Robbery, Theft Over) by date of occurrence. Ward assignment uses a spatial join of
         WGS84 coordinates against ward polygons (1–2% of records dropped per year due to
-        missing coordinates). 2025 data covers January–September only.</li>
-    <li><strong>Property taxes:</strong> Rates are set city-wide by City Council.
-        Per-ward tax-rate data does not exist. The section links to the councillor's budget
-        vote record.</li>
+        missing coordinates). 2025 data covers January–September only (the full dataset does not
+        include Oct–Dec 2025). A Jan–Sep 2024 comparison is provided for each ward and city-wide.
+        Downtown wards have many commuters and visitors, so offences per resident can look higher.</li>
+    <li><strong>Property taxes:</strong> Rates are set city-wide by City Council under Ontario's
+        strong-mayor rules (since 2023). Per-ward tax-rate data does not exist. The section shows
+        the councillor's vote on tax rates and fees for each budget year (2023–2026), including
+        which sub-vote is shown.</li>
   </ul>
   <p>Poll source: Nanos Research for CTV News/CP24, Sept 30–Oct 4, 2026. n=755, MOE ±3.6%, 19 times out of 20.</p>
 </section>
 
 <section aria-labelledby="h-formula">
   <h2 id="h-formula">Turnout formula</h2>
-  <p><strong>Turnout % = (Number Voted + Declined Ballots) ÷ Total Eligible Electors × 100</strong></p>
-  <p>This matches the City's own definition in the voter statistics file.
+  <p><strong>Turnout % = Number Voted ÷ Total Eligible Electors × 100</strong></p>
+  <p>Ballots cast = Number Voted only (column 14 of the voter statistics file).
+     Declined ballots are not included.
      Subdivisions 97 (mail-in), 98, and 99 (advance voting) are included in the vote count
      but not in the eligible-elector total, because those voters are already counted in
      their home subdivision's eligible total.</p>
   <p>City-wide 2022: 1,898,750 registered,
-     563,563 ballots cast,
+     563,124 ballots cast,
      29.7% turnout.</p>
 </section>
 

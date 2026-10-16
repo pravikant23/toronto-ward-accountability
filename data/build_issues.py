@@ -220,11 +220,13 @@ def process_311():
 def process_crime(polys, tree):
     """
     Returns:
-      ward_year_cat   : {ward_num: {year: {cat: count}}}
-      ward_year_total : {ward_num: {year: int}}
-      city_year_total : {year: int}
-      dropped         : {year: int}   records with missing/zero coords
-      occ_none_count  : int           records with OCC_YEAR='None'
+      ward_year_cat    : {ward_num: {year: {cat: count}}}
+      ward_year_total  : {ward_num: {year: int}}
+      city_year_total  : {year: int}
+      dropped          : {year: int}   records with missing/zero coords
+      occ_none_count   : int           records with OCC_YEAR='None'
+      ward_ytd24_total : {ward_num: int}   Jan-Sep 2024 count per ward
+      city_ytd24_total : int               Jan-Sep 2024 city total
     """
     print('\n=== Processing crime (MCI) data ===')
     wyt     = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
@@ -232,6 +234,8 @@ def process_crime(polys, tree):
     cyt     = defaultdict(int)
     dropped = defaultdict(int)
     occ_none = 0
+    ward_ytd24  = defaultdict(int)   # Jan-Sep 2024 per ward
+    city_ytd24  = 0
 
     with open(CRIME_CSV, encoding='utf-8', errors='replace') as f:
         reader = csv.DictReader(f)
@@ -255,6 +259,17 @@ def process_crime(polys, tree):
 
             cyt[yr] += 1
 
+            # Jan-Sep 2024 city count (before coord filter, to match raw total)
+            if yr == 2024:
+                _JAN_SEP = {'January','February','March','April','May','June',
+                            'July','August','September'}
+                month_s = row.get('OCC_MONTH', '').strip()
+                _in_ytd24 = month_s in _JAN_SEP
+                if _in_ytd24:
+                    city_ytd24 += 1
+            else:
+                _in_ytd24 = False
+
             lon_s = row.get('LONG_WGS84', '').strip()
             lat_s = row.get('LAT_WGS84', '').strip()
             try:
@@ -273,6 +288,10 @@ def process_crime(polys, tree):
             wyt[wn][yr][cat] += 1
             wytotal[wn][yr] += 1
 
+            # Jan-Sep 2024 per-ward count (placed only, consistent with annual ward counts)
+            if _in_ytd24 and 1 <= wn <= 25:
+                ward_ytd24[wn] += 1
+
     for yr in CRIME_YEARS:
         ward_sum = sum(wytotal[wn].get(yr, 0) for wn in range(1, 26))
         total = cyt.get(yr, 0)
@@ -281,7 +300,10 @@ def process_crime(polys, tree):
         print(f'  {yr}: city={total:,}, placed={ward_sum:,}, dropped={drop:,} ({pct_d:.1f}%)')
 
     print(f'  OCC_YEAR=None/missing: {occ_none:,}')
-    return dict(wyt), dict(wytotal), dict(cyt), dict(dropped), occ_none
+    print(f'  Jan-Sep 2024 (YTD comparison): city={city_ytd24:,}, '
+          f'ward_sum={sum(ward_ytd24.values()):,}')
+    return dict(wyt), dict(wytotal), dict(cyt), dict(dropped), occ_none, \
+           dict(ward_ytd24), city_ytd24
 
 
 # ── KSI processing ─────────────────────────────────────────────────────────────
@@ -333,6 +355,7 @@ def process_ksi(polys, tree):
                 coll[cid] = {
                     'yr': yr, 'wn': wn, 'acclass': acclass,
                     'ped': False, 'cyc': False,
+                    'month': int(accdate[5:7]) if len(accdate) >= 7 else 0,
                 }
 
             # Accumulate ped/cyc across rows for same collision
@@ -350,22 +373,31 @@ def process_ksi(polys, tree):
     print(f'  Resolved {resolved} of {len(blank_ward_coords)} via spatial join')
 
     # Aggregate
-    wyk  = defaultdict(lambda: defaultdict(lambda: {'total':0,'ped':0,'cyc':0}))
-    cyk  = defaultdict(lambda: {'total':0,'ped':0,'cyc':0})
-    drop = defaultdict(int)   # year → collisions without ward after spatial join
+    wyk     = defaultdict(lambda: defaultdict(lambda: {'total':0,'ped':0,'cyc':0}))
+    cyk     = defaultdict(lambda: {'total':0,'ped':0,'cyc':0})
+    drop    = defaultdict(int)   # year → collisions without ward after spatial join
+    wyk_ytd25 = defaultdict(lambda: {'total':0,'ped':0,'cyc':0})   # ward Jan-Sep 2025
+    cyk_ytd25 = {'total':0,'ped':0,'cyc':0}                         # city Jan-Sep 2025
 
     for cid, d in coll.items():
         yr      = d['yr']
         acclass = d['acclass']
         if acclass not in ('Fatal Injury', 'Non-Fatal Injury'):
             continue   # skip Property Damage Only
-        ped = d['ped']
-        cyc = d['cyc']
-        wn  = d['wn']
+        ped   = d['ped']
+        cyc   = d['cyc']
+        wn    = d['wn']
+        month = d.get('month', 0)
 
         cyk[yr]['total'] += 1
         if ped: cyk[yr]['ped'] += 1
         if cyc: cyk[yr]['cyc'] += 1
+
+        # Jan-Sep 2025 subset (for comparison with 2026 YTD)
+        if yr == 2025 and 1 <= month <= 9:
+            cyk_ytd25['total'] += 1
+            if ped: cyk_ytd25['ped'] += 1
+            if cyc: cyk_ytd25['cyc'] += 1
 
         if wn is None or wn < 1 or wn > 25:
             drop[yr] += 1
@@ -375,13 +407,21 @@ def process_ksi(polys, tree):
         if ped: wyk[wn][yr]['ped'] += 1
         if cyc: wyk[wn][yr]['cyc'] += 1
 
+        # Jan-Sep 2025 per-ward
+        if yr == 2025 and 1 <= month <= 9:
+            wyk_ytd25[wn]['total'] += 1
+            if ped: wyk_ytd25[wn]['ped'] += 1
+            if cyc: wyk_ytd25[wn]['cyc'] += 1
+
     for yr in KSI_YEARS:
         ct = cyk.get(yr, {}).get('total', 0)
         dt = drop.get(yr, 0)
         ws = sum(wyk[wn].get(yr, {}).get('total', 0) for wn in range(1, 26))
         print(f'  {yr}: city KSI collisions={ct}, placed={ws}, dropped={dt}')
+    print(f'  2025 Jan-Sep: city={cyk_ytd25["total"]}, '
+          f'ward_sum={sum(v["total"] for v in wyk_ytd25.values())}')
 
-    return dict(wyk), dict(cyk), dict(drop)
+    return dict(wyk), dict(cyk), dict(drop), dict(wyk_ytd25), cyk_ytd25
 
 
 # ── Validation helpers ────────────────────────────────────────────────────────
@@ -530,11 +570,12 @@ def main():
     # ── Process datasets ────────────────────────────────────────────────────────
     three11_types, three11_road, three11_total, three11_city, three11_unparsed = process_311()
 
-    crime_ward_cat, crime_ward_total, crime_city, crime_drop, occ_none = process_crime(polys, tree)
+    crime_ward_cat, crime_ward_total, crime_city, crime_drop, occ_none, \
+        crime_ward_ytd24, crime_city_ytd24 = process_crime(polys, tree)
     # Flatten crime_ward_total: {wn: {yr: count}}
     cw_total = {wn: crime_ward_total.get(wn, {}) for wn in range(1, 26)}
 
-    ksi_ward, ksi_city, ksi_drop = process_ksi(polys, tree)
+    ksi_ward, ksi_city, ksi_drop, ksi_ward_ytd25, ksi_city_ytd25 = process_ksi(polys, tree)
 
     # ── Validation ──────────────────────────────────────────────────────────────
     print('\n=== Validation ===')
@@ -547,6 +588,7 @@ def main():
         three11_total, three11_city, three11_unparsed,
         ksi_ward, ksi_city, ksi_drop,
     )
+
     if failures:
         for f in failures:
             print(f'  FAIL: {f}')
@@ -595,6 +637,11 @@ def main():
             cc = crime_city.get(yr, 0)
             city_crime_rates[yr] = round(cc / city_pop * 1000, 2) if city_pop else None
 
+        # Jan-Sep 2024 ward count (for comparison with Jan-Sep 2025)
+        ytd24_count = crime_ward_ytd24.get(wn, 0)
+        ytd24_rate  = round(ytd24_count / pop * 1000, 2) if pop else None
+        city_ytd24_rate = round(crime_city_ytd24 / city_pop * 1000, 2) if city_pop else None
+
         # 311 data
         three11_by_year = {}
         for yr in [2022, 2023, 2024, 2025]:
@@ -642,6 +689,10 @@ def main():
         # City KSI rates
         city_ksi = {yr: (ksi_city.get(yr) or {}) for yr in KSI_YEARS}
 
+        # Jan-Sep 2025 KSI (for comparison with Jan-Sep 2026)
+        ksi_ytd25_ward = ksi_ward_ytd25.get(wn, {'total':0,'ped':0,'cyc':0})
+        ksi_ytd25_city = ksi_city_ytd25
+
         ward['issues'] = {
             'permits_note': (
                 'Not available per ward. The building permits file uses a city map-grid code '
@@ -651,11 +702,23 @@ def main():
             ),
             'crime': {
                 'years': crime_by_year,
+                'ytd_jan_sep_2024': {
+                    'count':        ytd24_count,
+                    'rate_per_1k':  ytd24_rate,
+                },
                 'city_rate_per_1k': city_crime_rates,
+                'city_ytd_jan_sep_2024': {
+                    'count':        crime_city_ytd24,
+                    'rate_per_1k':  city_ytd24_rate,
+                },
+                'city_jan_sep_2025': {
+                    'count':        crime_city.get(2025, 0),
+                    'rate_per_1k':  round(crime_city.get(2025, 0) / city_pop * 1000, 2) if city_pop else None,
+                },
                 'categories': sorted(CRIME_CATEGORIES),
                 'source': 'major-crime-indicators.csv',
                 'note': (
-                    'Police-reported incidents by date of occurrence, located at the nearest '
+                    'Police-reported offences by date of occurrence, located at the nearest '
                     'intersection for privacy. Rates use 2021 Census population. '
                     f'Dropped (missing/zero coords): {crime_drop}'
                 ),
@@ -672,7 +735,17 @@ def main():
             },
             'ksi': {
                 'years': ksi_by_year,
+                'ytd_jan_sep_2025': {
+                    'collisions': ksi_ytd25_ward['total'],
+                    'pedestrian': ksi_ytd25_ward['ped'],
+                    'cyclist':    ksi_ytd25_ward['cyc'],
+                },
                 'city': city_ksi,
+                'city_ytd_jan_sep_2025': {
+                    'collisions': ksi_ytd25_city['total'],
+                    'pedestrian': ksi_ytd25_city['ped'],
+                    'cyclist':    ksi_ytd25_city['cyc'],
+                },
                 'source': 'motor-vehicle-collisions-ksi-4326.csv',
                 'note': (
                     'Unique collisions (not people) where acclass is Fatal or Non-Fatal Injury. '

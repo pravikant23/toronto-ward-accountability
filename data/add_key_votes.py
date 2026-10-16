@@ -45,7 +45,22 @@ WARD_COUNCILLOR_HISTORY = {
 }
 
 # Procedural motions to exclude from close votes display
-PROCEDURAL_EXCLUDE = {"Extend the Meeting", "Amend the Order Paper"}
+PROCEDURAL_EXCLUDE = {
+    "Extend the Meeting",
+    "Amend the Order Paper",
+    "Waive Referral",
+    "End Debate",
+    "Re-open Item",
+    "Waive Notice",
+    "Introduce Motion without Notice",
+    "Remove from Committee",
+    "Resolve to Committee of the Whole",
+}
+
+# Motion types that require a two-thirds majority
+TWO_THIRDS_TYPES = {
+    "Amend Item (Two-Thirds)",
+}
 
 
 # ── Load vote CSV into structures ─────────────────────────────────────────────
@@ -79,12 +94,14 @@ def pick_budget_vote(rows_by_item, item_num):
     """
     From a budget CC item, pick the key 'Adopt Item as Amended' sub-vote:
     the one with the most No votes (most contested = actual budget passage).
-    Returns list of rows for that sub-vote, or [] if not found.
+    Returns (rows, vote_description_clean) where vote_description_clean
+    strips the "Majority required - " prefix for display.
+    Returns ([], None) if not found.
     """
     all_rows = rows_by_item.get(item_num, [])
     adopt_rows = [r for r in all_rows if r["Motion Type"] == "Adopt Item as Amended"]
     if not adopt_rows:
-        return []
+        return [], None
 
     # Group by Vote Description to find individual sub-votes
     by_vd = defaultdict(list)
@@ -99,7 +116,16 @@ def pick_budget_vote(rows_by_item, item_num):
             best_no = no_count
             best_vd = vd
 
-    return by_vd.get(best_vd, [])
+    # Strip the "Majority required - CC38.1 - " prefix for clean display
+    clean_vd = best_vd or ""
+    # Remove "Majority required - " prefix
+    if clean_vd.startswith("Majority required - "):
+        clean_vd = clean_vd[len("Majority required - "):]
+    # Remove item-number prefix like "CC38.1 - " if present
+    import re as _re
+    clean_vd = _re.sub(r'^CC\d+\.\d+ - ', '', clean_vd).strip()
+
+    return by_vd.get(best_vd, []), clean_vd
 
 
 def find_close_votes(vote_groups):
@@ -169,9 +195,9 @@ def main():
     # ── Budget votes ───────────────────────────────────────────────────────────
     print("Extracting budget adoption votes …")
     budget_vote_sets = {}   # year -> rows of the key Adopt sub-vote
-    budget_meta = {}        # year -> {date, item, item_title, result}
+    budget_meta = {}        # year -> {date, item, item_title, result, vote_description}
     for yr, item_num in BUDGET_CC_ITEMS.items():
-        rows = pick_budget_vote(rows_by_item, item_num)
+        rows, vd_clean = pick_budget_vote(rows_by_item, item_num)
         if not rows:
             print(f"  WARNING: no Adopt Item as Amended found for {yr} ({item_num})",
                   file=sys.stderr)
@@ -183,15 +209,16 @@ def main():
         vote_dt = rows[0]["Date/Time"][:10]
         budget_vote_sets[yr] = rows
         budget_meta[yr] = {
-            "year":       yr,
-            "date":       vote_dt,
-            "item":       item_num,
-            "item_title": title,
-            "result":     result,
-            "yes_count":  yes,
-            "no_count":   no,
+            "year":             yr,
+            "date":             vote_dt,
+            "item":             item_num,
+            "item_title":       title,
+            "vote_description": vd_clean,
+            "result":           result,
+            "yes_count":        yes,
+            "no_count":         no,
         }
-        print(f"  {yr}: {item_num} {vote_dt} → {result} (Y={yes} N={no})")
+        print(f"  {yr}: {item_num} {vote_dt} → {result} (Y={yes} N={no}) [{vd_clean}]")
 
     # ── Close votes ────────────────────────────────────────────────────────────
     print("Extracting close votes …")
@@ -226,16 +253,17 @@ def main():
                 # Councillor not in the vote record → absent or not yet serving
                 vote = "Not recorded"
             close_votes_out.append({
-                "date":            dt,
-                "item":            item_num,
-                "title":           title,
-                "motion_type":     mt,
-                "vote_description": vd,
-                "yes_count":       yes,
-                "no_count":        no,
-                "result":          result,
-                "voted_by":        name,
-                "vote":            vote,
+                "date":               dt,
+                "item":               item_num,
+                "title":              title,
+                "motion_type":        mt,
+                "vote_description":   vd,
+                "two_thirds_required": mt in TWO_THIRDS_TYPES,
+                "yes_count":          yes,
+                "no_count":           no,
+                "result":             result,
+                "voted_by":           name,
+                "vote":               vote,
             })
         ward_doc["close_votes"] = close_votes_out
 

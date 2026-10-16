@@ -103,23 +103,23 @@ for w in wards:
     else:
         fail(f"Ward {w['ward_num']:>2}: missing registration or ballots data")
 
-# 6. City-level turnout = 29.68%
+# 6. City-level turnout = 29.66% (Number Voted only, not including declined)
 print("\n=== City-level check ===")
 city = data.get("city_2022", {})
 city_tp = city.get("turnout_pct")
-if city_tp == 29.68:
-    ok(f"City 2022 turnout = {city_tp}% (matches expected 29.68%)")
+if city_tp == 29.66:
+    ok(f"City 2022 turnout = {city_tp}% (matches expected 29.66%)")
 else:
-    fail(f"City 2022 turnout = {city_tp}%, expected 29.68%")
+    fail(f"City 2022 turnout = {city_tp}%, expected 29.66%")
 
 city_reg = city.get("registered_voters")
 city_bc  = city.get("ballots_cast")
-if city_reg == 1_898_750 and city_bc == 563_563:
+if city_reg == 1_898_750 and city_bc == 563_124:
     ok(f"City 2022 registered={city_reg:,}, ballots={city_bc:,} match expected values")
 else:
     fail(
         f"City 2022 totals: registered={city_reg:,} (exp 1,898,750), "
-        f"ballots={city_bc:,} (exp 563,563)"
+        f"ballots={city_bc:,} (exp 563,124)"
     )
 
 # 7. No null/zero placeholders for critical fields
@@ -232,7 +232,7 @@ for sheet_name in wb_res.sheetnames:
 for wn in spot_wards:
     wd      = next(w for w in wards if w["ward_num"] == wn)
     exp_reg = int(raw_eligible.get(wn, 0))
-    exp_bc  = int(raw_voted.get(wn, 0) + raw_declined.get(wn, 0))
+    exp_bc  = int(raw_voted.get(wn, 0))  # Number Voted only (not + declined)
     exp_wv  = raw_winner_votes.get(wn)
 
     if wd["registered_voters"] == exp_reg:
@@ -244,11 +244,11 @@ for wn in spot_wards:
         )
 
     if wd["ballots_cast"] == exp_bc:
-        ok(f"Ward {wn:>2}: ballots_cast {exp_bc:,} matches raw file")
+        ok(f"Ward {wn:>2}: ballots_cast {exp_bc:,} matches raw file (Number Voted only)")
     else:
         fail(
             f"Ward {wn:>2}: ballots_cast {wd['ballots_cast']:,} "
-            f"≠ raw {exp_bc:,}"
+            f"≠ raw {exp_bc:,} (Number Voted only)"
         )
 
     if exp_wv is not None and wd["winner_votes"] == exp_wv:
@@ -258,6 +258,220 @@ for wn in spot_wards:
             f"Ward {wn:>2}: winner_votes {wd['winner_votes']:,} "
             f"≠ raw {exp_wv:,}"
         )
+
+# 11. Accuracy fixes — data-source and period-label checks
+print("\n=== Accuracy checks (period labels, language source, ballots) ===")
+
+# 11a. All 25 wards must have exactly 3 top languages; each must have a positive speaker count
+for w in wards:
+    langs = (w.get("census") or {}).get("top_non_official_languages", [])
+    if len(langs) == 3:
+        ok(f"Ward {w['ward_num']:>2}: 3 top languages present")
+    else:
+        fail(f"Ward {w['ward_num']:>2}: expected 3 top languages, got {len(langs)}")
+    for lg in langs:
+        name = lg.get("language", "")
+        spk  = lg.get("speakers", 0)
+        if name.lower() in ("english", "french"):
+            fail(f"Ward {w['ward_num']:>2}: language list contains '{name}' (must be excluded)")
+        if "total" in name.lower() or "non-official" in name.lower():
+            fail(f"Ward {w['ward_num']:>2}: language '{name}' looks like an aggregate row (must be excluded)")
+        if not isinstance(spk, int) or spk <= 0:
+            fail(f"Ward {w['ward_num']:>2}: language '{name}' has invalid speaker count {spk}")
+        else:
+            ok(f"Ward {w['ward_num']:>2}: language '{name}' = {spk:,} speakers")
+
+# 11b. Ward 4 language spot-check (Tibetan, Polish, Spanish)
+w4 = next((w for w in wards if w["ward_num"] == 4), None)
+if w4:
+    langs4 = {lg["language"]: lg["speakers"] for lg in
+              (w4.get("census") or {}).get("top_non_official_languages", [])}
+    for name, expected in [("Tibetan", 1330), ("Polish", 1210), ("Spanish", 1205)]:
+        got = langs4.get(name)
+        if got == expected:
+            ok(f"Ward  4: {name} = {got:,} (matches expected)")
+        else:
+            fail(f"Ward  4: {name} = {got} (expected {expected})")
+
+# 11c. City-wide ballots = 563,124 (Number Voted only, not including declined)
+bc_city = city_bc
+if bc_city == 563_124:
+    ok(f"City ballots_cast = {bc_city:,} (Number Voted only, correct)")
+else:
+    fail(f"City ballots_cast = {bc_city:,}, expected 563,124 (Number Voted only)")
+
+# 11d. City-wide turnout = 29.66%
+if city_tp == 29.66:
+    ok(f"City turnout = {city_tp}% (Number Voted ÷ registered, correct)")
+else:
+    fail(f"City turnout = {city_tp}%, expected 29.66%")
+
+# 11e. Issues data present: all 25 wards must have crime.ytd_jan_sep_2024
+for w in wards:
+    ytd24 = ((w.get("issues") or {}).get("crime") or {}).get("ytd_jan_sep_2024")
+    if ytd24 and ytd24.get("count") is not None:
+        ok(f"Ward {w['ward_num']:>2}: crime.ytd_jan_sep_2024.count = {ytd24['count']:,}")
+    else:
+        fail(f"Ward {w['ward_num']:>2}: crime.ytd_jan_sep_2024 missing or null")
+
+# 11f. City Jan-Sep crime 2024 = 35,378 and 2025 = 30,688 (spot check via Ward 1)
+w1 = next((w for w in wards if w["ward_num"] == 1), None)
+if w1:
+    c1 = (w1.get("issues") or {}).get("crime") or {}
+    city_24 = (c1.get("city_ytd_jan_sep_2024") or {}).get("count")
+    city_25 = (c1.get("city_jan_sep_2025") or {}).get("count")
+    if city_24 == 35_378:
+        ok(f"City Jan-Sep 2024 crime = {city_24:,} (matches expected 35,378)")
+    else:
+        fail(f"City Jan-Sep 2024 crime = {city_24}, expected 35,378")
+    if city_25 == 30_688:
+        ok(f"City Jan-Sep 2025 crime = {city_25:,} (matches expected 30,688)")
+    else:
+        fail(f"City Jan-Sep 2025 crime = {city_25}, expected 30,688")
+
+# 11g. Budget votes must have vote_description stored for all years
+for w in wards:
+    for bv in (w.get("budget_votes") or []):
+        vd = bv.get("vote_description")
+        if vd and len(vd) > 2:
+            ok(f"Ward {w['ward_num']:>2}: budget {bv['year']} vote_description present: {vd[:40]}")
+        else:
+            fail(f"Ward {w['ward_num']:>2}: budget {bv['year']} vote_description missing or blank")
+
+# 11h. Close votes must not include known procedural motion types
+FORBIDDEN_PROCEDURAL = {"Waive Referral", "End Debate", "Re-open Item",
+                        "Waive Notice", "Introduce Motion without Notice"}
+cv_all_types: Counter = Counter()
+for w in wards:
+    for cv in (w.get("close_votes") or []):
+        cv_all_types[cv.get("motion_type", "")] += 1
+for mt in FORBIDDEN_PROCEDURAL:
+    if cv_all_types[mt] > 0:
+        fail(f"Close votes contain procedural motion type '{mt}' ({cv_all_types[mt]} occurrences)")
+    else:
+        ok(f"Close votes: '{mt}' correctly excluded")
+
+# 12. Councillor metrics and detail-page checks
+import csv as _csv
+
+METRICS_CSV  = os.path.join(BASE, "councillor_metrics.csv")
+SUMMARIES_CSV = os.path.join(BASE, "vote_summaries.csv")
+
+print("\n=== Councillor metrics checks ===")
+
+# 12a. councillor_metrics.csv — test answers and n-for-every-pct
+if not os.path.exists(METRICS_CSV):
+    fail("councillor_metrics.csv not found — run data/councillor_metrics.py first")
+else:
+    ok("councillor_metrics.csv found")
+    _metrics = {}
+    with open(METRICS_CSV, newline="", encoding="utf-8") as _f:
+        for _row in _csv.DictReader(_f):
+            for _k in ("with_majority_pct", "with_mayor_pct", "attendance_pct",
+                       "contested_cast", "majority_n", "mayor_n",
+                       "sessions_present", "sessions_total"):
+                _v = _row.get(_k, "")
+                try:
+                    _row[_k] = float(_v) if "." in (_v or "") else (int(_v) if _v else None)
+                except ValueError:
+                    _row[_k] = None
+            _metrics[_row["fullname"]] = _row
+
+    _TEST_MEMBERS = [
+        ("Gord Perks",      185, 80.5, 85.2),
+        ("Stephen Holyday", 191, 30.4, 22.7),
+        ("Amber Morley",    187, 93.0, 95.2),
+        ("Neethan Shan",     49, 91.8, 89.1),
+    ]
+    for _name, _exp_cast, _exp_maj, _exp_may in _TEST_MEMBERS:
+        _m = _metrics.get(_name)
+        if _m is None:
+            fail(f"{_name}: not in councillor_metrics.csv")
+        else:
+            _ok = (_m["contested_cast"] == _exp_cast and
+                   _m["with_majority_pct"] == _exp_maj and
+                   _m["with_mayor_pct"] == _exp_may)
+            if _ok:
+                ok(f"{_name}: contested_cast={_exp_cast}, "
+                   f"with_majority={_exp_maj}%, with_mayor={_exp_may}%")
+            else:
+                fail(f"{_name}: expected cast={_exp_cast}/{_exp_maj}%/{_exp_may}%, "
+                     f"got {_m['contested_cast']}/{_m['with_majority_pct']}%/{_m['with_mayor_pct']}%")
+
+    # Every pct has its n
+    for _fn, _m in _metrics.items():
+        if _m.get("with_majority_pct") is not None:
+            _n = int(_m.get("majority_n") or 0)
+            if _n > 0:
+                ok(f"{_fn}: with_majority_pct has n={_n}")
+            else:
+                fail(f"{_fn}: with_majority_pct set but majority_n=0")
+        if _m.get("with_mayor_pct") is not None:
+            _n = int(_m.get("mayor_n") or 0)
+            if _n > 0:
+                ok(f"{_fn}: with_mayor_pct has n={_n}")
+            else:
+                fail(f"{_fn}: with_mayor_pct set but mayor_n=0")
+        if _m.get("attendance_pct") is not None:
+            _pre = int(_m.get("sessions_present") or 0)
+            _tot = int(_m.get("sessions_total") or 0)
+            if _tot > 0:
+                ok(f"{_fn}: attendance_pct has n={_tot}")
+            else:
+                fail(f"{_fn}: attendance_pct set but sessions_total=0")
+
+print("\n=== Vote summaries checks ===")
+
+# 12b. vote_summaries.csv — banned words, official URLs, all items covered
+_BANNED = {"attempt", "blocked", "pushed", "controversial", "rejected", "failed"}
+
+if not os.path.exists(SUMMARIES_CSV):
+    fail("vote_summaries.csv not found — run data/generate_summaries.py first")
+else:
+    ok("vote_summaries.csv found")
+    _summaries = {}
+    with open(SUMMARIES_CSV, newline="", encoding="utf-8") as _f:
+        for _row in _csv.DictReader(_f):
+            _summaries[_row["item_num"]] = _row
+
+    for _item, _s in _summaries.items():
+        _summary_lc = (_s.get("summary") or "").lower()
+        _bad = [_w for _w in _BANNED if _w in _summary_lc]
+        if _bad:
+            fail(f"{_item}: summary contains banned word(s): {_bad}")
+        else:
+            ok(f"{_item}: no banned words in summary")
+
+        _url = _s.get("official_url", "")
+        if _url.startswith("https://secure.toronto.ca/council/agenda-item.do?item="):
+            ok(f"{_item}: has official TMMIS URL")
+        else:
+            fail(f"{_item}: missing or invalid official_url: {_url!r}")
+
+    # Every close-vote item must have a summary entry
+    _missing = set()
+    for w in wards:
+        for cv in (w.get("close_votes") or []):
+            _it = cv.get("item", "")
+            if _it and _it not in _summaries:
+                _missing.add(_it)
+    if _missing:
+        for _it in sorted(_missing):
+            fail(f"Close-vote item {_it} has no entry in vote_summaries.csv")
+    else:
+        ok("All close-vote items have a summary entry in vote_summaries.csv")
+
+    # No close-vote title is truncated (must not end with '…')
+    _truncated = []
+    for w in wards:
+        for cv in (w.get("close_votes") or []):
+            if cv.get("title", "").endswith("…"):
+                _truncated.append(cv["item"])
+    if _truncated:
+        for _it in _truncated:
+            fail(f"Close-vote title for {_it} is truncated")
+    else:
+        ok("No close-vote titles are truncated")
 
 # ── Final result ───────────────────────────────────────────────────────────────
 print()
