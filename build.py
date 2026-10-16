@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 """
-build.py — Toronto Ward Facts site generator (Phase 3).
+build.py — Toronto Ward Facts site generator.
 Reads data/wards.json + data/raw/city-wards-4326.geojson
 Writes docs/style.css, docs/index.html, docs/about.html, docs/ward-N.html (25 pages).
 Run: python3 build.py
+
+PREVIEW = True  → adds preview banner + noindex to every page.
+Set to False before public launch.
 """
+
+# ── Preview mode ───────────────────────────────────────────────────────────────
+PREVIEW = True   # flip to False before public launch
 
 import csv
 import json
@@ -526,15 +532,23 @@ def page_open(title, is_home=False, description=None, og_url=None):
             f'\n  <meta property="og:url" content="{canonical}">'
         )
     canonical_tag = f'\n  <link rel="canonical" href="{canonical}">' if canonical else ''
+    noindex_tag   = '\n  <meta name="robots" content="noindex,nofollow">' if PREVIEW else ''
+    preview_banner = (
+        '\n<div class="preview-banner" role="alert">'
+        '<strong>Staff preview</strong> — not for public distribution. '
+        'This site is under review before public release. '
+        '<a href="for-city-staff.html">Staff briefing →</a>'
+        '</div>'
+    ) if PREVIEW else ''
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">{desc_tag}{og_tags}{canonical_tag}
+  <meta name="viewport" content="width=device-width, initial-scale=1">{desc_tag}{og_tags}{canonical_tag}{noindex_tag}
   <title>{pt}</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body>{preview_banner}
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header">
   <a class="site-logo" href="index.html">Toronto Ward Facts</a>
@@ -1521,6 +1535,116 @@ def build_about(data):
     ])
 
 
+# ── Staff preview page ────────────────────────────────────────────────────────
+
+def build_staff_page():
+    return '\n'.join([
+        page_open(
+            'For City Staff — Toronto Ward Facts',
+            description='Staff briefing for the Toronto Ward Facts pre-release review.',
+            og_url='for-city-staff.html',
+        ),
+        '''<div class="staff-page">
+<div class="staff-hero">
+  <p class="ward-label">Staff preview</p>
+  <h1>Toronto Ward Facts — Staff Briefing</h1>
+  <p class="lead">Thank you for reviewing this site before public release.
+     This page explains what the site does, what data it uses, and how to
+     flag corrections or concerns.</p>
+</div>
+
+<section aria-labelledby="h-what">
+  <h2 id="h-what">What this site is</h2>
+  <p>Toronto Ward Facts is a non-partisan civic information site that presents
+     official City of Toronto open data in plain language for residents ahead of
+     the October 26, 2026 municipal election. It covers all 25 wards.</p>
+  <p>Each ward page shows: 2022 voter turnout and election results, councillor
+     attendance and voting record on Council (2022–2026), census profile, and
+     ward-level data on traffic, crime, and 311 service requests.</p>
+  <p>Each councillor page shows: every close council vote the member participated
+     in, with a plain-language summary of the agenda item and the vote result.</p>
+</section>
+
+<section aria-labelledby="h-data">
+  <h2 id="h-data">Data sources</h2>
+  <p>Every number on this site comes from a City of Toronto open data file,
+     published under the
+     <a href="https://open.toronto.ca/open-data-licence/">Open Government Licence – Toronto</a>.
+     No numbers have been estimated, adjusted, or inferred.</p>
+  <table class="data-table" style="margin-top:0.9rem">
+    <thead><tr><th>Data</th><th>Source file</th></tr></thead>
+    <tbody>
+      <tr><td>Voter turnout 2022 and 2018</td><td>elections-voter-statistics (XLSX)</td></tr>
+      <tr><td>2022 election results by candidate</td><td>elections-2022-results (XLSX)</td></tr>
+      <tr><td>Councillor attendance 2022–2026</td><td>council-attendance-2022-2026.csv</td></tr>
+      <tr><td>Council voting record 2022–2026</td><td>council-voting-2022-2026.csv</td></tr>
+      <tr><td>Census profiles (2021 Census)</td><td>ward-profiles-2021-census.xlsx</td></tr>
+      <tr><td>Major crime indicators</td><td>major-crime-indicators.csv</td></tr>
+      <tr><td>Motor vehicle collisions (KSI)</td><td>motor-vehicle-collisions-ksi-4326.csv</td></tr>
+      <tr><td>311 service requests 2022–2026</td><td>sr2022.zip – sr2026.zip</td></tr>
+      <tr><td>Ward boundaries</td><td>city-wards-4326.geojson</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section aria-labelledby="h-verify">
+  <h2 id="h-verify">What to review</h2>
+  <p>We would welcome your review of the following:</p>
+  <ol class="q-list" style="padding-left:1.2rem;margin-top:0.5rem">
+    <li><strong>Numbers:</strong> Do the voter turnout figures, candidate results, and
+        council vote counts match your records?</li>
+    <li><strong>Fairness:</strong> Is every councillor described in the same way, with
+        no editorial judgment about whether their record is good or bad?</li>
+    <li><strong>Plain language:</strong> Is the methodology explanation on the
+        <a href="about.html">About page</a> accurate and clear?</li>
+    <li><strong>Council voting summaries:</strong> The one-sentence summaries of agenda
+        items on councillor pages are generated from the official item title in the
+        voting CSV. If any summary mischaracterizes an item, please flag it.</li>
+    <li><strong>Links:</strong> All external links point to
+        <code style="font-family:var(--mono);font-size:0.85em">toronto.ca</code>
+        or Statistics Canada. Let us know if any are broken or misdirected.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="h-corrections">
+  <h2 id="h-corrections">How to send feedback</h2>
+  <p>Email corrections and concerns to
+     <a href="mailto:ravi@perimtr.ca">ravi@perimtr.ca</a>. Please include:</p>
+  <ul class="q-list" style="padding-left:1.2rem;margin-top:0.5rem">
+    <li>The page URL and the specific figure or text in question</li>
+    <li>What the correct value or wording should be, and the source</li>
+  </ul>
+  <p style="margin-top:0.7rem">We will acknowledge corrections within 48 hours and
+     update the site before public launch.</p>
+</section>
+
+<section aria-labelledby="h-timeline">
+  <h2 id="h-timeline">Timeline</h2>
+  <dl class="stat-grid" style="margin-top:0.5rem">
+    <div class="stat-item"><dt>Staff preview opens</dt><dd>October 2026</dd></div>
+    <div class="stat-item"><dt>Correction deadline</dt><dd>To be confirmed</dd></div>
+    <div class="stat-item"><dt>Public launch target</dt><dd>Before October 26, 2026</dd></div>
+    <div class="stat-item"><dt>Election day</dt><dd>Monday, October 26, 2026</dd></div>
+  </dl>
+</section>
+
+<section aria-labelledby="h-independence-s">
+  <h2 id="h-independence-s">Independence note</h2>
+  <div class="independence-box">
+    <p>Toronto Ward Facts is produced by
+       <a href="https://perimtr.ca" rel="noopener">Perimtr</a>, an independent
+       research and software company. This site is not affiliated with any candidate,
+       political party, or the City of Toronto. We do not accept advertising or
+       sponsorship from any political organization.</p>
+    <p>Our goal is to help Toronto residents make informed choices on election day
+       using only official City data.</p>
+  </div>
+</section>
+</div>''',
+        page_close(),
+    ])
+
+
 # ── CSS ────────────────────────────────────────────────────────────────────────
 
 CSS = '''@font-face {
@@ -1561,6 +1685,13 @@ body { font-family: var(--sans); background: var(--bg); color: var(--ink);
 a { color: var(--accent); }
 a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; }
+
+/* Preview banner */
+.preview-banner { background: var(--accent); color: #fff; text-align: center;
+                  padding: 0.5rem 1rem; font-family: var(--sans); font-size: 0.82rem;
+                  font-weight: 500; letter-spacing: 0.02em; }
+.preview-banner a { color: #fff; font-weight: 700; }
+.preview-banner strong { font-weight: 700; }
 
 /* Skip link */
 .skip-link { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
@@ -1817,6 +1948,13 @@ h3 { font-family: var(--serif); font-weight: 500; font-size: 1rem;
 .independence-box p { margin-bottom: 0.5rem; }
 .independence-box p:last-child { margin-bottom: 0; }
 
+/* Staff preview page */
+.staff-page { max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+.staff-hero { border-left: 4px solid var(--accent); padding: 1.1rem 1.4rem;
+              margin-bottom: 2rem; }
+.staff-hero h1 { margin-top: 0.3rem; }
+.staff-page section { margin-bottom: 2rem; }
+
 /* What matters here — poll bars */
 .poll-block { background: var(--dim); border: 1px solid var(--rule);
               padding: 0.9rem 1rem; margin-bottom: 1.1rem; }
@@ -1896,6 +2034,11 @@ def main():
     with open(os.path.join(DOCS, 'about.html'), 'w', encoding='utf-8') as f:
         f.write(build_about(data))
 
+    if PREVIEW:
+        print('Writing for-city-staff.html …')
+        with open(os.path.join(DOCS, 'for-city-staff.html'), 'w', encoding='utf-8') as f:
+            f.write(build_staff_page())
+
     print('Writing 25 ward pages …')
     for w in sorted(data['wards'], key=lambda x: x['ward_num']):
         wn = w['ward_num']
@@ -1911,10 +2054,10 @@ def main():
             with open(os.path.join(DOCS, f'councillor-ward-{wn}.html'), 'w', encoding='utf-8') as f:
                 f.write(build_councillor_page(w, paths, bounds))
             print(f'  councillor-ward-{wn}.html — {w["councillor_first"]} {w["councillor_last"]}')
-        total = len(data['wards']) * 2 + 3
+        total = len(data['wards']) * 2 + (4 if PREVIEW else 3)
     else:
         print('\nNote: data/vote_summaries.csv not found — skipping councillor detail pages.')
-        total = len(data['wards']) + 3
+        total = len(data['wards']) + (4 if PREVIEW else 3)
 
     print(f'\nDone. {total} files written to docs/')
 
