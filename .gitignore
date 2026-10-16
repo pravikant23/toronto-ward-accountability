@@ -1,0 +1,9 @@
+# Large raw data files — download separately (see README for open data URLs)
+data/raw/major-crime-indicators.csv
+data/raw/motor-vehicle-collisions-ksi-4326.csv
+data/raw/311/
+
+# Build artefacts
+__pycache__/
+*.pyc
+.DS_Store

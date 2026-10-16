@@ -24,9 +24,17 @@ Every number comes from a City of Toronto or Statistics Canada open-data file. N
 
 ## How to rebuild
 
+Three large raw data files are excluded from git (see `.gitignore`) and must be
+downloaded before running step 3. Download them from the open data links in the
+Data sources table below and place them in `data/raw/`:
+
+- `major-crime-indicators.csv` (~133 MB)
+- `motor-vehicle-collisions-ksi-4326.csv` (~10 MB)
+- `data/raw/311/sr{2022..2026}.zip` (five ZIP files, ~6 MB each) from the 311 dataset
+
 ```bash
-# Prerequisites: Python 3 + openpyxl
-pip3 install openpyxl
+# Prerequisites: Python 3 + openpyxl + shapely
+pip3 install openpyxl shapely
 
 # Step 1: Build wards.json from raw source files
 python3 data/build_data.py
@@ -34,10 +42,15 @@ python3 data/build_data.py
 # Step 2: Add council voting data (budget votes, close votes)
 python3 data/add_key_votes.py
 
-# Step 3: Validate (hard-fail — must pass before building HTML)
+# Step 3: Add issue data (311, crime, KSI) to wards.json
+#         Downloads raw CSVs/ZIPs to data/raw/ if not already present.
+#         Prints spot-check for Ward 1 and Ward 11 — review before proceeding.
+python3 data/build_issues.py
+
+# Step 4: Validate (hard-fail — must pass before building HTML)
 python3 data/validate.py
 
-# Step 4: Generate all HTML and CSS
+# Step 5: Generate all HTML and CSS
 python3 build.py
 ```
 
@@ -74,6 +87,9 @@ After election night (October 26, 2026), the City publishes official results to 
 | Council voting record | `council-voting-2022-2026.csv` | <https://open.toronto.ca/dataset/members-of-toronto-city-council-voting-record/> |
 | Council attendance | `council-attendance-2022-2026.csv` | <https://open.toronto.ca/dataset/members-of-toronto-city-council-meeting-attendance/> |
 | Ward boundaries | `city-wards-4326.geojson` | <https://open.toronto.ca/dataset/city-wards/> |
+| Major crime indicators (2018–2025) | `major-crime-indicators.csv` | <https://open.toronto.ca/dataset/major-crime-indicators/> |
+| Motor vehicle collisions — KSI (2018–2026) | `motor-vehicle-collisions-ksi-4326.csv` | <https://open.toronto.ca/dataset/motor-vehicle-collisions-involving-killed-or-seriously-injured-persons/> |
+| 311 service requests (2022–2026) | `data/raw/311/sr{year}.zip` | <https://open.toronto.ca/dataset/311-service-requests-customer-initiated/> |
 
 All data published under the [Open Government Licence – Toronto](https://open.toronto.ca/open-data-licence/).
 

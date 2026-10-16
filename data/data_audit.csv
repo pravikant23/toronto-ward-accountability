@@ -174,3 +174,728 @@ ward,ward_name,field,value,source_file,note
 25,Scarborough-Rouge Park,winner_votes,14168,2022-results/2022_Toronto_Poll_By_Poll_Councillor.xlsx,"Total column, highest-vote candidate"
 25,Scarborough-Rouge Park,population_2021,101485,ward-profiles-2021-census.xlsx,"Row 19 'Total - Age', '2021 One Variable' sheet"
 25,Scarborough-Rouge Park,median_household_income_2020,105000,ward-profiles-2021-census.xlsx,Row 1385 'Median total income of households in 2020'
+1,Etobicoke North,crime_total_2018,2111,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+1,Etobicoke North,crime_rate_2018,18.34,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+1,Etobicoke North,crime_total_2019,2040,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+1,Etobicoke North,crime_rate_2019,17.72,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+1,Etobicoke North,crime_total_2020,1733,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+1,Etobicoke North,crime_rate_2020,15.05,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+1,Etobicoke North,crime_total_2021,1851,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+1,Etobicoke North,crime_rate_2021,16.08,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+1,Etobicoke North,crime_total_2022,2416,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+1,Etobicoke North,crime_rate_2022,20.99,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+1,Etobicoke North,crime_total_2023,2754,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+1,Etobicoke North,crime_rate_2023,23.92,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+1,Etobicoke North,crime_total_2024,2445,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+1,Etobicoke North,crime_rate_2024,21.24,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+1,Etobicoke North,crime_total_2025,1578,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+1,Etobicoke North,crime_rate_2025,13.71,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+1,Etobicoke North,311_total_2022,14964,sr2022.zip,"All 311 requests, ward-parseable rows only"
+1,Etobicoke North,311_total_2023,13291,sr2023.zip,"All 311 requests, ward-parseable rows only"
+1,Etobicoke North,311_total_2024,12453,sr2024.zip,"All 311 requests, ward-parseable rows only"
+1,Etobicoke North,311_total_2025,15406,sr2025.zip,"All 311 requests, ward-parseable rows only"
+1,Etobicoke North,ksi_collisions_2018,20,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+1,Etobicoke North,ksi_collisions_2019,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+1,Etobicoke North,ksi_collisions_2020,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+1,Etobicoke North,ksi_collisions_2021,13,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+1,Etobicoke North,ksi_collisions_2022,14,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+1,Etobicoke North,ksi_collisions_2023,18,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+1,Etobicoke North,ksi_collisions_2024,17,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+1,Etobicoke North,ksi_collisions_2025,19,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+1,Etobicoke North,ksi_collisions_2026,13,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+2,Etobicoke Centre,crime_total_2018,941,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+2,Etobicoke Centre,crime_rate_2018,8.03,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+2,Etobicoke Centre,crime_total_2019,990,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+2,Etobicoke Centre,crime_rate_2019,8.45,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+2,Etobicoke Centre,crime_total_2020,955,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+2,Etobicoke Centre,crime_rate_2020,8.15,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+2,Etobicoke Centre,crime_total_2021,817,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+2,Etobicoke Centre,crime_rate_2021,6.97,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+2,Etobicoke Centre,crime_total_2022,1287,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+2,Etobicoke Centre,crime_rate_2022,10.98,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+2,Etobicoke Centre,crime_total_2023,1775,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+2,Etobicoke Centre,crime_rate_2023,15.15,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+2,Etobicoke Centre,crime_total_2024,1448,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+2,Etobicoke Centre,crime_rate_2024,12.35,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+2,Etobicoke Centre,crime_total_2025,899,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+2,Etobicoke Centre,crime_rate_2025,7.67,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+2,Etobicoke Centre,311_total_2022,19508,sr2022.zip,"All 311 requests, ward-parseable rows only"
+2,Etobicoke Centre,311_total_2023,19505,sr2023.zip,"All 311 requests, ward-parseable rows only"
+2,Etobicoke Centre,311_total_2024,17823,sr2024.zip,"All 311 requests, ward-parseable rows only"
+2,Etobicoke Centre,311_total_2025,21242,sr2025.zip,"All 311 requests, ward-parseable rows only"
+2,Etobicoke Centre,ksi_collisions_2018,19,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+2,Etobicoke Centre,ksi_collisions_2019,16,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+2,Etobicoke Centre,ksi_collisions_2020,12,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+2,Etobicoke Centre,ksi_collisions_2021,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+2,Etobicoke Centre,ksi_collisions_2022,12,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+2,Etobicoke Centre,ksi_collisions_2023,15,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+2,Etobicoke Centre,ksi_collisions_2024,6,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+2,Etobicoke Centre,ksi_collisions_2025,8,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+2,Etobicoke Centre,ksi_collisions_2026,6,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+3,Etobicoke-Lakeshore,crime_total_2018,1739,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+3,Etobicoke-Lakeshore,crime_rate_2018,12.43,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+3,Etobicoke-Lakeshore,crime_total_2019,1693,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+3,Etobicoke-Lakeshore,crime_rate_2019,12.1,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+3,Etobicoke-Lakeshore,crime_total_2020,1558,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+3,Etobicoke-Lakeshore,crime_rate_2020,11.13,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+3,Etobicoke-Lakeshore,crime_total_2021,1659,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+3,Etobicoke-Lakeshore,crime_rate_2021,11.86,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+3,Etobicoke-Lakeshore,crime_total_2022,2390,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+3,Etobicoke-Lakeshore,crime_rate_2022,17.08,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+3,Etobicoke-Lakeshore,crime_total_2023,3042,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+3,Etobicoke-Lakeshore,crime_rate_2023,21.74,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+3,Etobicoke-Lakeshore,crime_total_2024,3012,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+3,Etobicoke-Lakeshore,crime_rate_2024,21.53,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+3,Etobicoke-Lakeshore,crime_total_2025,2093,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+3,Etobicoke-Lakeshore,crime_rate_2025,14.96,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+3,Etobicoke-Lakeshore,311_total_2022,24917,sr2022.zip,"All 311 requests, ward-parseable rows only"
+3,Etobicoke-Lakeshore,311_total_2023,25086,sr2023.zip,"All 311 requests, ward-parseable rows only"
+3,Etobicoke-Lakeshore,311_total_2024,22394,sr2024.zip,"All 311 requests, ward-parseable rows only"
+3,Etobicoke-Lakeshore,311_total_2025,25874,sr2025.zip,"All 311 requests, ward-parseable rows only"
+3,Etobicoke-Lakeshore,ksi_collisions_2018,19,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+3,Etobicoke-Lakeshore,ksi_collisions_2019,20,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+3,Etobicoke-Lakeshore,ksi_collisions_2020,15,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+3,Etobicoke-Lakeshore,ksi_collisions_2021,24,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+3,Etobicoke-Lakeshore,ksi_collisions_2022,21,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+3,Etobicoke-Lakeshore,ksi_collisions_2023,23,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+3,Etobicoke-Lakeshore,ksi_collisions_2024,19,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+3,Etobicoke-Lakeshore,ksi_collisions_2025,17,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+3,Etobicoke-Lakeshore,ksi_collisions_2026,6,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+4,Parkdale-High Park,crime_total_2018,1219,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+4,Parkdale-High Park,crime_rate_2018,11.64,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+4,Parkdale-High Park,crime_total_2019,1252,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+4,Parkdale-High Park,crime_rate_2019,11.96,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+4,Parkdale-High Park,crime_total_2020,1111,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+4,Parkdale-High Park,crime_rate_2020,10.61,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+4,Parkdale-High Park,crime_total_2021,1026,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+4,Parkdale-High Park,crime_rate_2021,9.8,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+4,Parkdale-High Park,crime_total_2022,1307,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+4,Parkdale-High Park,crime_rate_2022,12.48,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+4,Parkdale-High Park,crime_total_2023,1479,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+4,Parkdale-High Park,crime_rate_2023,14.12,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+4,Parkdale-High Park,crime_total_2024,1466,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+4,Parkdale-High Park,crime_rate_2024,14.0,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+4,Parkdale-High Park,crime_total_2025,925,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+4,Parkdale-High Park,crime_rate_2025,8.83,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+4,Parkdale-High Park,311_total_2022,22170,sr2022.zip,"All 311 requests, ward-parseable rows only"
+4,Parkdale-High Park,311_total_2023,21544,sr2023.zip,"All 311 requests, ward-parseable rows only"
+4,Parkdale-High Park,311_total_2024,21435,sr2024.zip,"All 311 requests, ward-parseable rows only"
+4,Parkdale-High Park,311_total_2025,25517,sr2025.zip,"All 311 requests, ward-parseable rows only"
+4,Parkdale-High Park,ksi_collisions_2018,20,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+4,Parkdale-High Park,ksi_collisions_2019,13,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+4,Parkdale-High Park,ksi_collisions_2020,6,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+4,Parkdale-High Park,ksi_collisions_2021,13,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+4,Parkdale-High Park,ksi_collisions_2022,15,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+4,Parkdale-High Park,ksi_collisions_2023,6,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+4,Parkdale-High Park,ksi_collisions_2024,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+4,Parkdale-High Park,ksi_collisions_2025,8,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+4,Parkdale-High Park,ksi_collisions_2026,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+5,York South-Weston,crime_total_2018,1498,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+5,York South-Weston,crime_rate_2018,12.95,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+5,York South-Weston,crime_total_2019,1558,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+5,York South-Weston,crime_rate_2019,13.47,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+5,York South-Weston,crime_total_2020,1494,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+5,York South-Weston,crime_rate_2020,12.92,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+5,York South-Weston,crime_total_2021,1463,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+5,York South-Weston,crime_rate_2021,12.65,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+5,York South-Weston,crime_total_2022,1895,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+5,York South-Weston,crime_rate_2022,16.38,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+5,York South-Weston,crime_total_2023,2150,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+5,York South-Weston,crime_rate_2023,18.59,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+5,York South-Weston,crime_total_2024,2035,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+5,York South-Weston,crime_rate_2024,17.59,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+5,York South-Weston,crime_total_2025,1092,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+5,York South-Weston,crime_rate_2025,9.44,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+5,York South-Weston,311_total_2022,19146,sr2022.zip,"All 311 requests, ward-parseable rows only"
+5,York South-Weston,311_total_2023,16720,sr2023.zip,"All 311 requests, ward-parseable rows only"
+5,York South-Weston,311_total_2024,17363,sr2024.zip,"All 311 requests, ward-parseable rows only"
+5,York South-Weston,311_total_2025,20772,sr2025.zip,"All 311 requests, ward-parseable rows only"
+5,York South-Weston,ksi_collisions_2018,22,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+5,York South-Weston,ksi_collisions_2019,14,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+5,York South-Weston,ksi_collisions_2020,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+5,York South-Weston,ksi_collisions_2021,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+5,York South-Weston,ksi_collisions_2022,14,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+5,York South-Weston,ksi_collisions_2023,22,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+5,York South-Weston,ksi_collisions_2024,17,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+5,York South-Weston,ksi_collisions_2025,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+5,York South-Weston,ksi_collisions_2026,12,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+6,York Centre,crime_total_2018,1541,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+6,York Centre,crime_rate_2018,14.35,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+6,York Centre,crime_total_2019,1568,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+6,York Centre,crime_rate_2019,14.61,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+6,York Centre,crime_total_2020,1498,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+6,York Centre,crime_rate_2020,13.95,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+6,York Centre,crime_total_2021,1574,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+6,York Centre,crime_rate_2021,14.66,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+6,York Centre,crime_total_2022,2035,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+6,York Centre,crime_rate_2022,18.96,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+6,York Centre,crime_total_2023,2419,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+6,York Centre,crime_rate_2023,22.53,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+6,York Centre,crime_total_2024,2089,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+6,York Centre,crime_rate_2024,19.46,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+6,York Centre,crime_total_2025,1285,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+6,York Centre,crime_rate_2025,11.97,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+6,York Centre,311_total_2022,15380,sr2022.zip,"All 311 requests, ward-parseable rows only"
+6,York Centre,311_total_2023,14549,sr2023.zip,"All 311 requests, ward-parseable rows only"
+6,York Centre,311_total_2024,16279,sr2024.zip,"All 311 requests, ward-parseable rows only"
+6,York Centre,311_total_2025,18852,sr2025.zip,"All 311 requests, ward-parseable rows only"
+6,York Centre,ksi_collisions_2018,26,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+6,York Centre,ksi_collisions_2019,16,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+6,York Centre,ksi_collisions_2020,15,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+6,York Centre,ksi_collisions_2021,11,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+6,York Centre,ksi_collisions_2022,19,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+6,York Centre,ksi_collisions_2023,16,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+6,York Centre,ksi_collisions_2024,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+6,York Centre,ksi_collisions_2025,14,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+6,York Centre,ksi_collisions_2026,6,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+7,Humber River-Black Creek,crime_total_2018,1913,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+7,Humber River-Black Creek,crime_rate_2018,17.2,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+7,Humber River-Black Creek,crime_total_2019,2176,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+7,Humber River-Black Creek,crime_rate_2019,19.57,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+7,Humber River-Black Creek,crime_total_2020,2014,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+7,Humber River-Black Creek,crime_rate_2020,18.11,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+7,Humber River-Black Creek,crime_total_2021,1948,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+7,Humber River-Black Creek,crime_rate_2021,17.52,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+7,Humber River-Black Creek,crime_total_2022,2162,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+7,Humber River-Black Creek,crime_rate_2022,19.44,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+7,Humber River-Black Creek,crime_total_2023,2548,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+7,Humber River-Black Creek,crime_rate_2023,22.91,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+7,Humber River-Black Creek,crime_total_2024,2221,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+7,Humber River-Black Creek,crime_rate_2024,19.97,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+7,Humber River-Black Creek,crime_total_2025,1524,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+7,Humber River-Black Creek,crime_rate_2025,13.71,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+7,Humber River-Black Creek,311_total_2022,12013,sr2022.zip,"All 311 requests, ward-parseable rows only"
+7,Humber River-Black Creek,311_total_2023,11207,sr2023.zip,"All 311 requests, ward-parseable rows only"
+7,Humber River-Black Creek,311_total_2024,11452,sr2024.zip,"All 311 requests, ward-parseable rows only"
+7,Humber River-Black Creek,311_total_2025,13514,sr2025.zip,"All 311 requests, ward-parseable rows only"
+7,Humber River-Black Creek,ksi_collisions_2018,14,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+7,Humber River-Black Creek,ksi_collisions_2019,12,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+7,Humber River-Black Creek,ksi_collisions_2020,11,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+7,Humber River-Black Creek,ksi_collisions_2021,12,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+7,Humber River-Black Creek,ksi_collisions_2022,21,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+7,Humber River-Black Creek,ksi_collisions_2023,16,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+7,Humber River-Black Creek,ksi_collisions_2024,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+7,Humber River-Black Creek,ksi_collisions_2025,13,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+7,Humber River-Black Creek,ksi_collisions_2026,8,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+8,Eglinton-Lawrence,crime_total_2018,1216,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+8,Eglinton-Lawrence,crime_rate_2018,10.59,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+8,Eglinton-Lawrence,crime_total_2019,1319,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+8,Eglinton-Lawrence,crime_rate_2019,11.49,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+8,Eglinton-Lawrence,crime_total_2020,1280,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+8,Eglinton-Lawrence,crime_rate_2020,11.15,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+8,Eglinton-Lawrence,crime_total_2021,1157,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+8,Eglinton-Lawrence,crime_rate_2021,10.08,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+8,Eglinton-Lawrence,crime_total_2022,1551,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+8,Eglinton-Lawrence,crime_rate_2022,13.51,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+8,Eglinton-Lawrence,crime_total_2023,2044,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+8,Eglinton-Lawrence,crime_rate_2023,17.8,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+8,Eglinton-Lawrence,crime_total_2024,1556,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+8,Eglinton-Lawrence,crime_rate_2024,13.55,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+8,Eglinton-Lawrence,crime_total_2025,979,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+8,Eglinton-Lawrence,crime_rate_2025,8.53,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+8,Eglinton-Lawrence,311_total_2022,23394,sr2022.zip,"All 311 requests, ward-parseable rows only"
+8,Eglinton-Lawrence,311_total_2023,19895,sr2023.zip,"All 311 requests, ward-parseable rows only"
+8,Eglinton-Lawrence,311_total_2024,21590,sr2024.zip,"All 311 requests, ward-parseable rows only"
+8,Eglinton-Lawrence,311_total_2025,24221,sr2025.zip,"All 311 requests, ward-parseable rows only"
+8,Eglinton-Lawrence,ksi_collisions_2018,16,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+8,Eglinton-Lawrence,ksi_collisions_2019,8,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+8,Eglinton-Lawrence,ksi_collisions_2020,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+8,Eglinton-Lawrence,ksi_collisions_2021,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+8,Eglinton-Lawrence,ksi_collisions_2022,4,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+8,Eglinton-Lawrence,ksi_collisions_2023,12,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+8,Eglinton-Lawrence,ksi_collisions_2024,11,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+8,Eglinton-Lawrence,ksi_collisions_2025,4,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+8,Eglinton-Lawrence,ksi_collisions_2026,4,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+9,Davenport,crime_total_2018,1309,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+9,Davenport,crime_rate_2018,12.5,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+9,Davenport,crime_total_2019,1380,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+9,Davenport,crime_rate_2019,13.18,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+9,Davenport,crime_total_2020,1301,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+9,Davenport,crime_rate_2020,12.42,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+9,Davenport,crime_total_2021,1137,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+9,Davenport,crime_rate_2021,10.86,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+9,Davenport,crime_total_2022,1227,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+9,Davenport,crime_rate_2022,11.72,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+9,Davenport,crime_total_2023,1586,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+9,Davenport,crime_rate_2023,15.14,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+9,Davenport,crime_total_2024,1584,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+9,Davenport,crime_rate_2024,15.12,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+9,Davenport,crime_total_2025,985,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+9,Davenport,crime_rate_2025,9.41,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+9,Davenport,311_total_2022,22946,sr2022.zip,"All 311 requests, ward-parseable rows only"
+9,Davenport,311_total_2023,21457,sr2023.zip,"All 311 requests, ward-parseable rows only"
+9,Davenport,311_total_2024,23669,sr2024.zip,"All 311 requests, ward-parseable rows only"
+9,Davenport,311_total_2025,27124,sr2025.zip,"All 311 requests, ward-parseable rows only"
+9,Davenport,ksi_collisions_2018,20,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+9,Davenport,ksi_collisions_2019,16,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+9,Davenport,ksi_collisions_2020,17,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+9,Davenport,ksi_collisions_2021,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+9,Davenport,ksi_collisions_2022,13,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+9,Davenport,ksi_collisions_2023,12,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+9,Davenport,ksi_collisions_2024,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+9,Davenport,ksi_collisions_2025,6,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+9,Davenport,ksi_collisions_2026,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+10,Spadina-Fort York,crime_total_2018,2596,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+10,Spadina-Fort York,crime_rate_2018,19.17,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+10,Spadina-Fort York,crime_total_2019,2777,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+10,Spadina-Fort York,crime_rate_2019,20.51,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+10,Spadina-Fort York,crime_total_2020,2490,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+10,Spadina-Fort York,crime_rate_2020,18.39,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+10,Spadina-Fort York,crime_total_2021,2586,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+10,Spadina-Fort York,crime_rate_2021,19.1,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+10,Spadina-Fort York,crime_total_2022,2869,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+10,Spadina-Fort York,crime_rate_2022,21.19,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+10,Spadina-Fort York,crime_total_2023,3094,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+10,Spadina-Fort York,crime_rate_2023,22.85,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+10,Spadina-Fort York,crime_total_2024,3078,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+10,Spadina-Fort York,crime_rate_2024,22.73,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+10,Spadina-Fort York,crime_total_2025,2228,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+10,Spadina-Fort York,crime_rate_2025,16.45,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+10,Spadina-Fort York,311_total_2022,18176,sr2022.zip,"All 311 requests, ward-parseable rows only"
+10,Spadina-Fort York,311_total_2023,19439,sr2023.zip,"All 311 requests, ward-parseable rows only"
+10,Spadina-Fort York,311_total_2024,19439,sr2024.zip,"All 311 requests, ward-parseable rows only"
+10,Spadina-Fort York,311_total_2025,21243,sr2025.zip,"All 311 requests, ward-parseable rows only"
+10,Spadina-Fort York,ksi_collisions_2018,26,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+10,Spadina-Fort York,ksi_collisions_2019,29,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+10,Spadina-Fort York,ksi_collisions_2020,17,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+10,Spadina-Fort York,ksi_collisions_2021,26,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+10,Spadina-Fort York,ksi_collisions_2022,24,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+10,Spadina-Fort York,ksi_collisions_2023,21,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+10,Spadina-Fort York,ksi_collisions_2024,23,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+10,Spadina-Fort York,ksi_collisions_2025,16,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+10,Spadina-Fort York,ksi_collisions_2026,11,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+11,University-Rosedale,crime_total_2018,2050,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+11,University-Rosedale,crime_rate_2018,20.02,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+11,University-Rosedale,crime_total_2019,2174,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+11,University-Rosedale,crime_rate_2019,21.23,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+11,University-Rosedale,crime_total_2020,1882,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+11,University-Rosedale,crime_rate_2020,18.38,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+11,University-Rosedale,crime_total_2021,1853,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+11,University-Rosedale,crime_rate_2021,18.1,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+11,University-Rosedale,crime_total_2022,2105,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+11,University-Rosedale,crime_rate_2022,20.56,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+11,University-Rosedale,crime_total_2023,2399,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+11,University-Rosedale,crime_rate_2023,23.43,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+11,University-Rosedale,crime_total_2024,2356,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+11,University-Rosedale,crime_rate_2024,23.01,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+11,University-Rosedale,crime_total_2025,1617,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+11,University-Rosedale,crime_rate_2025,15.79,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+11,University-Rosedale,311_total_2022,23206,sr2022.zip,"All 311 requests, ward-parseable rows only"
+11,University-Rosedale,311_total_2023,22033,sr2023.zip,"All 311 requests, ward-parseable rows only"
+11,University-Rosedale,311_total_2024,23287,sr2024.zip,"All 311 requests, ward-parseable rows only"
+11,University-Rosedale,311_total_2025,27122,sr2025.zip,"All 311 requests, ward-parseable rows only"
+11,University-Rosedale,ksi_collisions_2018,17,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+11,University-Rosedale,ksi_collisions_2019,19,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+11,University-Rosedale,ksi_collisions_2020,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+11,University-Rosedale,ksi_collisions_2021,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+11,University-Rosedale,ksi_collisions_2022,14,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+11,University-Rosedale,ksi_collisions_2023,15,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+11,University-Rosedale,ksi_collisions_2024,19,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+11,University-Rosedale,ksi_collisions_2025,14,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+11,University-Rosedale,ksi_collisions_2026,6,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+12,Toronto-St. Paul's,crime_total_2018,1041,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+12,Toronto-St. Paul's,crime_rate_2018,9.12,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+12,Toronto-St. Paul's,crime_total_2019,1167,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+12,Toronto-St. Paul's,crime_rate_2019,10.23,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+12,Toronto-St. Paul's,crime_total_2020,1274,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+12,Toronto-St. Paul's,crime_rate_2020,11.17,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+12,Toronto-St. Paul's,crime_total_2021,1132,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+12,Toronto-St. Paul's,crime_rate_2021,9.92,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+12,Toronto-St. Paul's,crime_total_2022,1402,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+12,Toronto-St. Paul's,crime_rate_2022,12.29,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+12,Toronto-St. Paul's,crime_total_2023,1482,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+12,Toronto-St. Paul's,crime_rate_2023,12.99,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+12,Toronto-St. Paul's,crime_total_2024,1433,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+12,Toronto-St. Paul's,crime_rate_2024,12.56,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+12,Toronto-St. Paul's,crime_total_2025,924,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+12,Toronto-St. Paul's,crime_rate_2025,8.1,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+12,Toronto-St. Paul's,311_total_2022,20523,sr2022.zip,"All 311 requests, ward-parseable rows only"
+12,Toronto-St. Paul's,311_total_2023,17598,sr2023.zip,"All 311 requests, ward-parseable rows only"
+12,Toronto-St. Paul's,311_total_2024,19613,sr2024.zip,"All 311 requests, ward-parseable rows only"
+12,Toronto-St. Paul's,311_total_2025,21747,sr2025.zip,"All 311 requests, ward-parseable rows only"
+12,Toronto-St. Paul's,ksi_collisions_2018,12,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+12,Toronto-St. Paul's,ksi_collisions_2019,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+12,Toronto-St. Paul's,ksi_collisions_2020,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+12,Toronto-St. Paul's,ksi_collisions_2021,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+12,Toronto-St. Paul's,ksi_collisions_2022,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+12,Toronto-St. Paul's,ksi_collisions_2023,14,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+12,Toronto-St. Paul's,ksi_collisions_2024,6,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+12,Toronto-St. Paul's,ksi_collisions_2025,11,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+12,Toronto-St. Paul's,ksi_collisions_2026,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+13,Toronto Centre,crime_total_2018,3743,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+13,Toronto Centre,crime_rate_2018,32.01,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+13,Toronto Centre,crime_total_2019,4389,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+13,Toronto Centre,crime_rate_2019,37.54,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+13,Toronto Centre,crime_total_2020,3747,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+13,Toronto Centre,crime_rate_2020,32.04,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+13,Toronto Centre,crime_total_2021,3603,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+13,Toronto Centre,crime_rate_2021,30.81,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+13,Toronto Centre,crime_total_2022,3424,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+13,Toronto Centre,crime_rate_2022,29.28,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+13,Toronto Centre,crime_total_2023,3843,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+13,Toronto Centre,crime_rate_2023,32.87,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+13,Toronto Centre,crime_total_2024,3720,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+13,Toronto Centre,crime_rate_2024,31.81,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+13,Toronto Centre,crime_total_2025,2557,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+13,Toronto Centre,crime_rate_2025,21.87,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+13,Toronto Centre,311_total_2022,15208,sr2022.zip,"All 311 requests, ward-parseable rows only"
+13,Toronto Centre,311_total_2023,14025,sr2023.zip,"All 311 requests, ward-parseable rows only"
+13,Toronto Centre,311_total_2024,16219,sr2024.zip,"All 311 requests, ward-parseable rows only"
+13,Toronto Centre,311_total_2025,18718,sr2025.zip,"All 311 requests, ward-parseable rows only"
+13,Toronto Centre,ksi_collisions_2018,20,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+13,Toronto Centre,ksi_collisions_2019,21,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+13,Toronto Centre,ksi_collisions_2020,18,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+13,Toronto Centre,ksi_collisions_2021,13,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+13,Toronto Centre,ksi_collisions_2022,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+13,Toronto Centre,ksi_collisions_2023,17,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+13,Toronto Centre,ksi_collisions_2024,11,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+13,Toronto Centre,ksi_collisions_2025,16,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+13,Toronto Centre,ksi_collisions_2026,11,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+14,Toronto-Danforth,crime_total_2018,1370,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+14,Toronto-Danforth,crime_rate_2018,13.1,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+14,Toronto-Danforth,crime_total_2019,1431,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+14,Toronto-Danforth,crime_rate_2019,13.69,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+14,Toronto-Danforth,crime_total_2020,1295,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+14,Toronto-Danforth,crime_rate_2020,12.39,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+14,Toronto-Danforth,crime_total_2021,1245,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+14,Toronto-Danforth,crime_rate_2021,11.91,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+14,Toronto-Danforth,crime_total_2022,1567,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+14,Toronto-Danforth,crime_rate_2022,14.99,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+14,Toronto-Danforth,crime_total_2023,1633,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+14,Toronto-Danforth,crime_rate_2023,15.62,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+14,Toronto-Danforth,crime_total_2024,1562,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+14,Toronto-Danforth,crime_rate_2024,14.94,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+14,Toronto-Danforth,crime_total_2025,998,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+14,Toronto-Danforth,crime_rate_2025,9.55,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+14,Toronto-Danforth,311_total_2022,25086,sr2022.zip,"All 311 requests, ward-parseable rows only"
+14,Toronto-Danforth,311_total_2023,22311,sr2023.zip,"All 311 requests, ward-parseable rows only"
+14,Toronto-Danforth,311_total_2024,27428,sr2024.zip,"All 311 requests, ward-parseable rows only"
+14,Toronto-Danforth,311_total_2025,30476,sr2025.zip,"All 311 requests, ward-parseable rows only"
+14,Toronto-Danforth,ksi_collisions_2018,15,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+14,Toronto-Danforth,ksi_collisions_2019,12,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+14,Toronto-Danforth,ksi_collisions_2020,16,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+14,Toronto-Danforth,ksi_collisions_2021,18,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+14,Toronto-Danforth,ksi_collisions_2022,12,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+14,Toronto-Danforth,ksi_collisions_2023,13,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+14,Toronto-Danforth,ksi_collisions_2024,17,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+14,Toronto-Danforth,ksi_collisions_2025,16,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+14,Toronto-Danforth,ksi_collisions_2026,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+15,Don Valley West,crime_total_2018,807,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+15,Don Valley West,crime_rate_2018,7.99,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+15,Don Valley West,crime_total_2019,969,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+15,Don Valley West,crime_rate_2019,9.59,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+15,Don Valley West,crime_total_2020,842,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+15,Don Valley West,crime_rate_2020,8.33,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+15,Don Valley West,crime_total_2021,953,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+15,Don Valley West,crime_rate_2021,9.43,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+15,Don Valley West,crime_total_2022,1120,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+15,Don Valley West,crime_rate_2022,11.09,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+15,Don Valley West,crime_total_2023,1460,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+15,Don Valley West,crime_rate_2023,14.45,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+15,Don Valley West,crime_total_2024,1306,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+15,Don Valley West,crime_rate_2024,12.93,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+15,Don Valley West,crime_total_2025,824,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+15,Don Valley West,crime_rate_2025,8.16,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+15,Don Valley West,311_total_2022,17443,sr2022.zip,"All 311 requests, ward-parseable rows only"
+15,Don Valley West,311_total_2023,15370,sr2023.zip,"All 311 requests, ward-parseable rows only"
+15,Don Valley West,311_total_2024,18321,sr2024.zip,"All 311 requests, ward-parseable rows only"
+15,Don Valley West,311_total_2025,19631,sr2025.zip,"All 311 requests, ward-parseable rows only"
+15,Don Valley West,ksi_collisions_2018,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+15,Don Valley West,ksi_collisions_2019,8,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+15,Don Valley West,ksi_collisions_2020,2,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+15,Don Valley West,ksi_collisions_2021,5,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+15,Don Valley West,ksi_collisions_2022,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+15,Don Valley West,ksi_collisions_2023,11,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+15,Don Valley West,ksi_collisions_2024,11,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+15,Don Valley West,ksi_collisions_2025,4,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+15,Don Valley West,ksi_collisions_2026,2,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+16,Don Valley East,crime_total_2018,760,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+16,Don Valley East,crime_rate_2018,8.06,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+16,Don Valley East,crime_total_2019,809,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+16,Don Valley East,crime_rate_2019,8.58,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+16,Don Valley East,crime_total_2020,705,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+16,Don Valley East,crime_rate_2020,7.47,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+16,Don Valley East,crime_total_2021,704,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+16,Don Valley East,crime_rate_2021,7.46,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+16,Don Valley East,crime_total_2022,851,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+16,Don Valley East,crime_rate_2022,9.02,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+16,Don Valley East,crime_total_2023,1150,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+16,Don Valley East,crime_rate_2023,12.19,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+16,Don Valley East,crime_total_2024,1122,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+16,Don Valley East,crime_rate_2024,11.89,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+16,Don Valley East,crime_total_2025,779,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+16,Don Valley East,crime_rate_2025,8.26,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+16,Don Valley East,311_total_2022,10144,sr2022.zip,"All 311 requests, ward-parseable rows only"
+16,Don Valley East,311_total_2023,9506,sr2023.zip,"All 311 requests, ward-parseable rows only"
+16,Don Valley East,311_total_2024,10499,sr2024.zip,"All 311 requests, ward-parseable rows only"
+16,Don Valley East,311_total_2025,11628,sr2025.zip,"All 311 requests, ward-parseable rows only"
+16,Don Valley East,ksi_collisions_2018,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+16,Don Valley East,ksi_collisions_2019,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+16,Don Valley East,ksi_collisions_2020,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+16,Don Valley East,ksi_collisions_2021,5,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+16,Don Valley East,ksi_collisions_2022,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+16,Don Valley East,ksi_collisions_2023,5,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+16,Don Valley East,ksi_collisions_2024,14,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+16,Don Valley East,ksi_collisions_2025,6,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+16,Don Valley East,ksi_collisions_2026,5,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+17,Don Valley North,crime_total_2018,875,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+17,Don Valley North,crime_rate_2018,7.77,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+17,Don Valley North,crime_total_2019,907,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+17,Don Valley North,crime_rate_2019,8.06,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+17,Don Valley North,crime_total_2020,796,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+17,Don Valley North,crime_rate_2020,7.07,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+17,Don Valley North,crime_total_2021,809,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+17,Don Valley North,crime_rate_2021,7.19,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+17,Don Valley North,crime_total_2022,917,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+17,Don Valley North,crime_rate_2022,8.14,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+17,Don Valley North,crime_total_2023,1414,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+17,Don Valley North,crime_rate_2023,12.56,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+17,Don Valley North,crime_total_2024,1308,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+17,Don Valley North,crime_rate_2024,11.62,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+17,Don Valley North,crime_total_2025,784,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+17,Don Valley North,crime_rate_2025,6.96,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+17,Don Valley North,311_total_2022,12265,sr2022.zip,"All 311 requests, ward-parseable rows only"
+17,Don Valley North,311_total_2023,11622,sr2023.zip,"All 311 requests, ward-parseable rows only"
+17,Don Valley North,311_total_2024,12130,sr2024.zip,"All 311 requests, ward-parseable rows only"
+17,Don Valley North,311_total_2025,13737,sr2025.zip,"All 311 requests, ward-parseable rows only"
+17,Don Valley North,ksi_collisions_2018,12,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+17,Don Valley North,ksi_collisions_2019,13,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+17,Don Valley North,ksi_collisions_2020,3,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+17,Don Valley North,ksi_collisions_2021,5,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+17,Don Valley North,ksi_collisions_2022,5,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+17,Don Valley North,ksi_collisions_2023,8,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+17,Don Valley North,ksi_collisions_2024,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+17,Don Valley North,ksi_collisions_2025,4,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+17,Don Valley North,ksi_collisions_2026,2,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+18,Willowdale,crime_total_2018,1189,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+18,Willowdale,crime_rate_2018,10.15,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+18,Willowdale,crime_total_2019,1216,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+18,Willowdale,crime_rate_2019,10.38,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+18,Willowdale,crime_total_2020,1146,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+18,Willowdale,crime_rate_2020,9.78,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+18,Willowdale,crime_total_2021,1222,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+18,Willowdale,crime_rate_2021,10.43,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+18,Willowdale,crime_total_2022,1434,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+18,Willowdale,crime_rate_2022,12.24,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+18,Willowdale,crime_total_2023,1739,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+18,Willowdale,crime_rate_2023,14.85,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+18,Willowdale,crime_total_2024,1509,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+18,Willowdale,crime_rate_2024,12.88,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+18,Willowdale,crime_total_2025,947,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+18,Willowdale,crime_rate_2025,8.09,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+18,Willowdale,311_total_2022,13784,sr2022.zip,"All 311 requests, ward-parseable rows only"
+18,Willowdale,311_total_2023,12108,sr2023.zip,"All 311 requests, ward-parseable rows only"
+18,Willowdale,311_total_2024,13928,sr2024.zip,"All 311 requests, ward-parseable rows only"
+18,Willowdale,311_total_2025,15510,sr2025.zip,"All 311 requests, ward-parseable rows only"
+18,Willowdale,ksi_collisions_2018,16,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+18,Willowdale,ksi_collisions_2019,6,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+18,Willowdale,ksi_collisions_2020,8,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+18,Willowdale,ksi_collisions_2021,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+18,Willowdale,ksi_collisions_2022,6,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+18,Willowdale,ksi_collisions_2023,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+18,Willowdale,ksi_collisions_2024,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+18,Willowdale,ksi_collisions_2025,3,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+18,Willowdale,ksi_collisions_2026,2,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+19,Beaches-East York,crime_total_2018,1345,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+19,Beaches-East York,crime_rate_2018,12.4,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+19,Beaches-East York,crime_total_2019,1364,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+19,Beaches-East York,crime_rate_2019,12.57,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+19,Beaches-East York,crime_total_2020,1175,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+19,Beaches-East York,crime_rate_2020,10.83,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+19,Beaches-East York,crime_total_2021,1268,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+19,Beaches-East York,crime_rate_2021,11.69,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+19,Beaches-East York,crime_total_2022,1539,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+19,Beaches-East York,crime_rate_2022,14.18,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+19,Beaches-East York,crime_total_2023,1463,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+19,Beaches-East York,crime_rate_2023,13.48,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+19,Beaches-East York,crime_total_2024,1441,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+19,Beaches-East York,crime_rate_2024,13.28,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+19,Beaches-East York,crime_total_2025,980,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+19,Beaches-East York,crime_rate_2025,9.03,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+19,Beaches-East York,311_total_2022,24412,sr2022.zip,"All 311 requests, ward-parseable rows only"
+19,Beaches-East York,311_total_2023,20314,sr2023.zip,"All 311 requests, ward-parseable rows only"
+19,Beaches-East York,311_total_2024,24526,sr2024.zip,"All 311 requests, ward-parseable rows only"
+19,Beaches-East York,311_total_2025,27018,sr2025.zip,"All 311 requests, ward-parseable rows only"
+19,Beaches-East York,ksi_collisions_2018,15,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+19,Beaches-East York,ksi_collisions_2019,11,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+19,Beaches-East York,ksi_collisions_2020,6,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+19,Beaches-East York,ksi_collisions_2021,11,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+19,Beaches-East York,ksi_collisions_2022,5,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+19,Beaches-East York,ksi_collisions_2023,11,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+19,Beaches-East York,ksi_collisions_2024,6,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+19,Beaches-East York,ksi_collisions_2025,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+19,Beaches-East York,ksi_collisions_2026,4,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+20,Scarborough Southwest,crime_total_2018,1832,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+20,Scarborough Southwest,crime_rate_2018,16.64,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+20,Scarborough Southwest,crime_total_2019,1801,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+20,Scarborough Southwest,crime_rate_2019,16.36,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+20,Scarborough Southwest,crime_total_2020,1490,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+20,Scarborough Southwest,crime_rate_2020,13.53,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+20,Scarborough Southwest,crime_total_2021,1489,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+20,Scarborough Southwest,crime_rate_2021,13.52,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+20,Scarborough Southwest,crime_total_2022,1686,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+20,Scarborough Southwest,crime_rate_2022,15.31,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+20,Scarborough Southwest,crime_total_2023,2082,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+20,Scarborough Southwest,crime_rate_2023,18.91,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+20,Scarborough Southwest,crime_total_2024,2087,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+20,Scarborough Southwest,crime_rate_2024,18.96,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+20,Scarborough Southwest,crime_total_2025,1490,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+20,Scarborough Southwest,crime_rate_2025,13.53,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+20,Scarborough Southwest,311_total_2022,20322,sr2022.zip,"All 311 requests, ward-parseable rows only"
+20,Scarborough Southwest,311_total_2023,19009,sr2023.zip,"All 311 requests, ward-parseable rows only"
+20,Scarborough Southwest,311_total_2024,19847,sr2024.zip,"All 311 requests, ward-parseable rows only"
+20,Scarborough Southwest,311_total_2025,22300,sr2025.zip,"All 311 requests, ward-parseable rows only"
+20,Scarborough Southwest,ksi_collisions_2018,17,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+20,Scarborough Southwest,ksi_collisions_2019,21,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+20,Scarborough Southwest,ksi_collisions_2020,19,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+20,Scarborough Southwest,ksi_collisions_2021,11,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+20,Scarborough Southwest,ksi_collisions_2022,15,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+20,Scarborough Southwest,ksi_collisions_2023,15,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+20,Scarborough Southwest,ksi_collisions_2024,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+20,Scarborough Southwest,ksi_collisions_2025,14,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+20,Scarborough Southwest,ksi_collisions_2026,8,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+21,Scarborough Centre,crime_total_2018,1651,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+21,Scarborough Centre,crime_rate_2018,14.8,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+21,Scarborough Centre,crime_total_2019,1672,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+21,Scarborough Centre,crime_rate_2019,14.99,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+21,Scarborough Centre,crime_total_2020,1360,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+21,Scarborough Centre,crime_rate_2020,12.19,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+21,Scarborough Centre,crime_total_2021,1471,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+21,Scarborough Centre,crime_rate_2021,13.19,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+21,Scarborough Centre,crime_total_2022,1687,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+21,Scarborough Centre,crime_rate_2022,15.12,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+21,Scarborough Centre,crime_total_2023,2116,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+21,Scarborough Centre,crime_rate_2023,18.97,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+21,Scarborough Centre,crime_total_2024,2085,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+21,Scarborough Centre,crime_rate_2024,18.69,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+21,Scarborough Centre,crime_total_2025,1426,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+21,Scarborough Centre,crime_rate_2025,12.78,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+21,Scarborough Centre,311_total_2022,16489,sr2022.zip,"All 311 requests, ward-parseable rows only"
+21,Scarborough Centre,311_total_2023,16638,sr2023.zip,"All 311 requests, ward-parseable rows only"
+21,Scarborough Centre,311_total_2024,16744,sr2024.zip,"All 311 requests, ward-parseable rows only"
+21,Scarborough Centre,311_total_2025,18777,sr2025.zip,"All 311 requests, ward-parseable rows only"
+21,Scarborough Centre,ksi_collisions_2018,14,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+21,Scarborough Centre,ksi_collisions_2019,28,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+21,Scarborough Centre,ksi_collisions_2020,12,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+21,Scarborough Centre,ksi_collisions_2021,6,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+21,Scarborough Centre,ksi_collisions_2022,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+21,Scarborough Centre,ksi_collisions_2023,17,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+21,Scarborough Centre,ksi_collisions_2024,16,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+21,Scarborough Centre,ksi_collisions_2025,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+21,Scarborough Centre,ksi_collisions_2026,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+22,Scarborough-Agincourt,crime_total_2018,861,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+22,Scarborough-Agincourt,crime_rate_2018,8.3,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+22,Scarborough-Agincourt,crime_total_2019,968,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+22,Scarborough-Agincourt,crime_rate_2019,9.34,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+22,Scarborough-Agincourt,crime_total_2020,782,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+22,Scarborough-Agincourt,crime_rate_2020,7.54,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+22,Scarborough-Agincourt,crime_total_2021,696,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+22,Scarborough-Agincourt,crime_rate_2021,6.71,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+22,Scarborough-Agincourt,crime_total_2022,884,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+22,Scarborough-Agincourt,crime_rate_2022,8.53,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+22,Scarborough-Agincourt,crime_total_2023,1214,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+22,Scarborough-Agincourt,crime_rate_2023,11.71,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+22,Scarborough-Agincourt,crime_total_2024,1124,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+22,Scarborough-Agincourt,crime_rate_2024,10.84,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+22,Scarborough-Agincourt,crime_total_2025,774,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+22,Scarborough-Agincourt,crime_rate_2025,7.46,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+22,Scarborough-Agincourt,311_total_2022,10728,sr2022.zip,"All 311 requests, ward-parseable rows only"
+22,Scarborough-Agincourt,311_total_2023,10907,sr2023.zip,"All 311 requests, ward-parseable rows only"
+22,Scarborough-Agincourt,311_total_2024,10406,sr2024.zip,"All 311 requests, ward-parseable rows only"
+22,Scarborough-Agincourt,311_total_2025,12690,sr2025.zip,"All 311 requests, ward-parseable rows only"
+22,Scarborough-Agincourt,ksi_collisions_2018,20,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+22,Scarborough-Agincourt,ksi_collisions_2019,14,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+22,Scarborough-Agincourt,ksi_collisions_2020,12,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+22,Scarborough-Agincourt,ksi_collisions_2021,14,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+22,Scarborough-Agincourt,ksi_collisions_2022,4,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+22,Scarborough-Agincourt,ksi_collisions_2023,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+22,Scarborough-Agincourt,ksi_collisions_2024,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+22,Scarborough-Agincourt,ksi_collisions_2025,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+22,Scarborough-Agincourt,ksi_collisions_2026,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+23,Scarborough North,crime_total_2018,1003,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+23,Scarborough North,crime_rate_2018,10.67,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+23,Scarborough North,crime_total_2019,1055,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+23,Scarborough North,crime_rate_2019,11.22,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+23,Scarborough North,crime_total_2020,798,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+23,Scarborough North,crime_rate_2020,8.49,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+23,Scarborough North,crime_total_2021,686,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+23,Scarborough North,crime_rate_2021,7.3,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+23,Scarborough North,crime_total_2022,908,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+23,Scarborough North,crime_rate_2022,9.66,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+23,Scarborough North,crime_total_2023,1228,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+23,Scarborough North,crime_rate_2023,13.06,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+23,Scarborough North,crime_total_2024,1178,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+23,Scarborough North,crime_rate_2024,12.53,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+23,Scarborough North,crime_total_2025,718,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+23,Scarborough North,crime_rate_2025,7.64,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+23,Scarborough North,311_total_2022,10755,sr2022.zip,"All 311 requests, ward-parseable rows only"
+23,Scarborough North,311_total_2023,10664,sr2023.zip,"All 311 requests, ward-parseable rows only"
+23,Scarborough North,311_total_2024,10108,sr2024.zip,"All 311 requests, ward-parseable rows only"
+23,Scarborough North,311_total_2025,12308,sr2025.zip,"All 311 requests, ward-parseable rows only"
+23,Scarborough North,ksi_collisions_2018,18,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+23,Scarborough North,ksi_collisions_2019,19,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+23,Scarborough North,ksi_collisions_2020,8,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+23,Scarborough North,ksi_collisions_2021,6,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+23,Scarborough North,ksi_collisions_2022,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+23,Scarborough North,ksi_collisions_2023,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+23,Scarborough North,ksi_collisions_2024,11,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+23,Scarborough North,ksi_collisions_2025,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+23,Scarborough North,ksi_collisions_2026,4,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+24,Scarborough-Guildwood,crime_total_2018,1356,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+24,Scarborough-Guildwood,crime_rate_2018,13.2,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+24,Scarborough-Guildwood,crime_total_2019,1440,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+24,Scarborough-Guildwood,crime_rate_2019,14.01,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+24,Scarborough-Guildwood,crime_total_2020,1175,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+24,Scarborough-Guildwood,crime_rate_2020,11.43,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+24,Scarborough-Guildwood,crime_total_2021,1082,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+24,Scarborough-Guildwood,crime_rate_2021,10.53,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+24,Scarborough-Guildwood,crime_total_2022,1367,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+24,Scarborough-Guildwood,crime_rate_2022,13.3,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+24,Scarborough-Guildwood,crime_total_2023,1469,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+24,Scarborough-Guildwood,crime_rate_2023,14.3,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+24,Scarborough-Guildwood,crime_total_2024,1414,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+24,Scarborough-Guildwood,crime_rate_2024,13.76,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+24,Scarborough-Guildwood,crime_total_2025,1034,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+24,Scarborough-Guildwood,crime_rate_2025,10.06,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+24,Scarborough-Guildwood,311_total_2022,12744,sr2022.zip,"All 311 requests, ward-parseable rows only"
+24,Scarborough-Guildwood,311_total_2023,13098,sr2023.zip,"All 311 requests, ward-parseable rows only"
+24,Scarborough-Guildwood,311_total_2024,13453,sr2024.zip,"All 311 requests, ward-parseable rows only"
+24,Scarborough-Guildwood,311_total_2025,15439,sr2025.zip,"All 311 requests, ward-parseable rows only"
+24,Scarborough-Guildwood,ksi_collisions_2018,16,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+24,Scarborough-Guildwood,ksi_collisions_2019,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+24,Scarborough-Guildwood,ksi_collisions_2020,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+24,Scarborough-Guildwood,ksi_collisions_2021,10,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+24,Scarborough-Guildwood,ksi_collisions_2022,11,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+24,Scarborough-Guildwood,ksi_collisions_2023,13,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+24,Scarborough-Guildwood,ksi_collisions_2024,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+24,Scarborough-Guildwood,ksi_collisions_2025,13,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+24,Scarborough-Guildwood,ksi_collisions_2026,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+25,Scarborough-Rouge Park,crime_total_2018,981,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2018"
+25,Scarborough-Rouge Park,crime_rate_2018,9.67,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+25,Scarborough-Rouge Park,crime_total_2019,1113,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2019"
+25,Scarborough-Rouge Park,crime_rate_2019,10.97,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+25,Scarborough-Rouge Park,crime_total_2020,821,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2020"
+25,Scarborough-Rouge Park,crime_rate_2020,8.09,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+25,Scarborough-Rouge Park,crime_total_2021,908,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2021"
+25,Scarborough-Rouge Park,crime_rate_2021,8.95,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+25,Scarborough-Rouge Park,crime_total_2022,1016,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2022"
+25,Scarborough-Rouge Park,crime_rate_2022,10.01,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+25,Scarborough-Rouge Park,crime_total_2023,1256,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2023"
+25,Scarborough-Rouge Park,crime_rate_2023,12.38,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+25,Scarborough-Rouge Park,crime_total_2024,1215,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2024"
+25,Scarborough-Rouge Park,crime_rate_2024,11.97,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+25,Scarborough-Rouge Park,crime_total_2025,843,major-crime-indicators.csv,"MCI_CATEGORY in 5 cats, OCC_YEAR=2025"
+25,Scarborough-Rouge Park,crime_rate_2025,8.31,major-crime-indicators.csv,"per 1,000 residents (2021 Census pop)"
+25,Scarborough-Rouge Park,311_total_2022,17219,sr2022.zip,"All 311 requests, ward-parseable rows only"
+25,Scarborough-Rouge Park,311_total_2023,16378,sr2023.zip,"All 311 requests, ward-parseable rows only"
+25,Scarborough-Rouge Park,311_total_2024,16628,sr2024.zip,"All 311 requests, ward-parseable rows only"
+25,Scarborough-Rouge Park,311_total_2025,19396,sr2025.zip,"All 311 requests, ward-parseable rows only"
+25,Scarborough-Rouge Park,ksi_collisions_2018,11,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+25,Scarborough-Rouge Park,ksi_collisions_2019,14,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+25,Scarborough-Rouge Park,ksi_collisions_2020,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+25,Scarborough-Rouge Park,ksi_collisions_2021,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+25,Scarborough-Rouge Park,ksi_collisions_2022,9,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+25,Scarborough-Rouge Park,ksi_collisions_2023,7,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+25,Scarborough-Rouge Park,ksi_collisions_2024,5,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+25,Scarborough-Rouge Park,ksi_collisions_2025,8,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward
+25,Scarborough-Rouge Park,ksi_collisions_2026,8,motor-vehicle-collisions-ksi-4326.csv,Fatal+Non-Fatal acclass; unique collision_id per ward

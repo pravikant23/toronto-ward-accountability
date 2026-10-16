@@ -40,17 +40,30 @@ LINKS = {
     'attendance':    'https://open.toronto.ca/dataset/members-of-toronto-city-council-meeting-attendance/',
     'wards_geo':     'https://open.toronto.ca/dataset/city-wards/',
     'licence':       'https://open.toronto.ca/open-data-licence/',
+    'crime_mci':     'https://open.toronto.ca/dataset/major-crime-indicators/',
+    'ksi':           'https://open.toronto.ca/dataset/motor-vehicle-collisions-involving-killed-or-seriously-injured-persons/',
+    'three11':       'https://open.toronto.ca/dataset/311-service-requests-customer-initiated/',
 }
 
 CANDIDATE_QUESTIONS = [
     'What are your three priorities for this ward in the next term?',
+    'Roads and sidewalks are a top concern for many Toronto residents. What is your plan for road maintenance and pedestrian safety in this ward?',
+    'Housing costs are a significant concern. What policies would you support at City Council to make housing more affordable?',
+    'How will you approach property tax decisions at City Council, and what would you change about the city budget?',
+    'What is your approach to public safety in this ward, and how would you work with the Toronto Police Services Board?',
     'How will you stay in contact with residents throughout the term?',
-    'How will you approach major spending decisions at City Council?',
-    'What is your view on housing affordability in this ward?',
-    'How will you balance the interests of renters and homeowners?',
-    'How will you work with other councillors and the Mayor to get things done?',
-    'What would you protect and what would you change in the city budget?',
+    'How will you work with other councillors and the Mayor to get things done for this ward?',
 ]
+
+# Nanos/CTV/CP24 poll — Sept 30–Oct 4 2026
+POLL_ITEMS = [
+    ('Traffic and roads',     26),
+    ('Housing costs',         18),
+    ('Public safety / crime', 16),
+    ('Property taxes',        12),
+]
+POLL_SOURCE = ('Nanos Research for CTV News/CP24, Sept 30–Oct 4, 2026. '
+               'n=755 Toronto residents, MOE ±3.6 percentage points, 19 times out of 20.')
 
 COUNCIL_CAN = [
     'Property taxes and most City fees',
@@ -443,6 +456,165 @@ def sec_census(w, city_census):
   </div>
 </section>'''
 
+def sec_what_matters(w, city_census):
+    issues = w.get('issues', {})
+    pop    = (w.get('census') or {}).get('population_2021') or 0
+
+    # Poll bars — proportional to max
+    max_pct = max(pct for _, pct in POLL_ITEMS)
+    poll_rows = []
+    for label, pct in POLL_ITEMS:
+        bw = round(pct / max_pct * 100)
+        poll_rows.append(
+            f'<div class="poll-bar-row">'
+            f'<span class="poll-bar-label">{h(label)}</span>'
+            f'<div class="poll-bar-wrap">'
+            f'<div class="poll-bar" style="width:{bw}%" title="{pct}%"></div>'
+            f'<span class="poll-bar-pct">{pct}%</span>'
+            f'</div></div>'
+        )
+    poll_html = '\n    '.join(poll_rows)
+
+    # Traffic/roads card
+    three11_yr = (issues.get('three11') or {}).get('years', {}).get('2025') or {}
+    road311    = three11_yr.get('road_related')
+    ksi_yr     = (issues.get('ksi') or {}).get('years', {}).get('2025') or {}
+    ksi_cnt    = ksi_yr.get('collisions')
+    ksi_ped    = ksi_yr.get('pedestrian', 0)
+    ksi_cyc    = ksi_yr.get('cyclist', 0)
+
+    if road311 is not None and pop:
+        road_rate = round(road311 / pop * 1000, 1)
+        road_line = f'{fmt_num(road311)} road and sidewalk service requests in 2025 ({road_rate} per 1,000 residents)'
+    else:
+        road_line = 'Not available'
+
+    if ksi_cnt is not None:
+        ped_cyc_parts = []
+        if ksi_ped: ped_cyc_parts.append(f'{ksi_ped} pedestrian-involved')
+        if ksi_cyc: ped_cyc_parts.append(f'{ksi_cyc} cyclist-involved')
+        ped_cyc_txt = (': ' + ', '.join(ped_cyc_parts)) if ped_cyc_parts else ''
+        ksi_line = f'{ksi_cnt} serious-injury or fatal collisions, Jan–Sep 2025{ped_cyc_txt}'
+    else:
+        ksi_line = None
+
+    # Housing card
+    pct_rnt = (w.get('census') or {}).get('pct_rented')
+    c_rnt   = (city_census or {}).get('pct_rented')
+    med_inc = (w.get('census') or {}).get('median_household_income_2020')
+    c_inc   = (city_census or {}).get('median_household_income_2020')
+
+    rnt_line = (f'{fmt_pct(pct_rnt)} of dwellings rented'
+                + (f' <span class="stat-sub">(city: {fmt_pct(c_rnt)})</span>' if c_rnt is not None else '')) \
+               if pct_rnt is not None else 'Not available'
+    inc_line = (f'Median household income 2020: {fmt_dollar(med_inc)}'
+                + (f' <span class="stat-sub">(city: {fmt_dollar(c_inc)})</span>' if c_inc is not None else '')) \
+               if med_inc is not None else 'Not available'
+
+    # Safety card
+    crime_yr    = (issues.get('crime') or {}).get('years', {}).get('2025') or {}
+    crime_cnt   = crime_yr.get('count')
+    crime_rate  = crime_yr.get('rate_per_1k')
+    city_rate   = (issues.get('crime') or {}).get('city_rate_per_1k', {}).get('2025')
+
+    if crime_cnt is not None:
+        crime_line = f'{fmt_num(crime_cnt)} police-reported MCI incidents, Jan–Sep 2025'
+        rate_line  = (f'{crime_rate:.1f} per 1,000 residents'
+                      + (f' <span class="stat-sub">(city avg: {city_rate:.1f})</span>'
+                         if city_rate is not None else '')) if crime_rate is not None else ''
+    else:
+        crime_line = 'Not available'
+        rate_line  = ''
+
+    # Property taxes card — only current councillor's votes
+    cur_name = f"{w['councillor_first']} {w['councillor_last']}"
+    bv_list  = [bv for bv in (w.get('budget_votes') or [])
+                if bv.get('voted_by') == cur_name]
+    if bv_list:
+        bv_parts = [f'{bv["year"]}: {bv.get("vote","—")}' for bv in bv_list]
+        bv_line  = f'<p class="stat-sub">{h(cur_name)}\'s budget votes — {h(", ".join(bv_parts))}</p>'
+    else:
+        bv_line = ''
+
+    return f'''<section id="what-matters" aria-labelledby="h-matters">
+  <h2 id="h-matters">What matters here</h2>
+  <p class="note">A September 2026 survey asked Toronto residents their top concern for the municipal election.
+     Ward data below is from City of Toronto open data.</p>
+
+  <div class="poll-block">
+    <h3>Top concerns — Toronto residents, September 2026</h3>
+    <div class="poll-bars">
+    {poll_html}
+    </div>
+    <p class="note">{h(POLL_SOURCE)}</p>
+  </div>
+
+  <div class="issue-cards">
+
+    <div class="issue-card">
+      <div class="issue-card__head issue-card__head--traffic">
+        <span class="issue-card__pct">26%</span>
+        <h3>Traffic and roads</h3>
+      </div>
+      <div class="issue-card__body">
+        <p>{road_line}</p>
+        {f'<p class="stat-sub">{h(ksi_line)}</p>' if ksi_line else ''}
+        <p class="note">311 calls about potholes, road damage, traffic signals, sidewalks, and related issues.
+           KSI = killed or seriously injured collisions (Toronto Police, by date of occurrence).
+           Sources: <a href="{LINKS["three11"]}">311 Service Requests</a>,
+           <a href="{LINKS["ksi"]}">Motor Vehicle Collisions — KSI</a>.</p>
+      </div>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-card__head issue-card__head--housing">
+        <span class="issue-card__pct">18%</span>
+        <h3>Housing costs</h3>
+      </div>
+      <div class="issue-card__body">
+        <p>{rnt_line}</p>
+        <p>{inc_line}</p>
+        <p class="note">New housing permits per ward: not available. The City's building permits file
+           uses a map-grid code (e.g. "E2022") that does not correspond to ward boundaries
+           and contains no coordinates.
+           Source: <a href="{LINKS["census"]}">2021 Census Ward Profiles</a>.</p>
+      </div>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-card__head issue-card__head--safety">
+        <span class="issue-card__pct">16%</span>
+        <h3>Public safety</h3>
+      </div>
+      <div class="issue-card__body">
+        <p>{crime_line}</p>
+        {f'<p>{rate_line}</p>' if rate_line else ''}
+        <p class="note">Includes: Assault, Auto Theft, Break and Enter, Robbery, Theft Over.
+           2025 = Jan–Sep only (most recent available in the dataset).
+           Incidents are located to the nearest intersection for privacy; 1–2% dropped per year
+           due to missing coordinates.
+           Source: <a href="{LINKS["crime_mci"]}">Major Crime Indicators</a>.</p>
+      </div>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-card__head issue-card__head--taxes">
+        <span class="issue-card__pct">12%</span>
+        <h3>Property taxes</h3>
+      </div>
+      <div class="issue-card__body">
+        <p>Property tax rates are set by City Council and apply to all Toronto residential
+           properties. There is no per-ward breakdown of tax rates.</p>
+        {bv_line}
+        <p class="note">See the full budget vote record in the
+           <a href="#record">Councillor record</a> section below.</p>
+      </div>
+    </div>
+
+  </div>
+</section>'''
+
+
 def sec_record(w):
     cur = f"{w['councillor_first']} {w['councillor_last']}"
     bye = w.get('by_election')
@@ -627,6 +799,15 @@ def sec_sources(w):
       <tr><td>Ward boundaries (map)</td>
           <td>city-wards-4326.geojson</td>
           <td><a href="{LINKS["wards_geo"]}">City Wards</a></td></tr>
+      <tr><td>Major crime indicators (2018–2025, Jan–Sep)</td>
+          <td>major-crime-indicators.csv</td>
+          <td><a href="{LINKS["crime_mci"]}">Major Crime Indicators</a></td></tr>
+      <tr><td>Motor vehicle collisions — KSI (2018–2026, Jan–Sep)</td>
+          <td>motor-vehicle-collisions-ksi-4326.csv</td>
+          <td><a href="{LINKS["ksi"]}">Motor Vehicle Collisions — KSI</a></td></tr>
+      <tr><td>311 service requests (2022–2026, Jan–Sep)</td>
+          <td>sr2022.zip – sr2026.zip</td>
+          <td><a href="{LINKS["three11"]}">311 Service Requests — Customer Initiated</a></td></tr>
     </tbody>
   </table>
   <p class="note">Data published under the
@@ -649,6 +830,7 @@ def build_ward_page(w, ward_paths, bounds, city_census):
 
     page_nav = '''<nav class="page-nav" aria-label="Jump to section">
   <a href="#at-a-glance">At a glance</a>
+  <a href="#what-matters">What matters</a>
   <a href="#results">2022 Results</a>
   <a href="#census">Census</a>
   <a href="#record">Councillor record</a>
@@ -671,6 +853,7 @@ def build_ward_page(w, ward_paths, bounds, city_census):
 </div>''',
         page_nav,
         sec_glance(w, city_census),
+        sec_what_matters(w, city_census),
         sec_results(w),
         sec_census(w, city_census),
         sec_record(w),
@@ -695,15 +878,65 @@ def build_index(data, ward_paths, bounds):
     map_svg   = city_map_svg(ward_paths, bounds, link_all=True)
     chart_svg = turnout_chart_svg(wards, city22['turnout_pct'])
 
-    tbl_rows = ''.join(
-        f'<tr>'
-        f'<td><a href="ward-{w["ward_num"]}.html">Ward {w["ward_num"]}</a></td>'
-        f'<td>{h(w.get("ward_name",""))}</td>'
-        f'<td>{h(w["councillor_first"])} {h(w["councillor_last"])}</td>'
-        f'<td>{fmt_pct(w.get("turnout_pct"))}</td>'
-        f'</tr>'
-        for w in sorted(wards, key=lambda x: x['ward_num'])
-    )
+    def _issue_val(ward, key, sub, default=''):
+        return (ward.get('issues') or {}).get(key, {}).get('years', {}).get('2025') or {}
+
+    tbl_rows_list = []
+    for ward in sorted(wards, key=lambda x: x['ward_num']):
+        wn   = ward['ward_num']
+        tp   = ward.get('turnout_pct') or 0
+        pop  = (ward.get('census') or {}).get('population_2021') or 0
+
+        crime_25   = ((ward.get('issues') or {}).get('crime') or {}).get('years', {}).get('2025') or {}
+        crime_rate = crime_25.get('rate_per_1k') or ''
+
+        three11_25 = ((ward.get('issues') or {}).get('three11') or {}).get('years', {}).get('2025') or {}
+        road311    = three11_25.get('road_related') or ''
+
+        ksi_25     = ((ward.get('issues') or {}).get('ksi') or {}).get('years', {}).get('2025') or {}
+        ksi_cnt    = ksi_25.get('collisions') or ''
+
+        tbl_rows_list.append(
+            f'<tr>'
+            f'<td data-val="{wn}"><a href="ward-{wn}.html">Ward {wn}</a></td>'
+            f'<td data-val="{h(ward.get("ward_name",""))}">{h(ward.get("ward_name",""))}</td>'
+            f'<td data-val="{h(ward["councillor_last"])}">{h(ward["councillor_first"])} {h(ward["councillor_last"])}</td>'
+            f'<td data-val="{tp}">{fmt_pct(ward.get("turnout_pct"))}</td>'
+            f'<td data-val="{crime_rate}">{f"{crime_rate:.1f}/1k" if crime_rate else "—"}</td>'
+            f'<td data-val="{road311}">{fmt_num(road311) if road311 else "—"}</td>'
+            f'<td data-val="{ksi_cnt}">{ksi_cnt if ksi_cnt else "—"}</td>'
+            f'</tr>'
+        )
+    tbl_rows = '\n'.join(tbl_rows_list)
+
+    sort_js = '''<script>
+(function(){
+  var tbl = document.getElementById('ward-table');
+  if (!tbl) return;
+  var ths = tbl.querySelectorAll('th[data-sort]');
+  var state = {};
+  ths.forEach(function(th){
+    th.addEventListener('click', function(){
+      var col = parseInt(th.getAttribute('data-sort'), 10);
+      var asc = state[col] !== true;
+      state = {};
+      state[col] = asc;
+      ths.forEach(function(h){ h.className = ''; });
+      th.className = asc ? 'sort-asc' : 'sort-desc';
+      var tbody = tbl.querySelector('tbody');
+      var rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort(function(a, b){
+        var av = (a.children[col].getAttribute('data-val') || '').trim();
+        var bv = (b.children[col].getAttribute('data-val') || '').trim();
+        var an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return asc ? an - bn : bn - an;
+        return asc ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(function(r){ tbody.appendChild(r); });
+    });
+  });
+})();
+</script>'''
 
     return '\n'.join([
         page_open('Toronto Ward Facts', is_home=True),
@@ -711,8 +944,8 @@ def build_index(data, ward_paths, bounds):
   <div class="home-hero__text">
     <h1>Toronto Ward Facts</h1>
     <p class="lead">Official data on all 25 Toronto wards — voter turnout, 2022 election
-       results, census profiles, and councillor voting records. Non-partisan. Sourced
-       entirely from City of Toronto open data.</p>
+       results, census profiles, councillor voting records, and ward-level data on traffic,
+       crime, and housing. Non-partisan. Sourced entirely from City of Toronto open data.</p>
     <p>Next election: <strong>{ELECTION_DATE}</strong></p>
     <a class="btn" href="{LINKS["myvote"]}">Find my ward and polling place</a>
   </div>
@@ -737,18 +970,25 @@ def build_index(data, ward_paths, bounds):
 
 <section id="ward-list" aria-labelledby="h-wards">
   <h2 id="h-wards">All 25 wards</h2>
-  <table class="data-table ward-dir-tbl" aria-label="All 25 Toronto wards">
+  <p class="note">Click any column heading to sort. Crime rate and road 311 are for Jan–Sep 2025 (most recent available). KSI = serious-injury or fatal collisions.</p>
+  <div class="table-scroll">
+  <table class="data-table ward-dir-tbl" id="ward-table" aria-label="All 25 Toronto wards">
     <thead>
       <tr>
-        <th scope="col">Ward</th>
-        <th scope="col">Name</th>
-        <th scope="col">Current councillor</th>
-        <th scope="col">2022 turnout</th>
+        <th scope="col" data-sort="0">Ward</th>
+        <th scope="col" data-sort="1">Name</th>
+        <th scope="col" data-sort="2">Current councillor</th>
+        <th scope="col" data-sort="3">2022 turnout</th>
+        <th scope="col" data-sort="4">Crime/1k (2025 YTD)</th>
+        <th scope="col" data-sort="5">Road 311 (2025)</th>
+        <th scope="col" data-sort="6">KSI (2025 YTD)</th>
       </tr>
     </thead>
     <tbody>{tbl_rows}</tbody>
   </table>
+  </div>
 </section>''',
+        sort_js,
         page_close(),
     ])
 
@@ -788,10 +1028,40 @@ def build_about(data):
           <td><a href="{LINKS["attendance"]}">Members of Toronto City Council – Meeting Attendance</a></td></tr>
       <tr><td>City ward boundaries (GeoJSON)</td>
           <td><a href="{LINKS["wards_geo"]}">City Wards</a></td></tr>
+      <tr><td>Major crime indicators (2018–2025, Jan–Sep)</td>
+          <td><a href="{LINKS["crime_mci"]}">Major Crime Indicators</a></td></tr>
+      <tr><td>Motor vehicle collisions — KSI (2018–2026, Jan–Sep)</td>
+          <td><a href="{LINKS["ksi"]}">Motor Vehicle Collisions — KSI</a></td></tr>
+      <tr><td>311 service requests (2022–2026, Jan–Sep)</td>
+          <td><a href="{LINKS["three11"]}">311 Service Requests — Customer Initiated</a></td></tr>
     </tbody>
   </table>
   <p class="note">All data published under the
      <a href="{LINKS["licence"]}">Open Government Licence – Toronto</a>.</p>
+</section>
+
+<section aria-labelledby="h-what-matters">
+  <h2 id="h-what-matters">What matters here — methodology</h2>
+  <p>The "What matters here" section on each ward page shows ward-level data for
+     the four issues Toronto residents named most often in a September 2026 survey.</p>
+  <ul>
+    <li><strong>Traffic and roads:</strong> 311 service request counts for potholes, road damage,
+        traffic signals, sidewalks, and related categories (2022–2026). Request type names
+        were renamed by the City in 2025; pre-2025 equivalent names are mapped for consistent
+        year-over-year counting. KSI collision counts use unique collision IDs where the outcome
+        was a fatality or serious injury.</li>
+    <li><strong>Housing costs:</strong> Renter share and median household income from the 2021 Census.
+        Building permits per ward are not available: the City's permits file uses a map-grid
+        reference code that does not correspond to ward boundaries.</li>
+    <li><strong>Public safety:</strong> Five MCI categories (Assault, Auto Theft, Break and Enter,
+        Robbery, Theft Over) by date of occurrence. Ward assignment uses a spatial join of
+        WGS84 coordinates against ward polygons (1–2% of records dropped per year due to
+        missing coordinates). 2025 data covers January–September only.</li>
+    <li><strong>Property taxes:</strong> Rates are set city-wide by City Council.
+        Per-ward tax-rate data does not exist. The section links to the councillor's budget
+        vote record.</li>
+  </ul>
+  <p>Poll source: Nanos Research for CTV News/CP24, Sept 30–Oct 4, 2026. n=755, MOE ±3.6%, 19 times out of 20.</p>
 </section>
 
 <section aria-labelledby="h-formula">
@@ -1019,11 +1289,47 @@ h3 { font-size: 0.97rem; color: var(--clr-primary); margin: 1.1rem 0 0.45rem; }
 .site-footer a { color: #8ebcd8; }
 .site-footer p { margin-bottom: 0.35rem; }
 
+/* What matters here — poll bars */
+.poll-block { background: var(--clr-card); border: 1px solid var(--clr-border);
+              border-radius: var(--radius); padding: 0.9rem 1rem; margin-bottom: 1.1rem; }
+.poll-bars { display: flex; flex-direction: column; gap: 0.55rem; margin: 0.65rem 0 0.5rem; }
+.poll-bar-row { display: grid; grid-template-columns: 155px 1fr; gap: 0.5rem; align-items: center; }
+.poll-bar-label { font-size: 0.86rem; }
+.poll-bar-wrap { display: flex; align-items: center; gap: 0.45rem; }
+.poll-bar { background: var(--clr-bar); height: 20px; border-radius: 3px; min-width: 4px; }
+.poll-bar-pct { font-size: 0.82rem; font-weight: 600; white-space: nowrap; }
+
+/* What matters here — issue cards */
+.issue-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.1rem; }
+.issue-card { background: var(--clr-card); border: 1px solid var(--clr-border);
+              border-radius: var(--radius); overflow: hidden; }
+.issue-card__head { padding: 0.6rem 1rem; display: flex; align-items: center; gap: 0.55rem; }
+.issue-card__head h3 { margin: 0; font-size: 0.92rem; color: #fff; border: none;
+                       padding: 0; font-weight: 700; }
+.issue-card__pct { font-size: 1.05rem; font-weight: 700; color: #fff;
+                   min-width: 2.8rem; text-align: right; }
+.issue-card__head--traffic { background: #1a4a7a; }
+.issue-card__head--housing { background: #2d6a4f; }
+.issue-card__head--safety  { background: #6b2e2e; }
+.issue-card__head--taxes   { background: #5a4100; }
+.issue-card__body { padding: 0.75rem 1rem; font-size: 0.88rem; }
+.issue-card__body p { margin-bottom: 0.35rem; }
+.issue-card__body p:last-child { margin-bottom: 0; }
+
+/* Sortable table header */
+th[data-sort] { cursor: pointer; user-select: none; }
+th[data-sort]:hover { background: #d5dce8; }
+th[data-sort]::after { content: " ⇅"; font-size: 0.7rem; color: var(--clr-muted); }
+th[data-sort].sort-asc::after  { content: " ▲"; color: var(--clr-primary); }
+th[data-sort].sort-desc::after { content: " ▼"; color: var(--clr-primary); }
+
 /* Responsive */
 @media (max-width: 640px) {
   .ward-hero, .home-hero { grid-template-columns: 1fr; }
   .ward-hero__map, .home-hero__map { max-width: 100%; margin: 0 auto; }
   .powers-grid { grid-template-columns: 1fr; }
+  .issue-cards { grid-template-columns: 1fr; }
+  .poll-bar-row { grid-template-columns: 130px 1fr; }
 }
 @media (max-width: 420px) {
   .stat-grid { grid-template-columns: 1fr; }

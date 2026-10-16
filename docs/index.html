@@ -20,8 +20,8 @@
   <div class="home-hero__text">
     <h1>Toronto Ward Facts</h1>
     <p class="lead">Official data on all 25 Toronto wards — voter turnout, 2022 election
-       results, census profiles, and councillor voting records. Non-partisan. Sourced
-       entirely from City of Toronto open data.</p>
+       results, census profiles, councillor voting records, and ward-level data on traffic,
+       crime, and housing. Non-partisan. Sourced entirely from City of Toronto open data.</p>
     <p>Next election: <strong>Monday, October 26, 2026</strong></p>
     <a class="btn" href="https://myvote.toronto.ca/home">Find my ward and polling place</a>
   </div>
@@ -101,18 +101,76 @@
 
 <section id="ward-list" aria-labelledby="h-wards">
   <h2 id="h-wards">All 25 wards</h2>
-  <table class="data-table ward-dir-tbl" aria-label="All 25 Toronto wards">
+  <p class="note">Click any column heading to sort. Crime rate and road 311 are for Jan–Sep 2025 (most recent available). KSI = serious-injury or fatal collisions.</p>
+  <div class="table-scroll">
+  <table class="data-table ward-dir-tbl" id="ward-table" aria-label="All 25 Toronto wards">
     <thead>
       <tr>
-        <th scope="col">Ward</th>
-        <th scope="col">Name</th>
-        <th scope="col">Current councillor</th>
-        <th scope="col">2022 turnout</th>
+        <th scope="col" data-sort="0">Ward</th>
+        <th scope="col" data-sort="1">Name</th>
+        <th scope="col" data-sort="2">Current councillor</th>
+        <th scope="col" data-sort="3">2022 turnout</th>
+        <th scope="col" data-sort="4">Crime/1k (2025 YTD)</th>
+        <th scope="col" data-sort="5">Road 311 (2025)</th>
+        <th scope="col" data-sort="6">KSI (2025 YTD)</th>
       </tr>
     </thead>
-    <tbody><tr><td><a href="ward-1.html">Ward 1</a></td><td>Etobicoke North</td><td>Vincent Crisanti</td><td>24.0%</td></tr><tr><td><a href="ward-2.html">Ward 2</a></td><td>Etobicoke Centre</td><td>Stephen Holyday</td><td>29.9%</td></tr><tr><td><a href="ward-3.html">Ward 3</a></td><td>Etobicoke-Lakeshore</td><td>Amber Morley</td><td>32.7%</td></tr><tr><td><a href="ward-4.html">Ward 4</a></td><td>Parkdale-High Park</td><td>Gord Perks</td><td>38.5%</td></tr><tr><td><a href="ward-5.html">Ward 5</a></td><td>York South-Weston</td><td>Frances Nunziata</td><td>28.4%</td></tr><tr><td><a href="ward-6.html">Ward 6</a></td><td>York Centre</td><td>James Pasternak</td><td>25.1%</td></tr><tr><td><a href="ward-7.html">Ward 7</a></td><td>Humber River-Black Creek</td><td>Anthony Perruzza</td><td>22.1%</td></tr><tr><td><a href="ward-8.html">Ward 8</a></td><td>Eglinton-Lawrence</td><td>Mike Colle</td><td>31.6%</td></tr><tr><td><a href="ward-9.html">Ward 9</a></td><td>Davenport</td><td>Alejandra Bravo</td><td>30.6%</td></tr><tr><td><a href="ward-10.html">Ward 10</a></td><td>Spadina-Fort York</td><td>Ausma Malik</td><td>24.4%</td></tr><tr><td><a href="ward-11.html">Ward 11</a></td><td>University-Rosedale</td><td>Dianne Saxe</td><td>32.0%</td></tr><tr><td><a href="ward-12.html">Ward 12</a></td><td>Toronto-St. Paul&#x27;s</td><td>Josh Matlow</td><td>33.6%</td></tr><tr><td><a href="ward-13.html">Ward 13</a></td><td>Toronto Centre</td><td>Chris Moise</td><td>28.9%</td></tr><tr><td><a href="ward-14.html">Ward 14</a></td><td>Toronto-Danforth</td><td>Paula Fletcher</td><td>35.7%</td></tr><tr><td><a href="ward-15.html">Ward 15</a></td><td>Don Valley West</td><td>Rachel Chernos Lin</td><td>32.6%</td></tr><tr><td><a href="ward-16.html">Ward 16</a></td><td>Don Valley East</td><td>Jon Burnside</td><td>30.5%</td></tr><tr><td><a href="ward-17.html">Ward 17</a></td><td>Don Valley North</td><td>Shelley Carroll</td><td>26.5%</td></tr><tr><td><a href="ward-18.html">Ward 18</a></td><td>Willowdale</td><td>Lily Cheng</td><td>29.2%</td></tr><tr><td><a href="ward-19.html">Ward 19</a></td><td>Beaches-East York</td><td>Brad Bradford</td><td>36.4%</td></tr><tr><td><a href="ward-20.html">Ward 20</a></td><td>Scarborough Southwest</td><td>Parthi Kandavel</td><td>32.4%</td></tr><tr><td><a href="ward-21.html">Ward 21</a></td><td>Scarborough Centre</td><td>Michael Thompson</td><td>26.5%</td></tr><tr><td><a href="ward-22.html">Ward 22</a></td><td>Scarborough-Agincourt</td><td>Nick Mantas</td><td>26.0%</td></tr><tr><td><a href="ward-23.html">Ward 23</a></td><td>Scarborough North</td><td>Jamaal Myers</td><td>25.1%</td></tr><tr><td><a href="ward-24.html">Ward 24</a></td><td>Scarborough-Guildwood</td><td>Paul Ainslie</td><td>26.6%</td></tr><tr><td><a href="ward-25.html">Ward 25</a></td><td>Scarborough-Rouge Park</td><td>Neethan Shan</td><td>27.3%</td></tr></tbody>
+    <tbody><tr><td data-val="1"><a href="ward-1.html">Ward 1</a></td><td data-val="Etobicoke North">Etobicoke North</td><td data-val="Crisanti">Vincent Crisanti</td><td data-val="23.98">24.0%</td><td data-val="13.71">13.7/1k</td><td data-val="2089">2,089</td><td data-val="19">19</td></tr>
+<tr><td data-val="2"><a href="ward-2.html">Ward 2</a></td><td data-val="Etobicoke Centre">Etobicoke Centre</td><td data-val="Holyday">Stephen Holyday</td><td data-val="29.95">29.9%</td><td data-val="7.67">7.7/1k</td><td data-val="3219">3,219</td><td data-val="8">8</td></tr>
+<tr><td data-val="3"><a href="ward-3.html">Ward 3</a></td><td data-val="Etobicoke-Lakeshore">Etobicoke-Lakeshore</td><td data-val="Morley">Amber Morley</td><td data-val="32.66">32.7%</td><td data-val="14.96">15.0/1k</td><td data-val="3841">3,841</td><td data-val="17">17</td></tr>
+<tr><td data-val="4"><a href="ward-4.html">Ward 4</a></td><td data-val="Parkdale-High Park">Parkdale-High Park</td><td data-val="Perks">Gord Perks</td><td data-val="38.46">38.5%</td><td data-val="8.83">8.8/1k</td><td data-val="3279">3,279</td><td data-val="8">8</td></tr>
+<tr><td data-val="5"><a href="ward-5.html">Ward 5</a></td><td data-val="York South-Weston">York South-Weston</td><td data-val="Nunziata">Frances Nunziata</td><td data-val="28.38">28.4%</td><td data-val="9.44">9.4/1k</td><td data-val="2863">2,863</td><td data-val="9">9</td></tr>
+<tr><td data-val="6"><a href="ward-6.html">Ward 6</a></td><td data-val="York Centre">York Centre</td><td data-val="Pasternak">James Pasternak</td><td data-val="25.08">25.1%</td><td data-val="11.97">12.0/1k</td><td data-val="2310">2,310</td><td data-val="14">14</td></tr>
+<tr><td data-val="7"><a href="ward-7.html">Ward 7</a></td><td data-val="Humber River-Black Creek">Humber River-Black Creek</td><td data-val="Perruzza">Anthony Perruzza</td><td data-val="22.11">22.1%</td><td data-val="13.71">13.7/1k</td><td data-val="1620">1,620</td><td data-val="13">13</td></tr>
+<tr><td data-val="8"><a href="ward-8.html">Ward 8</a></td><td data-val="Eglinton-Lawrence">Eglinton-Lawrence</td><td data-val="Colle">Mike Colle</td><td data-val="31.6">31.6%</td><td data-val="8.53">8.5/1k</td><td data-val="4094">4,094</td><td data-val="4">4</td></tr>
+<tr><td data-val="9"><a href="ward-9.html">Ward 9</a></td><td data-val="Davenport">Davenport</td><td data-val="Bravo">Alejandra Bravo</td><td data-val="30.61">30.6%</td><td data-val="9.41">9.4/1k</td><td data-val="3862">3,862</td><td data-val="6">6</td></tr>
+<tr><td data-val="10"><a href="ward-10.html">Ward 10</a></td><td data-val="Spadina-Fort York">Spadina-Fort York</td><td data-val="Malik">Ausma Malik</td><td data-val="24.42">24.4%</td><td data-val="16.45">16.4/1k</td><td data-val="3759">3,759</td><td data-val="16">16</td></tr>
+<tr><td data-val="11"><a href="ward-11.html">Ward 11</a></td><td data-val="University-Rosedale">University-Rosedale</td><td data-val="Saxe">Dianne Saxe</td><td data-val="31.99">32.0%</td><td data-val="15.79">15.8/1k</td><td data-val="3786">3,786</td><td data-val="14">14</td></tr>
+<tr><td data-val="12"><a href="ward-12.html">Ward 12</a></td><td data-val="Toronto-St. Paul&#x27;s">Toronto-St. Paul&#x27;s</td><td data-val="Matlow">Josh Matlow</td><td data-val="33.63">33.6%</td><td data-val="8.1">8.1/1k</td><td data-val="3777">3,777</td><td data-val="11">11</td></tr>
+<tr><td data-val="13"><a href="ward-13.html">Ward 13</a></td><td data-val="Toronto Centre">Toronto Centre</td><td data-val="Moise">Chris Moise</td><td data-val="28.85">28.9%</td><td data-val="21.87">21.9/1k</td><td data-val="3360">3,360</td><td data-val="16">16</td></tr>
+<tr><td data-val="14"><a href="ward-14.html">Ward 14</a></td><td data-val="Toronto-Danforth">Toronto-Danforth</td><td data-val="Fletcher">Paula Fletcher</td><td data-val="35.73">35.7%</td><td data-val="9.55">9.6/1k</td><td data-val="4174">4,174</td><td data-val="16">16</td></tr>
+<tr><td data-val="15"><a href="ward-15.html">Ward 15</a></td><td data-val="Don Valley West">Don Valley West</td><td data-val="Chernos Lin">Rachel Chernos Lin</td><td data-val="32.6">32.6%</td><td data-val="8.16">8.2/1k</td><td data-val="2981">2,981</td><td data-val="4">4</td></tr>
+<tr><td data-val="16"><a href="ward-16.html">Ward 16</a></td><td data-val="Don Valley East">Don Valley East</td><td data-val="Burnside">Jon Burnside</td><td data-val="30.54">30.5%</td><td data-val="8.26">8.3/1k</td><td data-val="1586">1,586</td><td data-val="6">6</td></tr>
+<tr><td data-val="17"><a href="ward-17.html">Ward 17</a></td><td data-val="Don Valley North">Don Valley North</td><td data-val="Carroll">Shelley Carroll</td><td data-val="26.54">26.5%</td><td data-val="6.96">7.0/1k</td><td data-val="1569">1,569</td><td data-val="4">4</td></tr>
+<tr><td data-val="18"><a href="ward-18.html">Ward 18</a></td><td data-val="Willowdale">Willowdale</td><td data-val="Cheng">Lily Cheng</td><td data-val="29.21">29.2%</td><td data-val="8.09">8.1/1k</td><td data-val="2034">2,034</td><td data-val="3">3</td></tr>
+<tr><td data-val="19"><a href="ward-19.html">Ward 19</a></td><td data-val="Beaches-East York">Beaches-East York</td><td data-val="Bradford">Brad Bradford</td><td data-val="36.43">36.4%</td><td data-val="9.03">9.0/1k</td><td data-val="3669">3,669</td><td data-val="7">7</td></tr>
+<tr><td data-val="20"><a href="ward-20.html">Ward 20</a></td><td data-val="Scarborough Southwest">Scarborough Southwest</td><td data-val="Kandavel">Parthi Kandavel</td><td data-val="32.37">32.4%</td><td data-val="13.53">13.5/1k</td><td data-val="2525">2,525</td><td data-val="14">14</td></tr>
+<tr><td data-val="21"><a href="ward-21.html">Ward 21</a></td><td data-val="Scarborough Centre">Scarborough Centre</td><td data-val="Thompson">Michael Thompson</td><td data-val="26.49">26.5%</td><td data-val="12.78">12.8/1k</td><td data-val="2705">2,705</td><td data-val="9">9</td></tr>
+<tr><td data-val="22"><a href="ward-22.html">Ward 22</a></td><td data-val="Scarborough-Agincourt">Scarborough-Agincourt</td><td data-val="Mantas">Nick Mantas</td><td data-val="26.04">26.0%</td><td data-val="7.46">7.5/1k</td><td data-val="1698">1,698</td><td data-val="7">7</td></tr>
+<tr><td data-val="23"><a href="ward-23.html">Ward 23</a></td><td data-val="Scarborough North">Scarborough North</td><td data-val="Myers">Jamaal Myers</td><td data-val="25.1">25.1%</td><td data-val="7.64">7.6/1k</td><td data-val="1739">1,739</td><td data-val="10">10</td></tr>
+<tr><td data-val="24"><a href="ward-24.html">Ward 24</a></td><td data-val="Scarborough-Guildwood">Scarborough-Guildwood</td><td data-val="Ainslie">Paul Ainslie</td><td data-val="26.57">26.6%</td><td data-val="10.06">10.1/1k</td><td data-val="1592">1,592</td><td data-val="13">13</td></tr>
+<tr><td data-val="25"><a href="ward-25.html">Ward 25</a></td><td data-val="Scarborough-Rouge Park">Scarborough-Rouge Park</td><td data-val="Shan">Neethan Shan</td><td data-val="27.28">27.3%</td><td data-val="8.31">8.3/1k</td><td data-val="2050">2,050</td><td data-val="8">8</td></tr></tbody>
   </table>
+  </div>
 </section>
+<script>
+(function(){
+  var tbl = document.getElementById('ward-table');
+  if (!tbl) return;
+  var ths = tbl.querySelectorAll('th[data-sort]');
+  var state = {};
+  ths.forEach(function(th){
+    th.addEventListener('click', function(){
+      var col = parseInt(th.getAttribute('data-sort'), 10);
+      var asc = state[col] !== true;
+      state = {};
+      state[col] = asc;
+      ths.forEach(function(h){ h.className = ''; });
+      th.className = asc ? 'sort-asc' : 'sort-desc';
+      var tbody = tbl.querySelector('tbody');
+      var rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort(function(a, b){
+        var av = (a.children[col].getAttribute('data-val') || '').trim();
+        var bv = (b.children[col].getAttribute('data-val') || '').trim();
+        var an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return asc ? an - bn : bn - an;
+        return asc ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(function(r){ tbody.appendChild(r); });
+    });
+  });
+})();
+</script>
 </main>
 <footer class="site-footer">
   <p>Data from <a href="https://open.toronto.ca/dataset/elections-voter-statistics/">City of Toronto Open Data</a> under the

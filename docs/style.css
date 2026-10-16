@@ -188,11 +188,47 @@ h3 { font-size: 0.97rem; color: var(--clr-primary); margin: 1.1rem 0 0.45rem; }
 .site-footer a { color: #8ebcd8; }
 .site-footer p { margin-bottom: 0.35rem; }
 
+/* What matters here — poll bars */
+.poll-block { background: var(--clr-card); border: 1px solid var(--clr-border);
+              border-radius: var(--radius); padding: 0.9rem 1rem; margin-bottom: 1.1rem; }
+.poll-bars { display: flex; flex-direction: column; gap: 0.55rem; margin: 0.65rem 0 0.5rem; }
+.poll-bar-row { display: grid; grid-template-columns: 155px 1fr; gap: 0.5rem; align-items: center; }
+.poll-bar-label { font-size: 0.86rem; }
+.poll-bar-wrap { display: flex; align-items: center; gap: 0.45rem; }
+.poll-bar { background: var(--clr-bar); height: 20px; border-radius: 3px; min-width: 4px; }
+.poll-bar-pct { font-size: 0.82rem; font-weight: 600; white-space: nowrap; }
+
+/* What matters here — issue cards */
+.issue-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.1rem; }
+.issue-card { background: var(--clr-card); border: 1px solid var(--clr-border);
+              border-radius: var(--radius); overflow: hidden; }
+.issue-card__head { padding: 0.6rem 1rem; display: flex; align-items: center; gap: 0.55rem; }
+.issue-card__head h3 { margin: 0; font-size: 0.92rem; color: #fff; border: none;
+                       padding: 0; font-weight: 700; }
+.issue-card__pct { font-size: 1.05rem; font-weight: 700; color: #fff;
+                   min-width: 2.8rem; text-align: right; }
+.issue-card__head--traffic { background: #1a4a7a; }
+.issue-card__head--housing { background: #2d6a4f; }
+.issue-card__head--safety  { background: #6b2e2e; }
+.issue-card__head--taxes   { background: #5a4100; }
+.issue-card__body { padding: 0.75rem 1rem; font-size: 0.88rem; }
+.issue-card__body p { margin-bottom: 0.35rem; }
+.issue-card__body p:last-child { margin-bottom: 0; }
+
+/* Sortable table header */
+th[data-sort] { cursor: pointer; user-select: none; }
+th[data-sort]:hover { background: #d5dce8; }
+th[data-sort]::after { content: " ⇅"; font-size: 0.7rem; color: var(--clr-muted); }
+th[data-sort].sort-asc::after  { content: " ▲"; color: var(--clr-primary); }
+th[data-sort].sort-desc::after { content: " ▼"; color: var(--clr-primary); }
+
 /* Responsive */
 @media (max-width: 640px) {
   .ward-hero, .home-hero { grid-template-columns: 1fr; }
   .ward-hero__map, .home-hero__map { max-width: 100%; margin: 0 auto; }
   .powers-grid { grid-template-columns: 1fr; }
+  .issue-cards { grid-template-columns: 1fr; }
+  .poll-bar-row { grid-template-columns: 130px 1fr; }
 }
 @media (max-width: 420px) {
   .stat-grid { grid-template-columns: 1fr; }

@@ -47,10 +47,40 @@
           <td><a href="https://open.toronto.ca/dataset/members-of-toronto-city-council-meeting-attendance/">Members of Toronto City Council – Meeting Attendance</a></td></tr>
       <tr><td>City ward boundaries (GeoJSON)</td>
           <td><a href="https://open.toronto.ca/dataset/city-wards/">City Wards</a></td></tr>
+      <tr><td>Major crime indicators (2018–2025, Jan–Sep)</td>
+          <td><a href="https://open.toronto.ca/dataset/major-crime-indicators/">Major Crime Indicators</a></td></tr>
+      <tr><td>Motor vehicle collisions — KSI (2018–2026, Jan–Sep)</td>
+          <td><a href="https://open.toronto.ca/dataset/motor-vehicle-collisions-involving-killed-or-seriously-injured-persons/">Motor Vehicle Collisions — KSI</a></td></tr>
+      <tr><td>311 service requests (2022–2026, Jan–Sep)</td>
+          <td><a href="https://open.toronto.ca/dataset/311-service-requests-customer-initiated/">311 Service Requests — Customer Initiated</a></td></tr>
     </tbody>
   </table>
   <p class="note">All data published under the
      <a href="https://open.toronto.ca/open-data-licence/">Open Government Licence – Toronto</a>.</p>
+</section>
+
+<section aria-labelledby="h-what-matters">
+  <h2 id="h-what-matters">What matters here — methodology</h2>
+  <p>The "What matters here" section on each ward page shows ward-level data for
+     the four issues Toronto residents named most often in a September 2026 survey.</p>
+  <ul>
+    <li><strong>Traffic and roads:</strong> 311 service request counts for potholes, road damage,
+        traffic signals, sidewalks, and related categories (2022–2026). Request type names
+        were renamed by the City in 2025; pre-2025 equivalent names are mapped for consistent
+        year-over-year counting. KSI collision counts use unique collision IDs where the outcome
+        was a fatality or serious injury.</li>
+    <li><strong>Housing costs:</strong> Renter share and median household income from the 2021 Census.
+        Building permits per ward are not available: the City's permits file uses a map-grid
+        reference code that does not correspond to ward boundaries.</li>
+    <li><strong>Public safety:</strong> Five MCI categories (Assault, Auto Theft, Break and Enter,
+        Robbery, Theft Over) by date of occurrence. Ward assignment uses a spatial join of
+        WGS84 coordinates against ward polygons (1–2% of records dropped per year due to
+        missing coordinates). 2025 data covers January–September only.</li>
+    <li><strong>Property taxes:</strong> Rates are set city-wide by City Council.
+        Per-ward tax-rate data does not exist. The section links to the councillor's budget
+        vote record.</li>
+  </ul>
+  <p>Poll source: Nanos Research for CTV News/CP24, Sept 30–Oct 4, 2026. n=755, MOE ±3.6%, 19 times out of 20.</p>
 </section>
 
 <section aria-labelledby="h-formula">
