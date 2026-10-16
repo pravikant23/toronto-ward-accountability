@@ -16,10 +16,17 @@
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header">
   <a class="site-logo" href="index.html">Toronto Ward Facts</a>
-  <nav class="site-nav" aria-label="Site navigation">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-  </nav>
+  <div class="site-header__right">
+    <nav class="site-nav" aria-label="Site navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+    </nav>
+    <span class="site-credit">A civic project by
+      <a href="https://perimtr.ca" class="perimtr-link" rel="noopener">
+        <img src="perimtr-logo.png" alt="Perimtr" class="perimtr-logo-img">
+      </a>
+    </span>
+  </div>
 </header>
 <main id="main">
 <h1>About Toronto Ward Facts</h1>
@@ -118,18 +125,44 @@
   </ul>
 </section>
 
+<section aria-labelledby="h-independence">
+  <h2 id="h-independence">Editorial independence</h2>
+  <div class="independence-box">
+    <p>Toronto Ward Facts is a civic project by
+       <a href="https://perimtr.ca" rel="noopener">Perimtr</a>, an independent
+       research and software company based in Toronto.</p>
+    <p>This site is <strong>non-partisan</strong> and is not affiliated with any candidate,
+       political party, or the City of Toronto. All data on this site comes from City of
+       Toronto open data sources. Editorial decisions — what to show, how to describe it,
+       and what to omit — are made independently by the Perimtr team.</p>
+    <p>We do not accept advertising, sponsorship, or payment from any political organization.
+       If you believe a number is wrong, please send corrections to
+       <a href="mailto:ravi@perimtr.ca">ravi@perimtr.ca</a>.</p>
+  </div>
+</section>
+
 <section aria-labelledby="h-contact">
   <h2 id="h-contact">Contact and corrections</h2>
   <p>Corrections: <a href="mailto:ravi@perimtr.ca">ravi@perimtr.ca</a></p>
-  <p>This site is non-partisan and is not affiliated with any candidate, party, or the City of Toronto.</p>
 </section>
 </main>
 <footer class="site-footer">
-  <p>Data from <a href="https://open.toronto.ca/dataset/elections-voter-statistics/">City of Toronto Open Data</a> under the
-     <a href="https://open.toronto.ca/open-data-licence/">Open Government Licence – Toronto</a>.
-     Numbers last checked 2026-10-15. Corrections: <a href="mailto:ravi@perimtr.ca">ravi@perimtr.ca</a></p>
-  <p>This site is non-partisan and has no party affiliation.
-     <a href="about.html">About &amp; Sources</a></p>
+  <div class="site-footer__inner">
+    <div class="footer-data">
+      <p>Data from <a href="https://open.toronto.ca/dataset/elections-voter-statistics/">City of Toronto Open Data</a> under the
+         <a href="https://open.toronto.ca/open-data-licence/">Open Government Licence – Toronto</a>.
+         Numbers last checked 2026-10-15. Corrections: <a href="mailto:ravi@perimtr.ca">ravi@perimtr.ca</a></p>
+      <p><a href="about.html">About &amp; Sources</a></p>
+    </div>
+    <aside class="footer-independence" aria-label="Independence statement">
+      <p class="independence-label">Editorial independence</p>
+      <p>Toronto Ward Facts is a civic project by
+         <a href="https://perimtr.ca" rel="noopener">Perimtr</a>, an independent
+         research and software company. This site is non-partisan and is not affiliated
+         with any candidate, political party, or the City of Toronto.
+         Editorial decisions are made independently.</p>
+    </aside>
+  </div>
 </footer>
 </body>
 </html>
