@@ -490,9 +490,18 @@ def build_ward_paths(gj, bounds):
         paths[wn] = _ward_path_d(feat, MAP_W, bounds)
     return paths
 
-def city_map_svg(ward_paths, bounds, highlight=None, link_all=True, tab_stop=True):
+def build_ward_names(gj):
+    """Return {ward_num: ward_name} from GeoJSON properties."""
+    names = {}
+    for feat in gj['features']:
+        wn = int(feat['properties']['AREA_SHORT_CODE'])
+        names[wn] = feat['properties']['AREA_NAME']
+    return names
+
+def city_map_svg(ward_paths, bounds, highlight=None, link_all=True, tab_stop=True, ward_names=None):
     """Full-city outline SVG. highlight=ward_num draws that ward in dark blue.
-    tab_stop=False adds tabindex="-1" to all links (use in aria-hidden containers)."""
+    tab_stop=False adds tabindex="-1" to all links (use in aria-hidden containers).
+    ward_names={wn: name} adds data-name attribute for JS hover tooltips."""
     h_val = _svg_height(MAP_W, bounds)
     has_hl = highlight is not None
     lines = [
@@ -505,10 +514,13 @@ def city_map_svg(ward_paths, bounds, highlight=None, link_all=True, tab_stop=Tru
     for wn in sorted(ward_paths):
         d    = ward_paths[wn]
         fill = '#0047FF' if wn == highlight else ('#d0d8f0' if has_hl else '#6b8ccc')
+        name = ward_names.get(wn, '') if ward_names else ''
+        title_text = f'Ward {wn} — {name}' if name else f'Ward {wn}'
         path = (f'<path d="{d}" fill="{fill}" stroke="#fff" stroke-width="0.7" '
-                f'stroke-linejoin="round"><title>Ward {wn}</title></path>')
+                f'stroke-linejoin="round"><title>{title_text}</title></path>')
         if link_all or wn == highlight:
-            lines.append(f'  <a href="ward-{wn}.html"{a_attrs}>{path}</a>')
+            name_attr = f' data-name="Ward {wn} — {h(name)}"' if name else ''
+            lines.append(f'  <a href="ward-{wn}.html"{a_attrs}{name_attr}>{path}</a>')
         else:
             lines.append(f'  {path}')
     lines.append('</svg>')
@@ -559,7 +571,8 @@ def page_open(title, is_home=False, description=None, og_url=None):
     </nav>
     <span class="site-credit">A civic project by
       <a href="https://perimtr.ca" class="perimtr-link" rel="noopener">
-        <img src="perimtr-logo.png" alt="Perimtr" class="perimtr-logo-img">
+        <img src="perimtr-logo.png" alt="" class="perimtr-logo-img">
+        <span class="perimtr-name">Perimtr</span>
       </a>
     </span>
   </div>
@@ -586,6 +599,27 @@ def page_close():
     </aside>
   </div>
 </footer>
+<div id="map-tip" class="map-tip" aria-hidden="true"></div>
+<script>
+(function(){{
+  var tip = document.getElementById('map-tip');
+  if(!tip) return;
+  document.addEventListener('mouseover', function(e){{
+    var a = e.target.closest('a[data-name]');
+    if(a){{ tip.textContent = a.dataset.name; tip.classList.add('map-tip--on'); }}
+    else {{ tip.classList.remove('map-tip--on'); }}
+  }});
+  document.addEventListener('mousemove', function(e){{
+    if(tip.classList.contains('map-tip--on')){{
+      tip.style.left = (e.clientX + 14) + 'px';
+      tip.style.top  = (e.clientY - 36) + 'px';
+    }}
+  }});
+  document.addEventListener('mouseout', function(e){{
+    if(!e.target.closest('a[data-name]')) tip.classList.remove('map-tip--on');
+  }});
+}})();
+</script>
 </body>
 </html>'''
 
@@ -1219,13 +1253,13 @@ def sec_sources(w):
 
 # ── Page builders ──────────────────────────────────────────────────────────────
 
-def build_ward_page(w, ward_paths, bounds, city_census):
+def build_ward_page(w, ward_paths, bounds, city_census, ward_names=None):
     wn   = w['ward_num']
     name = w['ward_name']
     cur  = f"{w['councillor_first']} {w['councillor_last']}"
     bye  = w.get('by_election')
 
-    map_svg  = city_map_svg(ward_paths, bounds, highlight=wn, tab_stop=False)
+    map_svg  = city_map_svg(ward_paths, bounds, highlight=wn, tab_stop=False, ward_names=ward_names)
     bye_html = (f'<p class="by-election-strip"><strong>By-election:</strong> {h(bye)}</p>'
                 if bye else '')
 
@@ -1271,7 +1305,7 @@ def build_ward_page(w, ward_paths, bounds, city_census):
     ])
 
 
-def build_index(data, ward_paths, bounds):
+def build_index(data, ward_paths, bounds, ward_names=None):
     wards      = data['wards']
     city22     = data['city_2022']
     city18     = data['city_2018']
@@ -1281,7 +1315,7 @@ def build_index(data, ward_paths, bounds):
     tp22   = fmt_pct(city22['turnout_pct'])
     tp18   = fmt_pct(city18['turnout_pct'])
 
-    map_svg   = city_map_svg(ward_paths, bounds, link_all=True, tab_stop=False)
+    map_svg   = city_map_svg(ward_paths, bounds, link_all=True, tab_stop=False, ward_names=ward_names)
     chart_svg = turnout_chart_svg(wards, city22['turnout_pct'])
 
     def _issue_val(ward, key, sub, default=''):
@@ -1693,6 +1727,13 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; }
 .preview-banner a { color: #fff; font-weight: 700; }
 .preview-banner strong { font-weight: 700; }
 
+/* Map hover tooltip */
+.map-tip { position: fixed; background: var(--ink); color: #fff;
+           font-family: var(--sans); font-size: 0.8rem; line-height: 1.2;
+           padding: 0.3rem 0.6rem; pointer-events: none; display: none;
+           z-index: 1000; white-space: nowrap; }
+.map-tip--on { display: block; }
+
 /* Skip link */
 .skip-link { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .skip-link:focus { position: fixed; left: 0; top: 0; width: auto; height: auto;
@@ -1710,10 +1751,14 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; }
 .site-nav a { color: var(--muted); text-decoration: none; margin-left: 1.1rem;
               font-size: 0.88rem; font-weight: 500; }
 .site-nav a:hover { color: var(--ink); }
-.site-credit { font-size: 0.72rem; color: var(--muted); display: flex;
-               align-items: center; gap: 0.3rem; white-space: nowrap; }
-.perimtr-link { display: inline-flex; align-items: center; }
-.perimtr-logo-img { height: 18px; width: auto; display: block; opacity: 0.85; }
+.site-credit { font-size: 0.78rem; color: var(--muted); display: flex;
+               align-items: center; gap: 0.4rem; white-space: nowrap; }
+.perimtr-link { display: inline-flex; align-items: center; gap: 0.3rem;
+                text-decoration: none; color: var(--ink); font-weight: 600;
+                font-family: var(--sans); font-size: 0.82rem; }
+.perimtr-logo-img { height: 22px; width: auto; display: block; opacity: 0.9; }
+.perimtr-name { letter-spacing: 0.03em; }
+.perimtr-link:hover { color: var(--accent); }
 .perimtr-link:hover .perimtr-logo-img { opacity: 1; }
 
 /* Main */
@@ -1842,6 +1887,8 @@ h3 { font-family: var(--serif); font-weight: 500; font-size: 1rem;
 
 /* Ward directory */
 .ward-dir-tbl tr:hover td { background: var(--dim); }
+.ward-dir-tbl td:first-child,
+.ward-dir-tbl th:first-child { white-space: nowrap; }
 
 /* Census languages */
 .census-langs { margin-top: 0.9rem; }
@@ -2015,7 +2062,8 @@ def main():
     print('Loading GeoJSON …')
     gj     = load_geojson()
     bounds = compute_bounds(gj)
-    paths  = build_ward_paths(gj, bounds)
+    paths       = build_ward_paths(gj, bounds)
+    ward_names  = build_ward_names(gj)
     print(f'  Bounds: lon [{bounds[0]:.3f}, {bounds[1]:.3f}] '
           f'lat [{bounds[2]:.3f}, {bounds[3]:.3f}]. '
           f'SVG height = {_svg_height(MAP_W, bounds)}')
@@ -2028,7 +2076,7 @@ def main():
 
     print('Writing index.html …')
     with open(os.path.join(DOCS, 'index.html'), 'w', encoding='utf-8') as f:
-        f.write(build_index(data, paths, bounds))
+        f.write(build_index(data, paths, bounds, ward_names=ward_names))
 
     print('Writing about.html …')
     with open(os.path.join(DOCS, 'about.html'), 'w', encoding='utf-8') as f:
@@ -2043,7 +2091,7 @@ def main():
     for w in sorted(data['wards'], key=lambda x: x['ward_num']):
         wn = w['ward_num']
         with open(os.path.join(DOCS, f'ward-{wn}.html'), 'w', encoding='utf-8') as f:
-            f.write(build_ward_page(w, paths, bounds, city_census))
+            f.write(build_ward_page(w, paths, bounds, city_census, ward_names=ward_names))
         print(f'  ward-{wn}.html — {w["ward_name"]}')
 
     # Councillor detail pages (only if vote_summaries.csv exists)

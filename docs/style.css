@@ -44,6 +44,13 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; }
 .preview-banner a { color: #fff; font-weight: 700; }
 .preview-banner strong { font-weight: 700; }
 
+/* Map hover tooltip */
+.map-tip { position: fixed; background: var(--ink); color: #fff;
+           font-family: var(--sans); font-size: 0.8rem; line-height: 1.2;
+           padding: 0.3rem 0.6rem; pointer-events: none; display: none;
+           z-index: 1000; white-space: nowrap; }
+.map-tip--on { display: block; }
+
 /* Skip link */
 .skip-link { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .skip-link:focus { position: fixed; left: 0; top: 0; width: auto; height: auto;
@@ -61,10 +68,14 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; }
 .site-nav a { color: var(--muted); text-decoration: none; margin-left: 1.1rem;
               font-size: 0.88rem; font-weight: 500; }
 .site-nav a:hover { color: var(--ink); }
-.site-credit { font-size: 0.72rem; color: var(--muted); display: flex;
-               align-items: center; gap: 0.3rem; white-space: nowrap; }
-.perimtr-link { display: inline-flex; align-items: center; }
-.perimtr-logo-img { height: 18px; width: auto; display: block; opacity: 0.85; }
+.site-credit { font-size: 0.78rem; color: var(--muted); display: flex;
+               align-items: center; gap: 0.4rem; white-space: nowrap; }
+.perimtr-link { display: inline-flex; align-items: center; gap: 0.3rem;
+                text-decoration: none; color: var(--ink); font-weight: 600;
+                font-family: var(--sans); font-size: 0.82rem; }
+.perimtr-logo-img { height: 22px; width: auto; display: block; opacity: 0.9; }
+.perimtr-name { letter-spacing: 0.03em; }
+.perimtr-link:hover { color: var(--accent); }
 .perimtr-link:hover .perimtr-logo-img { opacity: 1; }
 
 /* Main */
@@ -193,6 +204,8 @@ h3 { font-family: var(--serif); font-weight: 500; font-size: 1rem;
 
 /* Ward directory */
 .ward-dir-tbl tr:hover td { background: var(--dim); }
+.ward-dir-tbl td:first-child,
+.ward-dir-tbl th:first-child { white-space: nowrap; }
 
 /* Census languages */
 .census-langs { margin-top: 0.9rem; }

@@ -23,7 +23,8 @@
     </nav>
     <span class="site-credit">A civic project by
       <a href="https://perimtr.ca" class="perimtr-link" rel="noopener">
-        <img src="perimtr-logo.png" alt="Perimtr" class="perimtr-logo-img">
+        <img src="perimtr-logo.png" alt="" class="perimtr-logo-img">
+        <span class="perimtr-name">Perimtr</span>
       </a>
     </span>
   </div>
@@ -164,5 +165,26 @@
     </aside>
   </div>
 </footer>
+<div id="map-tip" class="map-tip" aria-hidden="true"></div>
+<script>
+(function(){
+  var tip = document.getElementById('map-tip');
+  if(!tip) return;
+  document.addEventListener('mouseover', function(e){
+    var a = e.target.closest('a[data-name]');
+    if(a){ tip.textContent = a.dataset.name; tip.classList.add('map-tip--on'); }
+    else { tip.classList.remove('map-tip--on'); }
+  });
+  document.addEventListener('mousemove', function(e){
+    if(tip.classList.contains('map-tip--on')){
+      tip.style.left = (e.clientX + 14) + 'px';
+      tip.style.top  = (e.clientY - 36) + 'px';
+    }
+  });
+  document.addEventListener('mouseout', function(e){
+    if(!e.target.closest('a[data-name]')) tip.classList.remove('map-tip--on');
+  });
+})();
+</script>
 </body>
 </html>
