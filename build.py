@@ -571,8 +571,7 @@ def page_open(title, is_home=False, description=None, og_url=None):
     </nav>
     <span class="site-credit">A civic project by
       <a href="https://perimtr.ca" class="perimtr-link" rel="noopener">
-        <img src="perimtr-logo.png" alt="" class="perimtr-logo-img">
-        <span class="perimtr-name">Perimtr</span>
+        <img src="perimtr-logo.png" alt="Perimtr" class="perimtr-logo-img">
       </a>
     </span>
   </div>
@@ -1753,13 +1752,9 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; }
 .site-nav a:hover { color: var(--ink); }
 .site-credit { font-size: 0.78rem; color: var(--muted); display: flex;
                align-items: center; gap: 0.4rem; white-space: nowrap; }
-.perimtr-link { display: inline-flex; align-items: center; gap: 0.3rem;
-                text-decoration: none; color: var(--ink); font-weight: 600;
-                font-family: var(--sans); font-size: 0.82rem; }
-.perimtr-logo-img { height: 22px; width: auto; display: block; opacity: 0.9; }
-.perimtr-name { letter-spacing: 0.03em; }
-.perimtr-link:hover { color: var(--accent); }
-.perimtr-link:hover .perimtr-logo-img { opacity: 1; }
+.perimtr-link { display: inline-flex; align-items: center; text-decoration: none; }
+.perimtr-logo-img { height: 28px; width: auto; display: block; }
+.perimtr-link:hover .perimtr-logo-img { opacity: 0.75; }
 
 /* Main */
 main { max-width: 960px; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
